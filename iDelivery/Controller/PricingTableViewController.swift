@@ -17,7 +17,6 @@ class PricingTableViewController: UIViewController {
 	private let cellID = "cellID"
 	let tableview: UITableView = {
 		let tv = UITableView()
-//		tv.backgroundColor = .systemBlue
 		tv.translatesAutoresizingMaskIntoConstraints = false
 		tv.layer.cornerRadius = 5
 		return tv
@@ -40,9 +39,8 @@ extension PricingTableViewController: UITableViewDelegate,  UITableViewDataSourc
 		let value = values[indexPath.row]
 		let icon = icons[indexPath.row]
 		
-		cell.name.text = title
 		cell.value.text = "\(value) MAD"
-		cell.icon.image = UIImage(systemName: icon)
+		cell.icon.image = UIImage.textEmbededImage(image: UIImage(systemName: icon)!, string: title, color: .label, imageAlignment: 0, segFont: .systemFont(ofSize: 16))
 		return cell
 	}
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

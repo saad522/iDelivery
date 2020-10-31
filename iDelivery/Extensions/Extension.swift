@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
 	convenience init(_ icon: String,size : CGFloat = 35,color : UIColor = .systemGray) {
-	   self.init(type: .system)
+		self.init(type: .system)
 		self.tintColor = color
 		let configuration = UIImage.SymbolConfiguration(pointSize: size, weight: .light, scale: .large)
 		self.setImage(UIImage(systemName: icon, withConfiguration: configuration)?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -84,7 +84,7 @@ extension UIButton {
 		self.init(type: .system)
 		let attribudeTitle = NSMutableAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)])
 		attribudeTitle.append(NSAttributedString(string: action, attributes:
-			[NSAttributedString.Key.foregroundColor : UIColor.label,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .semibold)]))
+													[NSAttributedString.Key.foregroundColor : UIColor.label,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .semibold)]))
 		self.setAttributedTitle(attribudeTitle, for: .normal)
 	}
 }
@@ -99,6 +99,32 @@ extension UIColor {
 	static let systemColor = UIColor.init(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
 	static let greateBlue = UIColor.rgb(red: 74, green: 150, blue: 233)
 	static let iosColor = UIColor.init(red: 0.9492425323, green: 0.9487358928, blue: 0.9704347253, alpha: 1)
-	 
+	
 }
 
+//MARK: advanced  func from stackoverflow 🤓
+extension UIImage {
+	
+	class func textEmbededImage(image: UIImage, string: String, color:UIColor, imageAlignment: Int = 0, segFont: UIFont? = nil) -> UIImage {
+		let font = segFont ?? UIFont.systemFont(ofSize: 16.0)
+		let expectedTextSize: CGSize = (string as String).size(withAttributes: [NSAttributedString.Key.font: font])
+		let width: CGFloat = expectedTextSize.width + image.size.width + 5.0
+		let height: CGFloat = max(expectedTextSize.height, image.size.width)
+		let size: CGSize = CGSize(width: width, height: height)
+		UIGraphicsBeginImageContextWithOptions(size, false, 0)
+		let context: CGContext = UIGraphicsGetCurrentContext()!
+		context.setFillColor(color.cgColor)
+		let fontTopPosition: CGFloat = (height - expectedTextSize.height) / 2.0
+		let textOrigin: CGFloat = (imageAlignment == 0) ? image.size.width + 5 : 0
+		let textPoint: CGPoint = CGPoint.init(x: textOrigin, y: fontTopPosition)
+		string.draw(at: textPoint, withAttributes: [NSAttributedString.Key.font: font])
+		let flipVertical: CGAffineTransform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height)
+		context.concatenate(flipVertical)
+		let alignment: CGFloat =  (imageAlignment == 0) ? 0.0 : expectedTextSize.width + 5.0
+		context.draw(image.cgImage!, in: CGRect.init(x: alignment, y: ((height - image.size.height) / 2.0), width: image.size.width, height: image.size.height))
+		let newImage = UIGraphicsGetImageFromCurrentImageContext()
+		//	UIGraphicsEndImageContext()
+		
+		return newImage!
+	}
+}

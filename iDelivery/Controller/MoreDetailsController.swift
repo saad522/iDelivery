@@ -10,12 +10,10 @@ import SwiftUI
 class MoreDetailsController: UICollectionViewController {
 	
 	//MARK: Properties
-		//Pricing
-		//Tools
-		//Memebers
-		//IDs
-	private let pricingCellID = "pricingCellID"
+		//CellIDs
+	private let pricingCellID      = "pricingCellID"
 	private let prsonaleInfoCellID = "personaleInfoCellId"
+	private let toolsCellID		   = "toolsCellID"
 	let dismiss = UIButton(SFSymbols.dismiss,size: 20)
 	
 		//CompostionalLayout
@@ -55,6 +53,7 @@ extension MoreDetailsController {
 	fileprivate func configCollectionView() {
 		collectionView.register(PricingInformationCard.self, forCellWithReuseIdentifier: pricingCellID)
 		collectionView.register(PersonaleInfoCell.self, forCellWithReuseIdentifier: prsonaleInfoCellID)
+		collectionView.register(ToolsCardCell.self, forCellWithReuseIdentifier: toolsCellID)
 		view.addSubview(dismiss)
 		dismiss.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 35, left: 0, bottom: 0, right: 35))
 		dismiss.addTarget(self, action: #selector(handelDismiss), for: .touchUpInside)
@@ -63,7 +62,7 @@ extension MoreDetailsController {
 		dismiss(animated: true)
 	}
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 4
+		return 3
 	}
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		switch indexPath.item {
@@ -75,7 +74,7 @@ extension MoreDetailsController {
 			return cell
 			
 		default:
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pricingCellID, for: indexPath) as! PricingInformationCard
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: toolsCellID, for: indexPath) as! ToolsCardCell
 			return cell
 		}
 	}
@@ -114,31 +113,7 @@ struct MoreDetailsController_Previews: PreviewProvider {
 
 
 
-//extension UIImage {
-//
-//class func textEmbededImage(image: UIImage, string: String, color:UIColor, imageAlignment: Int = 0, segFont: UIFont? = nil) -> UIImage {
-//	let font = segFont ?? UIFont.systemFont(ofSize: 16.0)
-//	let expectedTextSize: CGSize = (string as String).size(withAttributes: [NSAttributedString.Key.font: font])
-//	let width: CGFloat = expectedTextSize.width + image.size.width + 5.0
-//	let height: CGFloat = max(expectedTextSize.height, image.size.width)
-//	let size: CGSize = CGSize(width: width, height: height)
-//	UIGraphicsBeginImageContextWithOptions(size, false, 0)
-//	let context: CGContext = UIGraphicsGetCurrentContext()!
-//	context.setFillColor(color.cgColor)
-//	let fontTopPosition: CGFloat = (height - expectedTextSize.height) / 2.0
-//	let textOrigin: CGFloat = (imageAlignment == 0) ? image.size.width + 5 : 0
-//	let textPoint: CGPoint = CGPoint.init(x: textOrigin, y: fontTopPosition)
-//	string.draw(at: textPoint, withAttributes: [NSAttributedString.Key.font: font])
-//	let flipVertical: CGAffineTransform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height)
-//	context.concatenate(flipVertical)
-//	let alignment: CGFloat =  (imageAlignment == 0) ? 0.0 : expectedTextSize.width + 5.0
-//	context.draw(image.cgImage!, in: CGRect.init(x: alignment, y: ((height - image.size.height) / 2.0), width: image.size.width, height: image.size.height))
-//	let newImage = UIGraphicsGetImageFromCurrentImageContext()
-////	UIGraphicsEndImageContext()
-//
-//	return newImage!
-//}
-//}
+
 //	let segment : UISegmentedControl = {
 //		let se = UISegmentedControl()
 //		se.insertSegment(with: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Pricing", color: .label, imageAlignment: 0, segFont: .systemFont(ofSize: 15)) , at: 0, animated: false)

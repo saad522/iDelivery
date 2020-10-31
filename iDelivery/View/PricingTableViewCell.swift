@@ -13,7 +13,7 @@ class PricingTableViewCell: UITableViewCell {
 	//MARK: Properties
 	
 	//Label
-	let name = UILabel.init(text: "Price", font: .systemFont(ofSize: 20))
+//	let name = UILabel.init(text: "Price", font: .systemFont(ofSize: 20))
 	let value = UILabel.init(text: "45 MAD", font: .systemFont(ofSize: 20))
 	
 	//Icon
@@ -31,7 +31,7 @@ class PricingTableViewCell: UITableViewCell {
 
 extension PricingTableViewCell {
 	fileprivate func createUI() {
-		let hStack = HStackView(arrangedSubviews: [icon,name,UIView(),value], spacing: 5)
+		let hStack = HStackView(arrangedSubviews: [icon,UIView(),value], spacing: 5)
 		addSubview(hStack)
 		hStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 10))
 	}

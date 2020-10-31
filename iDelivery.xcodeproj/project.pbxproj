@@ -18,6 +18,9 @@
 		0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA3625486B8C00033797 /* VerticalStackView.swift */; };
 		0485DA3A25486BA100033797 /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA3925486BA100033797 /* HStackView.swift */; };
 		0485DA3D254872EB00033797 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA3C254872EB00033797 /* Enums.swift */; };
+		0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487405E254D944300F3AA54 /* ToolsTableViewController.swift */; };
+		04874062254D96DC00F3AA54 /* ToolsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */; };
+		04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874064254D9A2400F3AA54 /* ToolsCardCell.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
 		04B2D1BC254C6CA70044B262 /* PricingInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */; };
 		04B2D1BF254C6D3F0044B262 /* PricingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */; };
@@ -46,6 +49,9 @@
 		0485DA3625486B8C00033797 /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		0485DA3925486BA100033797 /* HStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		0485DA3C254872EB00033797 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		0487405E254D944300F3AA54 /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
+		04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewCell.swift; sourceTree = "<group>"; };
+		04874064254D9A2400F3AA54 /* ToolsCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCardCell.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingInformationCard.swift; sourceTree = "<group>"; };
 		04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingTableViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 				04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */,
 				04CF78E8254C776A00981F51 /* PersonalnformationViewController.swift */,
 				040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */,
+				0487405E254D944300F3AA54 /* ToolsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -140,6 +147,8 @@
 				04BC24CF254B955F00F45872 /* PricingTableViewCell.swift */,
 				04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */,
 				04CF78EB254C783400981F51 /* PersonaleInfoCell.swift */,
+				04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */,
+				04874064254D9A2400F3AA54 /* ToolsCardCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -236,9 +245,12 @@
 				04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */,
 				04BC24D0254B955F00F45872 /* PricingTableViewCell.swift in Sources */,
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
+				04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
+				0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */,
 				04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */,
+				04874062254D96DC00F3AA54 /* ToolsTableViewCell.swift in Sources */,
 				0485DA10254864DE00033797 /* AppDelegate.swift in Sources */,
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
