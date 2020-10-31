@@ -88,13 +88,13 @@ extension CardUserViewCell {
 		let hStackTransport = HStackView(arrangedSubviews: [iconReturns,returns,UIView()], spacing: 5)
 		hStackTransport.alignment = .lastBaseline
 //		iconTransport.backgroundColor = .systemYellow
-		let hStackRetruns = HStackView(arrangedSubviews: [iconValise,transport,iconTransport,UIView(),moreDetails], spacing: 5)
+		let hStackRetruns = HStackView(arrangedSubviews: [iconValise,transport,iconTransport,UIView()], spacing: 5)
 		
 		let vStackLabels = VerticalStackView(arrangedSubviews: [hStackName,hStackTransport,hStackPrice], spacing: 20)
 		
 		let hStack = HStackView(arrangedSubviews: [userIcon,vStackLabels], spacing: 10)
 		
-		let mainStack = VerticalStackView(arrangedSubviews: [hStack,hStackLocation,hStackRetruns], spacing: 10)
+		let mainStack = VerticalStackView(arrangedSubviews: [hStack,hStackLocation,hStackRetruns], spacing: 15)
 		
 		addSubview(mainStack)
 		mainStack.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))

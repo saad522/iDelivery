@@ -13,6 +13,8 @@ class SearchByCityController: UICollectionViewController {
 	private let topCellID 	  = "topCellID"
 	private let secondeCellID = "secondeCellID"
 	
+	var buttonsIcons  = [SFSymbols.filter,SFSymbols.sort,SFSymbols.reload]
+	var buttonsTitles = ["Filter","Sort","Reload"]
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
@@ -74,7 +76,13 @@ extension SearchByCityController {
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		switch indexPath.section {
 		case 0:
+			let icon   = buttonsIcons[indexPath.item]
+			let title = buttonsTitles[indexPath.item]
+			
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellID, for: indexPath) as! CustomizeButtonsCell
+			cell.actionIcone.image = UIImage(systemName: icon)
+			cell.actionName.text   = title
+			cell.backgroundColor = .label
 			return cell
 		default:
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondeCellID, for: indexPath) as! CardUserViewCell
@@ -83,14 +91,17 @@ extension SearchByCityController {
 	}
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if indexPath.section == 0 {
-//			let filteringController = UIViewController()
-//			filteringController.view.backgroundColor = .blue
-////			filteringController.modalPresentationStyle = .formSheet
-//			present(filteringController, animated: true)
-			let slideVC = FiltersView()
-			slideVC.modalPresentationStyle = .custom
-			slideVC.transitioningDelegate = self
-			self.present(slideVC, animated: true)
+			if indexPath.item == 0 {
+				let slideVC = FiltersView()
+				slideVC.modalPresentationStyle = .custom
+				slideVC.transitioningDelegate = self
+				self.present(slideVC, animated: true)
+			} else {
+				let slideVC = SortsView()
+				slideVC.modalPresentationStyle = .custom
+				slideVC.transitioningDelegate = self
+				self.present(slideVC, animated: true)
+			}
 		} else {
 			let detailsControlles = MoreDetailsController()
 			detailsControlles.modalPresentationStyle = .fullScreen

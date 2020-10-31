@@ -23,6 +23,7 @@
 		04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874064254D9A2400F3AA54 /* ToolsCardCell.swift */; };
 		0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874069254DAB2400F3AA54 /* FiltersView.swift */; };
 		0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487406C254DAB4000F3AA54 /* PresentationController.swift */; };
+		04874071254E029B00F3AA54 /* SortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874070254E029B00F3AA54 /* SortsView.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
 		04B2D1BC254C6CA70044B262 /* PricingInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */; };
 		04B2D1BF254C6D3F0044B262 /* PricingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */; };
@@ -56,6 +57,7 @@
 		04874064254D9A2400F3AA54 /* ToolsCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCardCell.swift; sourceTree = "<group>"; };
 		04874069254DAB2400F3AA54 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 		0487406C254DAB4000F3AA54 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		04874070254E029B00F3AA54 /* SortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortsView.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingInformationCard.swift; sourceTree = "<group>"; };
 		04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingTableViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */,
 				04874064254D9A2400F3AA54 /* ToolsCardCell.swift */,
 				04874069254DAB2400F3AA54 /* FiltersView.swift */,
+				04874070254E029B00F3AA54 /* SortsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
 				0485DA3025486A1300033797 /* Extension.swift in Sources */,
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
+				04874071254E029B00F3AA54 /* SortsView.swift in Sources */,
 				040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */,
 				04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,

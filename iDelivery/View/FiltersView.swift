@@ -69,7 +69,6 @@ class FiltersView: UIViewController {
 
 		let hStackPrice = HStackView(arrangedSubviews: [price,textFieldPrice,priceMad,UIView(),switchPrice], spacing: 10)
 		let hStackRetrun = HStackView(arrangedSubviews: [retruns,textFieldRetrun,retrunMad,UIView(),switchReturn], spacing: 10)
-		
 		let vStack = VerticalStackView(arrangedSubviews: [hStackPrice,hStackRetrun], spacing: 25)
 		
 		view.addSubview(vStack)
@@ -77,7 +76,7 @@ class FiltersView: UIViewController {
 		view.backgroundColor = .systemBackground
 		view.addSubview(filterButton)
 		filterButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 25, right: 25),size: .init(width: 0, height: 48))
-		filterButton.backgroundColor = .niceBlue
+		filterButton.backgroundColor = .label
 		filterButton.setTitleColor(.systemBackground, for: .normal)
 	}
 	override func viewDidLayoutSubviews() {

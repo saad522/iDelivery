@@ -118,12 +118,13 @@ extension UIImage {
 		let textOrigin: CGFloat = (imageAlignment == 0) ? image.size.width + 5 : 0
 		let textPoint: CGPoint = CGPoint.init(x: textOrigin, y: fontTopPosition)
 		string.draw(at: textPoint, withAttributes: [NSAttributedString.Key.font: font])
+//		image.withTintColor(.label)
 		let flipVertical: CGAffineTransform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height)
 		context.concatenate(flipVertical)
 		let alignment: CGFloat =  (imageAlignment == 0) ? 0.0 : expectedTextSize.width + 5.0
 		context.draw(image.cgImage!, in: CGRect.init(x: alignment, y: ((height - image.size.height) / 2.0), width: image.size.width, height: image.size.height))
 		let newImage = UIGraphicsGetImageFromCurrentImageContext()
-		//	UIGraphicsEndImageContext()
+			UIGraphicsEndImageContext()
 		
 		return newImage!
 	}
