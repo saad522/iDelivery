@@ -82,10 +82,29 @@ extension SearchByCityController {
 		}
 	}
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let detailsControlles = MoreDetailsController()
-		detailsControlles.modalPresentationStyle = .fullScreen
-		present(detailsControlles, animated: true)
+		if indexPath.section == 0 {
+//			let filteringController = UIViewController()
+//			filteringController.view.backgroundColor = .blue
+////			filteringController.modalPresentationStyle = .formSheet
+//			present(filteringController, animated: true)
+			let slideVC = FiltersView()
+			slideVC.modalPresentationStyle = .custom
+			slideVC.transitioningDelegate = self
+			self.present(slideVC, animated: true)
+		} else {
+			let detailsControlles = MoreDetailsController()
+			detailsControlles.modalPresentationStyle = .fullScreen
+			present(detailsControlles, animated: true)
+		}
 		
+		
+	}
+	
+	@objc func showMiracle() {
+		let slideVC = FiltersView()
+		slideVC.modalPresentationStyle = .custom
+		slideVC.transitioningDelegate = self
+		self.present(slideVC, animated: true, completion: nil)
 	}
 }
 struct SearchByCityView: UIViewControllerRepresentable {
@@ -105,5 +124,11 @@ struct SearchByCityController_Previews: PreviewProvider {
 	static var previews: some View {
 		SearchByCityView()
 			.edgesIgnoringSafeArea(.all)
+	}
+}
+
+extension SearchByCityController: UIViewControllerTransitioningDelegate {
+	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+		PresentationController(presentedViewController: presented, presenting: presenting)
 	}
 }

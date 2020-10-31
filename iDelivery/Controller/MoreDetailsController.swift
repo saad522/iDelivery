@@ -55,7 +55,7 @@ extension MoreDetailsController {
 		collectionView.register(PersonaleInfoCell.self, forCellWithReuseIdentifier: prsonaleInfoCellID)
 		collectionView.register(ToolsCardCell.self, forCellWithReuseIdentifier: toolsCellID)
 		view.addSubview(dismiss)
-		dismiss.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 35, left: 0, bottom: 0, right: 35))
+		dismiss.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 35, left: 0, bottom: 0, right: 15))
 		dismiss.addTarget(self, action: #selector(handelDismiss), for: .touchUpInside)
 	}
 	@objc func handelDismiss() {

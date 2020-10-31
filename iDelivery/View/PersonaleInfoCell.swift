@@ -26,7 +26,7 @@ class PersonaleInfoCell: UICollectionViewCell {
 extension PersonaleInfoCell {
 	fileprivate func creatUI() {
 		
-		let vStack = VerticalStackView(arrangedSubviews: [personaleInfo,presonaleViewController.view], spacing: 5)
+		let vStack = VerticalStackView(arrangedSubviews: [personaleInfo,presonaleViewController.view], spacing: 15)
 			addSubview(vStack)
 			vStack.fillSuperview(padding: .init(top: 10, left: 10, bottom: 10, right: 10))
 		
