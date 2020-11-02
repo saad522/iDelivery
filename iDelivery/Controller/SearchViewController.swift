@@ -11,12 +11,21 @@ class SearchViewController: UICollectionViewController {
 	//MARK: Properties
 	private let cellID = "cellID"
 	let searchController = UISearchController(searchResultsController: nil)
+	var nameFilter: String?
+	var dataSource: UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>!
+
+	enum Section: CaseIterable {
+		case main
+	}
+	let mountainsController = MountainsController()
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpNavigation()
 		configuerCollectionView()
+		configureDataSource()
+		performQuery(with: nil)
 	}
 	
 	//MARK: ComposotionalLayout
@@ -37,6 +46,45 @@ class SearchViewController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 }
+
+
+extension SearchViewController {
+	/// - Tag: SearchViewControllerDataSource
+	func configureDataSource() {
+		
+		let cellRegistration = UICollectionView.CellRegistration
+		<SearchViewCell, MountainsController.Mountain> { (cell, indexPath, mountain) in
+			// Populate the cell with our item description.
+			cell.name.text = mountain.name
+		}
+		
+		dataSource = UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>(collectionView: collectionView) {
+			(collectionView: UICollectionView, indexPath: IndexPath, identifier: MountainsController.Mountain) -> UICollectionViewCell? in
+			// Return the cell.
+			
+			return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+		}
+	}
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let object = dataSource.itemIdentifier(for: indexPath)
+		let searchByCitiesController = SearchByCityController()
+		navigationController?.pushViewController(searchByCitiesController, animated: true)
+//		navigationController?.title = object?.name ?? ""
+		searchByCitiesController.navigationItem.title = object?.name ?? "Casablnca"
+	}
+	/// - Tag: MountainsPerformQuery
+	func performQuery(with filter: String?) {
+		let mountains = mountainsController.filteredMountains(with: filter).sorted { $0.name < $1.name }
+			
+		var snapshot = NSDiffableDataSourceSnapshot<Section, MountainsController.Mountain>()
+		snapshot.appendSections([.main])
+		snapshot.appendItems(mountains)
+		
+		dataSource.apply(snapshot, animatingDifferences: true)
+	}
+}
+
+
 //MARK: setUp NavigationController
 extension SearchViewController : UISearchBarDelegate {
 	fileprivate func setUpNavigation() {
@@ -66,12 +114,15 @@ extension SearchViewController  {
 		return cell
 	}
 	
-	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let searchByCityController = SearchByCityController()
-		navigationController?.pushViewController(searchByCityController, animated: true)
-		
+	
+}
+extension SearchViewController {
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		performQuery(with: searchText)
 	}
 }
+
+
 struct SearchView : UIViewControllerRepresentable {
 	func makeUIViewController(context: Context) -> UIViewController {
 		let searchViewController = SearchViewController()

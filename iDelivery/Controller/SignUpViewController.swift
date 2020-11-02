@@ -48,6 +48,12 @@ class SignUpViewController: UIViewController {
 	let linePassword = UIView(.systemGray)
 	let lineLocation = UIView(.systemGray)
 	
+	//UIPickeView
+	var pickerView = UIPickerView()
+	let cities = MountainsController().generateMountains()
+	var titles : [String] = []
+	
+	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -55,6 +61,32 @@ class SignUpViewController: UIViewController {
 		createUI()
 		dismissKeyBoard()
 		setActions()
+		setupPickeView()
+	}
+}
+
+//MARK: SetUp UIPickeView
+extension SignUpViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return cities.count
+	}
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		cities.forEach({titles.append($0.name)})
+		locationText.text = titles[row]
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		cities.forEach({titles.append($0.name)})
+		return titles[row]
+	}
+	fileprivate func setupPickeView() {
+		pickerView.delegate    = self
+		pickerView.dataSource  = self
+		locationText.inputView = pickerView
 	}
 }
 extension SignUpViewController {

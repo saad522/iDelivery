@@ -30,13 +30,15 @@ class FiltersView: UIViewController {
 		let text = UITextField()
 		text.borderStyle = .line
 		text.placeholder = " 10"
+		text.keyboardType = .numberPad
 		text.constrainWidth(constant: 100)
 		return text
 	}()
 	let textFieldRetrun : UITextField = {
 		let text = UITextField()
 		text.borderStyle = .line
-		text.placeholder = " 10"
+		text.placeholder = " 5"
+		text.keyboardType = .numberPad
 		text.constrainWidth(constant: 100)
 		return text
 	}()

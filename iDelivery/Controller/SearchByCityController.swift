@@ -55,7 +55,7 @@ class SearchByCityController: UICollectionViewController {
 //MARK: Configuration Of CollectionView
 extension SearchByCityController {
 	fileprivate func setUpNavigation() {
-		navigationItem.title = "Rabat"
+//		navigationItem.title = "Rabat"
 		navigationController?.navigationBar.prefersLargeTitles = true
 	}
 	fileprivate func configuCollectionView() {
