@@ -40,14 +40,8 @@ class FiltersView: UIViewController {
 		text.constrainWidth(constant: 100)
 		return text
 	}()
-	let switchPrice : UISwitch = {
-		let switchP = UISwitch()
-		return switchP
-	}()
-	let switchReturn : UISwitch = {
-		let switchP = UISwitch()
-		return switchP
-	}()
+	let switchPrice = UISwitch()
+	let switchReturn = UISwitch()
 	var hasSetPointOrigin = false
 	var pointOrigin: CGPoint?
 	
