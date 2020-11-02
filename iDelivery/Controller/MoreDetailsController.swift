@@ -56,7 +56,7 @@ extension MoreDetailsController {
 		collectionView.register(ToolsCardCell.self, forCellWithReuseIdentifier: toolsCellID)
 		view.addSubview(dismiss)
 		dismiss.tintColor = .label
-		dismiss.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 25, left: 0, bottom: 0, right: 15))
+		dismiss.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 35, left: 0, bottom: 0, right: 15))
 		dismiss.addTarget(self, action: #selector(handelDismiss), for: .touchUpInside)
 	}
 	@objc func handelDismiss() {

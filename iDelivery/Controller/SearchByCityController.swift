@@ -16,37 +16,24 @@ class SearchByCityController: UICollectionViewController {
 	var buttonsIcons  = [SFSymbols.filter,SFSymbols.sort,SFSymbols.reload]
 	var buttonsTitles = ["Filter","Sort","Reload"]
 	
+	
+	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpNavigation()
 		configuCollectionView()
+		menus()
 	}
 	
 	//--:ComosotionalLayout Configuration
 	init() {
+		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+		item.contentInsets = .init(top: 12, leading: 10, bottom: 12, trailing: 10)
+		let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(250)), subitems: [item])
 		
-		let layout = UICollectionViewCompositionalLayout { (numberOfSection, _) -> NSCollectionLayoutSection? in
-			if numberOfSection == 0 {
-				let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1)))
-				item.contentInsets = .init(top: 0, leading: 10, bottom: 12, trailing: 10)
-				let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), subitems: [item])
-				
-				let section = NSCollectionLayoutSection(group: group)
-				section.contentInsets.top = 12
-				return section
-			} else {
-				let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-				item.contentInsets = .init(top: 12, leading: 10, bottom: 12, trailing: 10)
-				let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(250)), subitems: [item])
-				
-				let section = NSCollectionLayoutSection(group: group)
-				
-				return section
-			}
-			
-		}
-		
+		let section = NSCollectionLayoutSection(group: group)
+		let layout = UICollectionViewCompositionalLayout(section: section)
 		super.init(collectionViewLayout: layout)
 	}
 	
@@ -54,6 +41,15 @@ class SearchByCityController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	fileprivate func menus() {
+		let filters = UIMenu(title: "", children: [
+								UIAction(title: "Filters", image: UIImage(systemName: SFSymbols.filter), handler: handleFilters),
+								UIAction(title: "Sorts", image: UIImage(systemName: SFSymbols.sort), handler: handleSort),
+								UIAction(title: "Reloads", image: UIImage(systemName: SFSymbols.reload), handler: handleReload)])
+		let barItem = UIBarButtonItem(title: "", image: #imageLiteral(resourceName: "icons8-filter-100").withTintColor(.label).withRenderingMode(.alwaysOriginal), menu: filters)
+		navigationItem.rightBarButtonItem = barItem
+		
+	}
 }
 
 //MARK: Configuration Of CollectionView
@@ -67,52 +63,38 @@ extension SearchByCityController {
 		collectionView.register(CustomizeButtonsCell.self, forCellWithReuseIdentifier: topCellID)
 		collectionView.register(CardUserViewCell.self, forCellWithReuseIdentifier: secondeCellID)
 	}
-	override func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 2
-	}
+	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 3
+		return 4
 	}
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		switch indexPath.section {
-		case 0:
-			let icon   = buttonsIcons[indexPath.item]
-			let title = buttonsTitles[indexPath.item]
-			
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topCellID, for: indexPath) as! CustomizeButtonsCell
-			cell.actionIcone.image = UIImage(systemName: icon)
-			cell.actionName.text   = title
-			cell.backgroundColor = .label
-			return cell
-		default:
+		
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondeCellID, for: indexPath) as! CardUserViewCell
 			return cell
-		}
+		
 	}
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if indexPath.section == 0 {
-			if indexPath.item == 0 {
-				let slideVC = FiltersView()
-				slideVC.modalPresentationStyle = .custom
-				slideVC.transitioningDelegate = self
-				self.present(slideVC, animated: true)
-			} else {
-				let slideVC = SortsView()
-				slideVC.modalPresentationStyle = .custom
-				slideVC.transitioningDelegate = self
-				self.present(slideVC, animated: true)
-			}
-		} else {
 			let detailsControlles = MoreDetailsController()
 			detailsControlles.modalPresentationStyle = .fullScreen
 			present(detailsControlles, animated: true)
-		}
-		
-		
 	}
-	
-	@objc func showMiracle() {
+	func handleFilters(action: UIAction) {
 		let slideVC = FiltersView()
+		slideVC.modalPresentationStyle = .custom
+		slideVC.transitioningDelegate = self
+		self.present(slideVC, animated: true)
+	}
+	func handleSort(action: UIAction) {
+		let slideVC = SortsView()
+		slideVC.modalPresentationStyle = .custom
+		slideVC.transitioningDelegate = self
+		self.present(slideVC, animated: true)
+	}
+	func handleReload(action: UIAction) {
+		collectionView.reloadData()
+	}
+	@objc func showMiracle() {
+		let slideVC = SortsView()
 		slideVC.modalPresentationStyle = .custom
 		slideVC.transitioningDelegate = self
 		self.present(slideVC, animated: true, completion: nil)
