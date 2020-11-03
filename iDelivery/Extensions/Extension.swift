@@ -6,7 +6,19 @@
 //
 
 import UIKit
-
+extension UIButton {
+	convenience init(action : String,background : UIColor) {
+		self.init(type: .system)
+		self.tintColor = .label
+		self.setTitle(action, for: .normal)
+		self.setTitleColor(.systemBackground, for: .normal)
+		self.titleLabel?.font = .boldSystemFont(ofSize: 16)
+		self.backgroundColor = background
+		self.constrainHeight(constant: 35)
+		self.constrainWidth(constant: 240)
+		self.layer.cornerRadius = 5
+	}
+}
 extension UIButton {
 	convenience init(_ icon: String,size : CGFloat = 35,color : UIColor = .systemGray) {
 		self.init(type: .system)
@@ -118,7 +130,6 @@ extension UIImage {
 		let textOrigin: CGFloat = (imageAlignment == 0) ? image.size.width + 5 : 0
 		let textPoint: CGPoint = CGPoint.init(x: textOrigin, y: fontTopPosition)
 		string.draw(at: textPoint, withAttributes: [NSAttributedString.Key.font: font])
-//		image.withTintColor(.label)
 		let flipVertical: CGAffineTransform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height)
 		context.concatenate(flipVertical)
 		let alignment: CGFloat =  (imageAlignment == 0) ? 0.0 : expectedTextSize.width + 5.0

@@ -10,6 +10,9 @@
 		040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */; };
 		043930222550A11B003BC235 /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930212550A11B003BC235 /* MountainsRawData.swift */; };
 		043930252550A138003BC235 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930242550A138003BC235 /* MountainsController.swift */; };
+		0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */; };
+		0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */; };
+		0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */; };
 		0485DA10254864DE00033797 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA0F254864DE00033797 /* AppDelegate.swift */; };
 		0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA11254864DE00033797 /* SceneDelegate.swift */; };
 		0485DA19254864E100033797 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0485DA18254864E100033797 /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 		040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		043930212550A11B003BC235 /* MountainsRawData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		043930242550A138003BC235 /* MountainsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
+		0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileControllerView.swift; sourceTree = "<group>"; };
+		0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersonalView.swift; sourceTree = "<group>"; };
+		0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationOfUserTableViewController.swift; sourceTree = "<group>"; };
 		0485DA0C254864DE00033797 /* iDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0485DA0F254864DE00033797 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0485DA11254864DE00033797 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 				040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */,
 				0487405E254D944300F3AA54 /* ToolsTableViewController.swift */,
 				0487406C254DAB4000F3AA54 /* PresentationController.swift */,
+				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
+				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 				04874069254DAB2400F3AA54 /* FiltersView.swift */,
 				04874070254E029B00F3AA54 /* SortsView.swift */,
 				04A9C191254F037B0092886B /* RadioButton.swift */,
+				0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +273,7 @@
 				04BC24D0254B955F00F45872 /* PricingTableViewCell.swift in Sources */,
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
 				0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */,
+				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
 				04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
@@ -280,10 +290,12 @@
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
 				04874071254E029B00F3AA54 /* SortsView.swift in Sources */,
 				040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */,
+				0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */,
 				04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
+				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

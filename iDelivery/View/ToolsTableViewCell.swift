@@ -13,6 +13,7 @@ class ToolsTableViewCell: UITableViewCell {
 	//MARK: Properties
 	
 	//Label
+	let name = UILabel.init(text: "Price", font: .systemFont(ofSize: 16))
 
 	let value = UIImageView(SFSymbols.currency)
 	
@@ -33,7 +34,7 @@ extension ToolsTableViewCell {
 	fileprivate func createUI() {
 		value.constrainWidth(constant: 25)
 		value.constrainHeight(constant: 25)
-		let hStack = HStackView(arrangedSubviews: [icon,UIView(),value], spacing: 5)
+		let hStack = HStackView(arrangedSubviews: [icon,name,UIView(),value], spacing: 5)
 		addSubview(hStack)
 		hStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 10))
 	}

@@ -13,7 +13,7 @@ class MainTabBarController: UITabBarController {
 		super.viewDidLoad()
 		viewControllers = [
 			setControllers(SearchViewController(), "Search", SFSymbols.search),
-			setControllers(UIViewController(), "Profile", SFSymbols.profile)
+			setControllersWithoutNav(ProfileControllerView(), "Profile", SFSymbols.profile)
 			]
 		
 //		perform(#selector(handlePresting), with: nil, afterDelay: 0)
@@ -32,6 +32,14 @@ class MainTabBarController: UITabBarController {
 		controller.navigationBar.prefersLargeTitles = true
 		controller.tabBarItem.image = UIImage(systemName: icon)
 		controller.view.backgroundColor = .systemBackground
+		return controller
+		
+	}
+	fileprivate func setControllersWithoutNav(_ viewController : UIViewController, _ title : String,_ icon : String) -> UIViewController {
+		let controller =  viewController
+		controller.tabBarItem.title = title
+		viewController.navigationItem.title = title
+		controller.tabBarItem.image = UIImage(systemName: icon)
 		return controller
 		
 	}

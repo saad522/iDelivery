@@ -36,11 +36,10 @@ extension ToolsTableViewController: UITableViewDelegate,  UITableViewDataSource 
 		let cell = tableview.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ToolsTableViewCell
 		let title = price[indexPath.row]
 		let value = values[indexPath.row]
-		let icon = icons[indexPath.row]
-		
-		cell.value.image = value
-		
-		cell.icon.image = UIImage.textEmbededImage(image: UIImage(systemName: icon)!, string: title, color: .label, imageAlignment: 0)
+		let icon  = icons[indexPath.row]
+		cell.value.image = value.withTintColor(.label)
+		cell.icon.image  = UIImage(systemName: icon)
+		cell.name.text   = title
 		return cell
 	}
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

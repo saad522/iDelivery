@@ -40,7 +40,8 @@ extension PricingTableViewController: UITableViewDelegate,  UITableViewDataSourc
 		let icon = icons[indexPath.row]
 		
 		cell.value.text = "\(value) MAD"
-		cell.icon.image = UIImage.textEmbededImage(image: UIImage(systemName: icon)!, string: title, color: .label, imageAlignment: 0, segFont: .systemFont(ofSize: 16))
+		cell.icon.image = UIImage(systemName: icon)
+		cell.name.text = title
 		return cell
 	}
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

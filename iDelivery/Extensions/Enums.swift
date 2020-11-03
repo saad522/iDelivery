@@ -30,4 +30,7 @@ enum SFSymbols {
 	static let dismiss    = "multiply.circle.fill"
 	static let selected   = "largecircle.fill.circle"
 	static let unSelected = "circle"
+	static let edit		  = "square.and.pencil"
+	static let editeImage = "camera.fill"
+	static let addInfo    = "plus.circle"
 }
