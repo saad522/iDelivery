@@ -20,9 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window = UIWindow(frame: windowScene.coordinateSpace.bounds )
 		window?.makeKeyAndVisible()
 		window?.windowScene = windowScene
-		let vc = LoginViewController()
+		let vc = MainTabBarController()
 		// SearchViewController
-		window?.rootViewController = UINavigationController(rootViewController: vc)
+		window?.rootViewController = vc
 		
 	}
 

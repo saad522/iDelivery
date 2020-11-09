@@ -9,10 +9,10 @@ import UIKit
 class ToolsTableViewController: UIViewController {
 	
 	//Pricing
-	let price = ["I have a","Organize orders with"]
-	let icons = [SFSymbols.valise,SFSymbols.doc]
+	let price = ["Transport"]
+	let icons = [SFSymbols.valise]
 	
-	let values : [UIImage] = [#imageLiteral(resourceName: "icons8-motorcycle-delivery-single-box-100"),#imageLiteral(resourceName: "icons8-google-sheets-100")]
+	let values : [UIImage] = [#imageLiteral(resourceName: "motorcycle")]
 	private let cellID = "cellID"
 	let tableview: UITableView = {
 		let tv = UITableView()
@@ -51,6 +51,6 @@ extension ToolsTableViewController: UITableViewDelegate,  UITableViewDataSource 
 		tableview.dataSource = self
 		view.addSubview(tableview)
 
-		tableview.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 5, bottom: 0, right: 5), size: .init(width: 0, height: 85))
+		tableview.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 5, bottom: 0, right: 5), size: .init(width: 0, height: 40))
 	}
 }

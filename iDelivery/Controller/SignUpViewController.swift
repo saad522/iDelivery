@@ -10,10 +10,11 @@ import SwiftUI
 class SignUpViewController: UIViewController {
 	//MARK: Properties
 	//Title
-	let logo = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
+	let logo = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 25)!, textColor: .label)
 	//TextFields
 	let fullNameText = UITextField(placholder: "Full-Name")
-	let phoneText    = UITextField(placholder: "Phone")
+	let phoneText    = UITextField(placholder: "Phone (Required)")
+	let emailText    = UITextField(placholder: "Email")
 	let passwordText = UITextField(placholder: "Password",isPassword: true)
 	let locationText = UITextField(placholder: "City")
 	
@@ -22,12 +23,12 @@ class SignUpViewController: UIViewController {
 	let phoneIcon      = UIImageView(SFSymbols.phone)
 	let passwordIcon   = UIImageView(SFSymbols.password)
 	let locationIcone  = UIImageView(SFSymbols.location)
-
+	let emailIcone     = UIImageView(SFSymbols.email)
 	
 	//Image
 	let profilePicture : UIImageView = {
 		let picture = UIImageView()
-		let size : CGFloat = 100
+		let size : CGFloat = 75
 		picture.constrainWidth(constant: size)
 		picture.constrainHeight(constant: size)
 		picture.layer.cornerRadius = size/2
@@ -47,6 +48,7 @@ class SignUpViewController: UIViewController {
 	let linePhon     = UIView(.systemGray)
 	let linePassword = UIView(.systemGray)
 	let lineLocation = UIView(.systemGray)
+	let lineEmail    = UIView(.systemGray)
 	
 	//UIPickeView
 	var pickerView = UIPickerView()
@@ -99,9 +101,8 @@ extension SignUpViewController {
 		loginUpButton.tintColor = .label
 		view.addSubview(logo)
 		logo.translatesAutoresizingMaskIntoConstraints = false
-		logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: -5).isActive = true
+		logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 		logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		logo.constrainWidth(constant: 140)
 		
 		//PictureView
 		view.addSubview(profilePicture)
@@ -111,37 +112,42 @@ extension SignUpViewController {
 		cameraIcon.tintColor = .systemGray
 		profilePicture.isUserInteractionEnabled = true
 		cameraIcon.centerInSuperview()
-		
+
 		// StackViews
 		// FullName StackView
 		let fullNameHS = HStackView(arrangedSubviews: [fullNameIcon,fullNameText,UIView()])
 		let fullNameVS = VerticalStackView(arrangedSubviews: [fullNameHS,lineName], spacing: 8)
-		
+
 		// Phone StackView
 		let phoneHS = HStackView(arrangedSubviews: [phoneIcon,phoneText,UIView()])
 		let phoneVS = VerticalStackView(arrangedSubviews: [phoneHS,linePhon], spacing: 8)
 		phoneText.keyboardType = .phonePad
+
+		//Email StackView
+		let emailHS = HStackView(arrangedSubviews: [emailIcone,emailText,UIView()])
+		let emailVS = VerticalStackView(arrangedSubviews: [emailHS,lineEmail], spacing: 8)
+
 		// Password StackView
 		let passwordHS = HStackView(arrangedSubviews: [passwordIcon,passwordText,hiddenPassword])
 		[passwordIcon,hiddenPassword].forEach({$0.constrainWidth(constant: 25)})
 		let passwordVS = VerticalStackView(arrangedSubviews: [passwordHS,linePassword], spacing: 8)
-		
+
 		// Location StackView
 		let locationHS = HStackView(arrangedSubviews: [locationIcone,locationText,UIView()])
 		let locationVS = VerticalStackView(arrangedSubviews: [locationHS,lineLocation], spacing: 8)
-		
+
 		// Main Stack
-		let mainStack = VerticalStackView(arrangedSubviews: [fullNameVS,phoneVS,passwordVS,locationVS], spacing: 40)
-		
+		let mainStack = VerticalStackView(arrangedSubviews: [fullNameVS,phoneVS,emailVS,passwordVS,locationVS], spacing: 35)
+
 		view.addSubview(mainStack)
-		mainStack.anchor(top: profilePicture.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 40, left: 25, bottom: 0, right: 25))
-		
+		mainStack.anchor(top: profilePicture.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 20, left: 25, bottom: 0, right: 25))
+
 		//SignUp Button
 		view.addSubview(signUpButton)
-		signUpButton.anchor(top: mainStack.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 40, left: 25, bottom: 0, right: 25),size: .init(width: 0, height: 50))
+		signUpButton.anchor(top: mainStack.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 30, left: 25, bottom: 0, right: 25),size: .init(width: 0, height: 50))
 		//Login Button
 		view.addSubview(loginUpButton)
-		loginUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 25, right: 25))
+		loginUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 0, right: 25))
 	}
 	fileprivate func dismissKeyBoard() {
 		let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -156,9 +162,7 @@ extension SignUpViewController {
 		signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
 	}
 	@objc func handleSignUp() {
-			let mainTab = MainTabBarController()
-			navigationController?.pushViewController(mainTab, animated: true)
-		
+		self.dismiss(animated: true)
 	}
 	@objc fileprivate func handlePassword() {
 		if passwordText.isSecureTextEntry == true {

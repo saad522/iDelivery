@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */; };
+		042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042370C02559D50200E45215 /* EditProfileViewController.swift */; };
 		043930222550A11B003BC235 /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930212550A11B003BC235 /* MountainsRawData.swift */; };
 		043930252550A138003BC235 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930242550A138003BC235 /* MountainsController.swift */; };
 		0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */; };
@@ -30,7 +31,6 @@
 		0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487406C254DAB4000F3AA54 /* PresentationController.swift */; };
 		04874071254E029B00F3AA54 /* SortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874070254E029B00F3AA54 /* SortsView.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
-		04A9C192254F037B0092886B /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9C191254F037B0092886B /* RadioButton.swift */; };
 		04B2D1BC254C6CA70044B262 /* PricingInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */; };
 		04B2D1BF254C6D3F0044B262 /* PricingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
@@ -46,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		042370C02559D50200E45215 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		043930212550A11B003BC235 /* MountainsRawData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		043930242550A138003BC235 /* MountainsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
 		0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileControllerView.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		0487406C254DAB4000F3AA54 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		04874070254E029B00F3AA54 /* SortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortsView.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		04A9C191254F037B0092886B /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingInformationCard.swift; sourceTree = "<group>"; };
 		04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingTableViewController.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
@@ -143,6 +143,7 @@
 				0487406C254DAB4000F3AA54 /* PresentationController.swift */,
 				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
 				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
+				042370C02559D50200E45215 /* EditProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,7 +173,6 @@
 				04874064254D9A2400F3AA54 /* ToolsCardCell.swift */,
 				04874069254DAB2400F3AA54 /* FiltersView.swift */,
 				04874070254E029B00F3AA54 /* SortsView.swift */,
-				04A9C191254F037B0092886B /* RadioButton.swift */,
 				0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */,
 			);
 			path = View;
@@ -274,6 +274,7 @@
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
 				0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */,
 				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
+				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,
 				04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
@@ -281,7 +282,6 @@
 				043930252550A138003BC235 /* MountainsController.swift in Sources */,
 				043930222550A11B003BC235 /* MountainsRawData.swift in Sources */,
 				04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */,
-				04A9C192254F037B0092886B /* RadioButton.swift in Sources */,
 				04874062254D96DC00F3AA54 /* ToolsTableViewCell.swift in Sources */,
 				0485DA10254864DE00033797 /* AppDelegate.swift in Sources */,
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,

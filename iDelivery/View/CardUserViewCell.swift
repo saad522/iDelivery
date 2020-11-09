@@ -34,7 +34,7 @@ class CardUserViewCell: UICollectionViewCell {
 	let iconPrice = UIImageView(SFSymbols.currency)
 	let iconLocation = UIImageView(SFSymbols.location)
 	let iconReturns = UIImageView(SFSymbols.currency)
-	let iconTransport = UIImageView(image: #imageLiteral(resourceName: "icons8-motorcycle-delivery-single-box-100"))
+	let iconTransport = UIImageView(image: #imageLiteral(resourceName: "motorcycle"))
 	let iconValise = UIImageView(SFSymbols.valise)
 	
 	//Buttons

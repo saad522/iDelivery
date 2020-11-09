@@ -10,10 +10,10 @@ import UIKit
 class InformationOfUserTableViewController: UIViewController {
 	
 	//Pricing
-	let price = ["Price Per Order (MAD)","Return Per Order (MAD)","Stockage (MAD)","I have","Organize orders"]
-	let icons = [SFSymbols.currency,SFSymbols.currency,SFSymbols.package,SFSymbols.valise,SFSymbols.doc]
+	let price = ["Price Per Order (MAD)","Return Per Order (MAD)","Stockage (MAD)","Transport","Email"]
+	let icons = [SFSymbols.currency,SFSymbols.currency,SFSymbols.package,SFSymbols.valise,SFSymbols.secondeEmail]
 	
-	let values : [Any] = [25,10,5,"Motorcyle","Google Sheets"]
+	let values : [Any] = [25,10,5,"Motorcyle","saadsaissi41@gmail.com"]
 	private let cellID = "cellID"
 	let tableview: UITableView = {
 		let tv = UITableView()

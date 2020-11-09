@@ -16,17 +16,17 @@ class LoginViewController: UIViewController {
 	let loginlabel = UILabel.init(text: "Login", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
 	
 	//Icons
-	let phonIcon     = UIImageView(SFSymbols.phone)
+	let emailIcon     = UIImageView(SFSymbols.email)
 	let passwordIcon = UIImageView(SFSymbols.password)
 	
 	
 	//TextFields
-	let phonlText    = UITextField(placholder: "Phone")
+	let emailText    = UITextField(placholder: "Email")
 	let passwordText = UITextField(placholder: "Password",isPassword: true)
 
 	
 	//Containers
-	let phonContainer     = UIView(shadowOpacity: 0.4)
+	let emailContainer     = UIView(shadowOpacity: 0.4)
 	let passwordContainer = UIView(shadowOpacity: 0.4)
 	
 	
@@ -42,14 +42,10 @@ class LoginViewController: UIViewController {
 		createUI()
 		dismissKeyBoard()
 		setActions()
-//		perform(#selector(handlePresting), with: nil, afterDelay: 0)
+		
 
 	}
-//	@objc func handlePresting() {
-//		let loginViewScreen = MainTabBarController()
-//		loginViewScreen.modalPresentationStyle = .fullScreen
-//		present(loginViewScreen, animated: true)
-//	}
+	
 }
 
 //MARK: Create Login  UI
@@ -71,21 +67,20 @@ extension LoginViewController {
 		loginlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		loginlabel.constrainWidth(constant: 100)
 		
-		let phoneStack = HStackView(arrangedSubviews: [phonIcon,phonlText,UIView()])
-		phonContainer.addSubview(phoneStack)
-		phonlText.keyboardType = .phonePad
-		phoneStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 0))
+		let emailStack = HStackView(arrangedSubviews: [emailIcon,emailText,UIView()])
+		emailContainer.addSubview(emailStack)
+		emailStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 0))
 		let passwordStack = HStackView(arrangedSubviews: [passwordIcon,passwordText,hiddenPassword])
 		[passwordIcon,hiddenPassword].forEach({$0.constrainWidth(constant: 25)})
 		
 		passwordContainer.addSubview(passwordStack)
 		passwordStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 10))
 		
-		let vStackContainer = VerticalStackView(arrangedSubviews: [phonContainer,passwordContainer,loginButton,skipButton], spacing: 30)
+		let vStackContainer = VerticalStackView(arrangedSubviews: [emailContainer,passwordContainer,loginButton,skipButton], spacing: 30)
 		view.addSubview(vStackContainer)
 		
 		
-		[phonContainer,passwordContainer,loginButton].forEach({$0.constrainHeight(constant: 50)})
+		[emailContainer,passwordContainer,loginButton].forEach({$0.constrainHeight(constant: 50)})
 		
 		vStackContainer.anchor(top: loginlabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 25, left: 25, bottom: 0, right: 25))
 		view.addSubview(signUpButton)
@@ -107,8 +102,7 @@ extension LoginViewController {
 		loginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 	}
 	@objc func handleLogin() {
-		let mainTab = MainTabBarController()
-		navigationController?.pushViewController(mainTab, animated: true)
+		self.dismiss(animated: true)
 	}
 	@objc func handleSkip() {
 		handleLogin()

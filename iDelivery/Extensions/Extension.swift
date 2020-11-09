@@ -78,17 +78,17 @@ extension UIImageView {
 }
 
 extension UIButton {
-	convenience init(title: String) {
+	convenience init(title: String,_ backgroundColor : UIColor = .systemBackground,_ titlColor : UIColor = .label,_ size : CGFloat = 36) {
 		self.init(type: .system)
 		self.setTitle(title, for: .normal)
-		self.setTitleColor(.label, for: .normal)
-		self.titleLabel?.font = UIFont(name: "Avenir-Light", size: 36)
+		self.setTitleColor(titlColor, for: .normal)
+		self.titleLabel?.font = UIFont(name: "Avenir-Light", size: size)
 		self.layer.cornerRadius = 5
 		self.layer.shadowOpacity = 0.4
 		self.layer.shadowRadius = 10
 		self.layer.shadowOffset = .init(width: 0, height: 10)
 		self.layer.cornerRadius = 5
-		self.backgroundColor = .systemBackground
+		self.backgroundColor = backgroundColor
 	}
 }
 extension UIButton {
@@ -138,5 +138,12 @@ extension UIImage {
 			UIGraphicsEndImageContext()
 		
 		return newImage!
+	}
+}
+extension UIImage {
+	func resized(to size: CGSize) -> UIImage {
+		return UIGraphicsImageRenderer(size: size).image { _ in
+			draw(in: CGRect(origin: .zero, size: size))
+		}
 	}
 }

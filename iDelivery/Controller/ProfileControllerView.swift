@@ -67,7 +67,8 @@ extension  ProfileControllerView {
 	}
 	
 	@objc fileprivate func handlePrestenUpdateProfile() {
-		
+		let editeProfileViwController = UINavigationController(rootViewController: EditeProfileViewController())
+		present(editeProfileViwController, animated: true)
 	}
 }
 

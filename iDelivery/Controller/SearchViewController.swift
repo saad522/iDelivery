@@ -26,8 +26,14 @@ class SearchViewController: UICollectionViewController {
 		configuerCollectionView()
 		configureDataSource()
 		performQuery(with: nil)
+		perform(#selector(handlePresting), with: nil, afterDelay: 0)
 	}
-	
+	@objc func handlePresting() {
+		let loginViewScreen = LoginViewController()
+		let controller = UINavigationController(rootViewController: loginViewScreen)
+		controller.modalPresentationStyle = .overFullScreen
+		present(controller, animated: true)
+	}
 	//MARK: ComposotionalLayout
 	init() {
 		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1)))
