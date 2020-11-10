@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController{
 	//MARK: Properties
 	//Title
 	let logo = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 25)!, textColor: .label)
@@ -26,21 +27,22 @@ class SignUpViewController: UIViewController {
 	let emailIcone     = UIImageView(SFSymbols.email)
 	
 	//Image
-	let profilePicture : UIImageView = {
+	lazy var profilePicture : UIImageView = {
 		let picture = UIImageView()
-		let size : CGFloat = 75
+		let size : CGFloat = 85
 		picture.constrainWidth(constant: size)
 		picture.constrainHeight(constant: size)
-		picture.layer.cornerRadius = size/2
-		picture.layer.borderWidth = 0.5
-		picture.layer.borderColor = UIColor.black.cgColor
+
+		picture.isUserInteractionEnabled = true
+		picture.image = UIImage(systemName: SFSymbols.camera)?.withTintColor(.systemGray).withRenderingMode(.alwaysOriginal)
+		picture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePickerImage)))
 		return picture
 	}()
 	
 	//Buttons
 	let loginUpButton  = UIButton("Aleardy have an account?","Login")
 	let signUpButton   = UIButton(title: "SignUp")
-	let cameraIcon     = UIButton(SFSymbols.camera)
+//	let cameraIcon     = UIButton(SFSymbols.camera)
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
 	
 	//Separators
@@ -106,12 +108,14 @@ extension SignUpViewController {
 		
 		//PictureView
 		view.addSubview(profilePicture)
-		profilePicture.anchor(top: logo.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,padding: .init(top: 0, left: 25, bottom: 0, right: 0))
-		//Camera Icon
-		profilePicture.addSubview(cameraIcon)
-		cameraIcon.tintColor = .systemGray
-		profilePicture.isUserInteractionEnabled = true
-		cameraIcon.centerInSuperview()
+		profilePicture.translatesAutoresizingMaskIntoConstraints = false
+		profilePicture.topAnchor.constraint(equalTo: logo.bottomAnchor).isActive = true
+		profilePicture.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//		//Camera Icon
+//		profilePicture.addSubview(cameraIcon)
+//		cameraIcon.tintColor = .systemGray
+//		profilePicture.isUserInteractionEnabled = true
+//		cameraIcon.centerInSuperview()
 
 		// StackViews
 		// FullName StackView
@@ -140,7 +144,7 @@ extension SignUpViewController {
 		let mainStack = VerticalStackView(arrangedSubviews: [fullNameVS,phoneVS,emailVS,passwordVS,locationVS], spacing: 35)
 
 		view.addSubview(mainStack)
-		mainStack.anchor(top: profilePicture.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 20, left: 25, bottom: 0, right: 25))
+		mainStack.anchor(top: profilePicture.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 15, left: 25, bottom: 0, right: 25))
 
 		//SignUp Button
 		view.addSubview(signUpButton)
@@ -155,15 +159,94 @@ extension SignUpViewController {
 		view.addGestureRecognizer(tap)
 	}
 }
+
+//MARK: UIIMAGEPICKERVIEW
+extension SignUpViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+	@objc func handlePickerImage() {
+		let picker = UIImagePickerController()
+		picker.delegate = self
+		picker.allowsEditing = true
+		present(picker, animated: true)
+	}
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		guard let imgaeEdit = info[.editedImage] as? UIImage else  { return }
+		profilePicture.image = imgaeEdit
+		dismiss(animated: true)
+
+		
+	}
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		print("HERE")
+		dismiss(animated: true)
+	}
+}
+
+
 extension SignUpViewController {
 	fileprivate func setActions() {
 		loginUpButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 		hiddenPassword.addTarget(self, action: #selector(handlePassword), for: .touchUpInside)
 		signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+//		profilePicture.
 	}
+	
 	@objc func handleSignUp() {
-		self.dismiss(animated: true)
+		guard let fullName = fullNameText.text else { return  }
+		guard let email    = emailText.text else { return  }
+		guard let phone    = phoneText.text else { return  }
+		guard let password = passwordText.text else { return  }
+		guard let location = locationText.text else { return  }
+        
+        
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("Failed To Create User 👎🏿 reason : ",error.localizedDescription)
+            }
+            guard let userId = result?.user.uid else { return }
+            let imageName = UUID().uuidString
+            let storage = Storage.storage().reference().child("\(imageName).png")
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/png"
+            if let uploadData = self.profilePicture.image!.pngData() {
+                storage.putData(uploadData, metadata: metaData) { (metadata, error) in
+                    if let error = error {
+                        print("Failed To Upload Image  👎🏾reason : ",error.localizedDescription)
+                    }
+                    storage.downloadURL { (url, error) in
+                        if let error = error {
+                            print("Failed To download URL of Image 👎🏽 reason : ",error.localizedDescription)
+                        }
+                        guard let imageURL = url?.absoluteString else {return}
+                        let values : [String:Any] = ["fullName":fullName,
+                                                     "phone":phone,
+                                                     "email":email,
+                                                     "city":location,
+                                                     "password":password,
+                                                     "profileImage" : imageURL,
+                                                     "userId" : userId]
+                        self.uploadUserData(values: values)
+                    }
+                 
+                }
+            }
+            
+            
+            
+        }
+        
+//		self.dismiss(animated: true)
 	}
+    private func uploadUserData(values : [String:Any]) {
+        let database = Firestore.firestore()
+        database.collection(DB_Keys.collectionKey).addDocument(data: values) { (error) in
+            if let error = error {
+                print("Failed To set Data 👎🏻 reason : ",error.localizedDescription)
+            }
+            print("We did it 👍🏿")
+            self.dismiss(animated: true)
+        }
+    }
 	@objc fileprivate func handlePassword() {
 		if passwordText.isSecureTextEntry == true {
 			passwordText.isSecureTextEntry = false
@@ -199,4 +282,28 @@ struct SignUpView_Previews: PreviewProvider {
 		SignUpView()
 			.edgesIgnoringSafeArea(.all)
     }
+}
+extension UIImage {
+		// image with rounded corners
+		public func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
+			let maxRadius = min(size.width, size.height) / 2
+			let cornerRadius: CGFloat
+			if let radius = radius, radius > 0 && radius <= maxRadius {
+				cornerRadius = radius
+			} else {
+				cornerRadius = maxRadius
+			}
+			UIGraphicsBeginImageContextWithOptions(size, false, scale)
+			let rect = CGRect(origin: .zero, size: size)
+			UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+			draw(in: rect)
+			let image = UIGraphicsGetImageFromCurrentImageContext()
+			UIGraphicsEndImageContext()
+			return image
+		}
+	}
+
+
+enum DB_Keys {
+    static let collectionKey = "users"
 }
