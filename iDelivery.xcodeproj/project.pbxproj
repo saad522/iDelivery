@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,9 @@
 		043930222550A11B003BC235 /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930212550A11B003BC235 /* MountainsRawData.swift */; };
 		043930252550A138003BC235 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930242550A138003BC235 /* MountainsController.swift */; };
 		0443E60A255B1200006C209C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0443E609255B1200006C209C /* GoogleService-Info.plist */; };
+		044B4B17255C3770008A0BAB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B4B16255C3770008A0BAB /* User.swift */; };
+		044B4B1A255C44D5008A0BAB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B4B19255C44D5008A0BAB /* API.swift */; };
+		044B4B1E255C4D32008A0BAB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 044B4B1D255C4D32008A0BAB /* SDWebImage */; };
 		0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */; };
 		0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */; };
 		0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */; };
@@ -52,6 +55,8 @@
 		043930212550A11B003BC235 /* MountainsRawData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		043930242550A138003BC235 /* MountainsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
 		0443E609255B1200006C209C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		044B4B16255C3770008A0BAB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		044B4B19255C44D5008A0BAB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileControllerView.swift; sourceTree = "<group>"; };
 		0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersonalView.swift; sourceTree = "<group>"; };
 		0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationOfUserTableViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044B4B1E255C4D32008A0BAB /* SDWebImage in Frameworks */,
 				9BAB390FB476033A7C7B080B /* Pods_iDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +199,7 @@
 			children = (
 				043930212550A11B003BC235 /* MountainsRawData.swift */,
 				043930242550A138003BC235 /* MountainsController.swift */,
+				044B4B16255C3770008A0BAB /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +207,7 @@
 		0485DA282548655900033797 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				044B4B19255C44D5008A0BAB /* API.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -210,7 +218,6 @@
 				CC4BBB36034B0AD35174F386 /* Pods-iDelivery.debug.xcconfig */,
 				E8707F282EAB0B03798D48CF /* Pods-iDelivery.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -240,6 +247,9 @@
 			dependencies = (
 			);
 			name = iDelivery;
+			packageProductDependencies = (
+				044B4B1D255C4D32008A0BAB /* SDWebImage */,
+			);
 			productName = iDelivery;
 			productReference = 0485DA0C254864DE00033797 /* iDelivery.app */;
 			productType = "com.apple.product-type.application";
@@ -267,6 +277,9 @@
 				Base,
 			);
 			mainGroup = 0485DA03254864DE00033797;
+			packageReferences = (
+				044B4B1C255C4D32008A0BAB /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 0485DA0D254864DE00033797 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -360,6 +373,7 @@
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
 				0485DA3025486A1300033797 /* Extension.swift in Sources */,
+				044B4B17255C3770008A0BAB /* User.swift in Sources */,
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
 				04874071254E029B00F3AA54 /* SortsView.swift in Sources */,
 				040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */,
@@ -369,6 +383,7 @@
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
 				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
+				044B4B1A255C44D5008A0BAB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +579,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		044B4B1C255C4D32008A0BAB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		044B4B1D255C4D32008A0BAB /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 044B4B1C255C4D32008A0BAB /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0485DA04254864DE00033797 /* Project object */;
 }

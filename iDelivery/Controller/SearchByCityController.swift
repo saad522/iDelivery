@@ -6,13 +6,22 @@
 //
 
 import SwiftUI
+import Firebase
+import SDWebImage
+import FirebaseFirestore
 
 class SearchByCityController: UICollectionViewController {
 	
 	//MARK: Properties
+    fileprivate let city: String
+    // dependency injection constructor
+    
+    
+    
 	private let topCellID 	  = "topCellID"
 	private let secondeCellID = "secondeCellID"
-	
+    var users = [User]()
+    
 	var buttonsIcons  = [SFSymbols.filter,SFSymbols.sort,SFSymbols.reload]
 	var buttonsTitles = ["Filter","Sort","Reload"]
 	
@@ -24,16 +33,20 @@ class SearchByCityController: UICollectionViewController {
 		setUpNavigation()
 		configuCollectionView()
 		menus()
+        fectch()
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
 	}
 	
-	//--:ComosotionalLayout Configuration
-	init() {
+	//--ComosotionalLayout Configuration
+	init(city: String?) {
 		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
 		item.contentInsets = .init(top: 12, leading: 10, bottom: 12, trailing: 10)
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(250)), subitems: [item])
 		
 		let section = NSCollectionLayoutSection(group: group)
 		let layout = UICollectionViewCompositionalLayout(section: section)
+        self.city = city ?? "Casablnca"
 		super.init(collectionViewLayout: layout)
 	}
 	
@@ -52,6 +65,29 @@ class SearchByCityController: UICollectionViewController {
 	}
 }
 
+//MARK: setup Firebase
+extension SearchByCityController {
+    func fectch() {
+        API.shared.fetchUsersData(city: city) { (user, error)   in
+            if let error = error {
+                print("We could not fetch users data reason ",error.localizedDescription)
+                return
+            }
+            self.users = user ?? []
+//            self.users.forEach({print("\($0.fullName) \($0.price), \($0.city) \($0.retruns)")})
+//            user?.forEach({print($0.price)})
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+
+    @objc fileprivate func handleRefresh() {
+        collectionView.refreshControl?.endRefreshing()
+        fectch()
+    }
+}
+
 //MARK: Configuration Of CollectionView
 extension SearchByCityController {
 	fileprivate func setUpNavigation() {
@@ -65,14 +101,16 @@ extension SearchByCityController {
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 4
+        return users.count
 	}
-	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondeCellID, for: indexPath) as! CardUserViewCell
-			return cell
-		
-	}
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondeCellID, for: indexPath) as! CardUserViewCell
+        let user = users[indexPath.item]
+        cell.user = user
+        return cell
+        
+    }
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 			let detailsControlles = MoreDetailsController()
 			detailsControlles.modalPresentationStyle = .fullScreen
@@ -102,7 +140,7 @@ extension SearchByCityController {
 }
 struct SearchByCityView: UIViewControllerRepresentable {
 	func makeUIViewController(context: Context) -> UIViewController {
-		let searchByCityController = SearchByCityController()
+		let searchByCityController = SearchByCityController(city: nil)
 		return UINavigationController(rootViewController: searchByCityController)
 	}
 	

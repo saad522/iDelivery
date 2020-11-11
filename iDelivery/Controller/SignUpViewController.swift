@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController{
 	//MARK: Properties
@@ -192,10 +193,11 @@ extension SignUpViewController {
 	
 	@objc func handleSignUp() {
 		guard let fullName = fullNameText.text else { return  }
+        guard let phone    = phoneText.text else { return  }
+        guard let location = locationText.text else { return  }
 		guard let email    = emailText.text else { return  }
-		guard let phone    = phoneText.text else { return  }
 		guard let password = passwordText.text else { return  }
-		guard let location = locationText.text else { return  }
+		
         
         
         
@@ -218,14 +220,14 @@ extension SignUpViewController {
                             print("Failed To download URL of Image 👎🏽 reason : ",error.localizedDescription)
                         }
                         guard let imageURL = url?.absoluteString else {return}
-                        let values : [String:Any] = ["fullName":fullName,
-                                                     "phone":phone,
+                        let values : [String:Any] = ["city":location,
                                                      "email":email,
-                                                     "city":location,
+                                                     "fullName":fullName,
                                                      "password":password,
-                                                     "profileImage" : imageURL,
-                                                     "userId" : userId]
-                        self.uploadUserData(values: values)
+                                                     "phone" : phone,
+                                                     "profileImage":imageURL,
+                                                     "userId":userId]
+                        self.uploadUserData(values: values, docmentID: userId)
                     }
                  
                 }
@@ -235,17 +237,19 @@ extension SignUpViewController {
             
         }
         
-//		self.dismiss(animated: true)
 	}
-    private func uploadUserData(values : [String:Any]) {
+    private func uploadUserData(values : [String:Any],docmentID : String) {
         let database = Firestore.firestore()
-        database.collection(DB_Keys.collectionKey).addDocument(data: values) { (error) in
+        database.collection(DB_Keys.collectionKey).document(docmentID).setData(values) { (error) in
             if let error = error {
                 print("Failed To set Data 👎🏻 reason : ",error.localizedDescription)
             }
             print("We did it 👍🏿")
             self.dismiss(animated: true)
         }
+//            .addDocument(data: values) { (error) in
+//
+//        }
     }
 	@objc fileprivate func handlePassword() {
 		if passwordText.isSecureTextEntry == true {

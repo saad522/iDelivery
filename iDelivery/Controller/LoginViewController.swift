@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+
 class LoginViewController: UIViewController {
 	
 	
@@ -102,10 +104,20 @@ extension LoginViewController {
 		loginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 	}
 	@objc func handleLogin() {
-		self.dismiss(animated: true)
+        guard let email    = emailText.text else { return  }
+        guard let password = passwordText.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("Failed to Login user 👎🏾 reason :",error.localizedDescription)
+                return
+            }
+            print("User is logged 👍🏿 ")
+            self.dismiss(animated: true)
+        }
 	}
 	@objc func handleSkip() {
-		handleLogin()
+        self.dismiss(animated: true)
 	}
 	@objc fileprivate func handlePassword() {
 		if passwordText.isSecureTextEntry == true {

@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import Firebase
+import FirebaseFirestore
 
 class EditeProfileViewController: UIViewController {
 	//MARK:Properties
@@ -44,15 +45,45 @@ class EditeProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		creatUI()
+        setActions()
 	}
 }
 
+//MARK: setup Firebase
+extension EditeProfileViewController {
+   @objc func handleUpdate() {
+    guard let price = priceText.text else { return }
+        guard let retruns = retrunText.text else { return }
+        guard let stockage = stockText.text else { return }
+        let transport = segmentedController.selectedSegmentIndex
+        let values : [String:Any] = ["price":price,
+                                 "retruns":retruns,
+                                 "stock":stockage,
+                                 "transport":transport]
+        
+        guard let uiserID = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+    db.collection(DB_Keys.collectionKey).document(uiserID).setData(values, merge: true) { (error) in
+        if let error = error {
+            print("Failed to set Data 👎🏻 reason ",error.localizedDescription)
+            return
+        }
+        print("Its's Done ✅")
+        self.dismiss(animated: true)
+    }
+}
+    
+    func setActions() {
+        updateButton.addTarget(self, action: #selector(handleUpdate), for: .touchUpInside)
+    }
+    
+}
 //MARK: Create UI
 extension EditeProfileViewController {
 	fileprivate func creatUI() {
 		view.backgroundColor = .systemBackground
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancle", style: .done, target: self, action: #selector(handleCancel))
-		
+        [priceText,retrunText,stockText].forEach({$0.keyboardType = .numberPad})
 		let hStackPrice = HStackView(arrangedSubviews: [priceIcon,priceText,UIView()], spacing: 5)
 		let vStackPrice = VerticalStackView(arrangedSubviews: [hStackPrice,linePrice], spacing: 5)
 

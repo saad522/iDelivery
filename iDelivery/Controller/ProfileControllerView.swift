@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+
 class ProfileControllerView: UIViewController {
 	//MARK: Properties
 	let cardPersonnaleController = CardPersonalView()
@@ -35,9 +37,23 @@ class ProfileControllerView: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		createUI()
+        fetchUserData()
+//        API.shared.updateUserData()
 	}
 }
 
+//MARK: setupFirebase
+extension ProfileControllerView {
+    fileprivate func fetchUserData() {
+        API.shared.fetchUserData { (user, error) in
+            if let error = error {
+                print("Failed To Load Data 👎🏻 reason ",error.localizedDescription)
+                return
+            }
+            self.cardPersonnaleController.user = user
+        }
+    }
+}
 //MARK: create UI
 extension  ProfileControllerView {
 	fileprivate func createUI() {

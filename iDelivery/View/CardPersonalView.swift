@@ -8,12 +8,21 @@
 import UIKit
 class CardPersonalView: UIViewController {
 	
-	//Profile Picture
-	let profilePicture = UIImageView(image: #imageLiteral(resourceName: "LmpwZw"))
-	
+	//MARK: Properties
+    var user : User! {
+        didSet {
+            name.text = user.fullName
+            phone.text = user.phone
+            print("Pohone",user.phone)
+            city.text = user.city
+            profilePicture.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+        }
+    }
+    //Profile Picture
+    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "LmpwZw"))
 	//Profile Info
 	let name = UILabel.init(text: "Saad Saissi Hassni", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
-	let phone = UILabel.init(text: "0657890122", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
+	let phone = UILabel.init(text: "", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
 	
 	let city =  UILabel.init(text: "Tangier", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
 	
@@ -36,6 +45,7 @@ class CardPersonalView: UIViewController {
 		return edit
 	}()
 	
+    //MARK: Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		createUI()

@@ -11,6 +11,22 @@ import UIKit
 class CardUserViewCell: UICollectionViewCell {
 	//MARK: Properties
 	//Labels
+    var user : User! {
+        didSet {
+            userIcon.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+            price.text = "Price : \(user.price) DH"
+            returns.text = "Return : \(user.retruns) DH"
+            name.text = user.fullName
+            city.text = user.city
+            if user.transport == 0 {
+                iconTransport.image = #imageLiteral(resourceName: "motorcycle")
+            } else {
+                iconTransport.image = #imageLiteral(resourceName: "car")
+            }
+            
+        }
+    }
+    
 	let userIcon = UIImageView(cornerRadius: 5)
 	let name = UILabel.init(text: "Saad Saissi Hassani", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
 	let price = UILabel.init(text: "price: 7$", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)

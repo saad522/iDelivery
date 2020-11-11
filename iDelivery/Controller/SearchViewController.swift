@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 class SearchViewController: UICollectionViewController {
 	//MARK: Properties
@@ -22,18 +23,15 @@ class SearchViewController: UICollectionViewController {
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setUpNavigation()
-		configuerCollectionView()
-		configureDataSource()
-		performQuery(with: nil)
-		perform(#selector(handlePresting), with: nil, afterDelay: 0)
+        checkIfUserLoggedIn()
+//        signOut()
 	}
-	@objc func handlePresting() {
-		let loginViewScreen = LoginViewController()
-		let controller = UINavigationController(rootViewController: loginViewScreen)
-		controller.modalPresentationStyle = .overFullScreen
-		present(controller, animated: true)
-	}
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupSearchViewController()
+        
+    }
 	//MARK: ComposotionalLayout
 	init() {
 		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1)))
@@ -52,8 +50,27 @@ class SearchViewController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 }
-
-
+//MARK: Configure Firebase
+extension SearchViewController {
+    fileprivate func checkIfUserLoggedIn() {
+        if Auth.auth().currentUser?.uid == nil {
+            let loginViewScreen = LoginViewController()
+            let controller = UINavigationController(rootViewController: loginViewScreen)
+            controller.modalPresentationStyle = .overFullScreen
+            present(controller, animated: true)
+        } else {
+            setupSearchViewController()
+        }
+    }
+    fileprivate func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError {
+            print("Having Trobble with SignOut the usr", separator: "resons:", terminator: "\(signOutError)")
+        }
+    }
+}
+//MARK: Configure CollectionView
 extension SearchViewController {
 	/// - Tag: SearchViewControllerDataSource
 	func configureDataSource() {
@@ -73,9 +90,8 @@ extension SearchViewController {
 	}
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let object = dataSource.itemIdentifier(for: indexPath)
-		let searchByCitiesController = SearchByCityController()
+		let searchByCitiesController = SearchByCityController(city: object?.name ?? "Casablnca")
 		navigationController?.pushViewController(searchByCitiesController, animated: true)
-//		navigationController?.title = object?.name ?? ""
 		searchByCitiesController.navigationItem.title = object?.name ?? "Casablnca"
 	}
 	/// - Tag: MountainsPerformQuery
@@ -100,6 +116,13 @@ extension SearchViewController : UISearchBarDelegate {
 		navigationItem.hidesSearchBarWhenScrolling = false
 		searchController.searchBar.delegate = self
 	}
+    
+    func setupSearchViewController() {
+        setUpNavigation()
+        configuerCollectionView()
+        configureDataSource()
+        performQuery(with: nil)
+    }
 }
 
 
