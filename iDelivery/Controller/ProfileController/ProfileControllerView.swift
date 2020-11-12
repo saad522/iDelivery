@@ -12,7 +12,7 @@ class ProfileControllerView: UIViewController {
 	//MARK: Properties
 	let cardPersonnaleController = CardPersonalView()
 	let infoUserTableViewController = InformationOfUserTableViewController()
-	let descptionLabel = UILabel.init(text: "complete your profile by adding pricing \nStocke price …etc.\n to helps users get to find you 😎", font: .systemFont(ofSize: 14), numberOfLines: 7, textColor: .label)
+	let descptionLabel = UILabel.init(text: "complete your profile by adding pricing Stocke price…etc.to helps\n users get to find you 😎", font: .systemFont(ofSize: 13), numberOfLines: 7, textColor: .label)
 	lazy var  addButton : UIButton =  {
 		let button = UIButton(type: .system)
 		button.setImage(UIImage(systemName: SFSymbols.addInfo), for: .normal)
@@ -24,7 +24,12 @@ class ProfileControllerView: UIViewController {
 		button.tintColor = .systemBackground
 		return button
 	}()
-    let logoutButton = UIButton(action: "LogOut", background: .systemRed)
+    let logoutButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Logout", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        return button
+    }()
 	//If User Not Login UI Components
 	let deisgn = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
 	let loginButton = UIButton(action: "Login", background: .systemRed)
@@ -90,7 +95,7 @@ extension  ProfileControllerView {
         
         let vStackDesign = VerticalStackView(arrangedSubviews: [deisgn,haveAccountLabel,loginButton,UIView()], spacing: 10)
         
-        let vStack = VerticalStackView(arrangedSubviews: [cardPersonnaleController.view,infoUserTableViewController.view,HStackView(arrangedSubviews: [descptionLabel,addButton], spacing: 5),logoutButton,UIView()], spacing: 20)
+        let vStack = VerticalStackView(arrangedSubviews: [cardPersonnaleController.view,infoUserTableViewController.view,HStackView(arrangedSubviews: [descptionLabel,addButton], spacing: 5),UIView()], spacing: 15)
         
         if Auth.auth().currentUser?.uid == nil {
             //MARK: User not Login
@@ -101,22 +106,18 @@ extension  ProfileControllerView {
             view.addSubview(vStackDesign)
             vStackDesign.centerInSuperview()
             vStack.removeFromSuperview()
+            logoutButton.removeFromSuperview()
         } else {
+            view.addSubview(logoutButton)
+            logoutButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 5, left: 0, bottom: 0, right: 10))
             view.backgroundColor = .secondarySystemBackground
-            cardPersonnaleController.view.constrainHeight(constant: 180)
+            cardPersonnaleController.view.constrainHeight(constant: 160)
             view.addSubview(vStack)
-            vStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 10))
+            vStack.anchor(top: logoutButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
             vStackDesign.removeFromSuperview()
+            
         }
     }
-//	fileprivate func createUI() {
-//
-//
-//
-//	}
-//    func userNotLoggedUI() {
-//
-//    }
 	@objc fileprivate func handlePrestenUpdateProfile() {
 		let editeProfileViwController = EditeProfileViewController()
         editeProfileViwController.profileViewController = self
