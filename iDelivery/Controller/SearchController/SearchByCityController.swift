@@ -22,8 +22,6 @@ class SearchByCityController: UICollectionViewController {
 	private let secondeCellID = "secondeCellID"
     var users = [User]()
     
-	var buttonsIcons  = [SFSymbols.filter,SFSymbols.sort,SFSymbols.reload]
-	var buttonsTitles = ["Filter","Sort","Reload"]
 	
 	
 	
@@ -67,6 +65,7 @@ class SearchByCityController: UICollectionViewController {
 
 //MARK: setup Firebase
 extension SearchByCityController {
+
     func fectch() {
         API.shared.fetchUsersData(city: city) { (user, error)   in
             if let error = error {
@@ -96,7 +95,6 @@ extension SearchByCityController {
 	}
 	fileprivate func configuCollectionView() {
 		collectionView.backgroundColor = .secondarySystemBackground
-		collectionView.register(CustomizeButtonsCell.self, forCellWithReuseIdentifier: topCellID)
 		collectionView.register(CardUserViewCell.self, forCellWithReuseIdentifier: secondeCellID)
 	}
 	
@@ -112,7 +110,8 @@ extension SearchByCityController {
         
     }
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-			let detailsControlles = MoreDetailsController()
+            let user = users[indexPath.item]
+			let detailsControlles = MoreDetailsController(user: user)
 			detailsControlles.modalPresentationStyle = .fullScreen
 			present(detailsControlles, animated: true)
 	}

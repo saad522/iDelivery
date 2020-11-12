@@ -28,13 +28,20 @@ extension UIButton {
 	}
 }
 extension UILabel {
-	convenience init(text: String, font: UIFont, numberOfLines: Int = 1,textColor : UIColor = .label) {
+	convenience init(text: String, font: UIFont = .systemFont(ofSize: 16, weight: .semibold) , numberOfLines: Int = 1,textColor : UIColor = .label) {
 		self.init(frame: .zero)
 		self.text = text
 		self.font = font
 		self.textColor = textColor
 		self.numberOfLines = numberOfLines
 	}
+}
+extension UIView {
+    func shadow(){
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius  = 10
+        layer.shadowOffset  = .init(width: 0, height: 10)
+    }
 }
 extension UITextField {
 	convenience init(placholder : String,isPassword : Bool = false) {

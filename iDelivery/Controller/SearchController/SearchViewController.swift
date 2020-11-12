@@ -55,18 +55,12 @@ extension SearchViewController {
     fileprivate func checkIfUserLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
             let loginViewScreen = LoginViewController()
+//            loginViewScreen.
             let controller = UINavigationController(rootViewController: loginViewScreen)
             controller.modalPresentationStyle = .overFullScreen
             present(controller, animated: true)
         } else {
             setupSearchViewController()
-        }
-    }
-    fileprivate func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError {
-            print("Having Trobble with SignOut the usr", separator: "resons:", terminator: "\(signOutError)")
         }
     }
 }

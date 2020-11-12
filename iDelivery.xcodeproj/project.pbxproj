@@ -29,23 +29,16 @@
 		0485DA3A25486BA100033797 /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA3925486BA100033797 /* HStackView.swift */; };
 		0485DA3D254872EB00033797 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA3C254872EB00033797 /* Enums.swift */; };
 		0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487405E254D944300F3AA54 /* ToolsTableViewController.swift */; };
-		04874062254D96DC00F3AA54 /* ToolsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */; };
-		04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874064254D9A2400F3AA54 /* ToolsCardCell.swift */; };
 		0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874069254DAB2400F3AA54 /* FiltersView.swift */; };
 		0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487406C254DAB4000F3AA54 /* PresentationController.swift */; };
 		04874071254E029B00F3AA54 /* SortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874070254E029B00F3AA54 /* SortsView.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
-		04B2D1BC254C6CA70044B262 /* PricingInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */; };
-		04B2D1BF254C6D3F0044B262 /* PricingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
-		04BC24D0254B955F00F45872 /* PricingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CF254B955F00F45872 /* PricingTableViewCell.swift */; };
 		04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5682549D6F600FCB620 /* SearchByCityController.swift */; };
 		04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */; };
 		04BFC56F2549E21A00FCB620 /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC56E2549E21A00FCB620 /* SearchViewCell.swift */; };
-		04BFC5722549F0C800FCB620 /* CustomizeButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5712549F0C800FCB620 /* CustomizeButtonsCell.swift */; };
 		04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5742549FA0B00FCB620 /* CardUserViewCell.swift */; };
 		04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF78E8254C776A00981F51 /* PersonalnformationViewController.swift */; };
-		04CF78EC254C783400981F51 /* PersonaleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF78EB254C783400981F51 /* PersonaleInfoCell.swift */; };
 		9BAB390FB476033A7C7B080B /* Pods_iDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4CC48FB0B535436F032FCB /* Pods_iDelivery.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,23 +66,16 @@
 		0485DA3925486BA100033797 /* HStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		0485DA3C254872EB00033797 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0487405E254D944300F3AA54 /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
-		04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewCell.swift; sourceTree = "<group>"; };
-		04874064254D9A2400F3AA54 /* ToolsCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCardCell.swift; sourceTree = "<group>"; };
 		04874069254DAB2400F3AA54 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 		0487406C254DAB4000F3AA54 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		04874070254E029B00F3AA54 /* SortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortsView.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingInformationCard.swift; sourceTree = "<group>"; };
-		04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingTableViewController.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
-		04BC24CF254B955F00F45872 /* PricingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingTableViewCell.swift; sourceTree = "<group>"; };
 		04BFC5682549D6F600FCB620 /* SearchByCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByCityController.swift; sourceTree = "<group>"; };
 		04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		04BFC56E2549E21A00FCB620 /* SearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
-		04BFC5712549F0C800FCB620 /* CustomizeButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeButtonsCell.swift; sourceTree = "<group>"; };
 		04BFC5742549FA0B00FCB620 /* CardUserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardUserViewCell.swift; sourceTree = "<group>"; };
 		04CF78E8254C776A00981F51 /* PersonalnformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalnformationViewController.swift; sourceTree = "<group>"; };
-		04CF78EB254C783400981F51 /* PersonaleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaleInfoCell.swift; sourceTree = "<group>"; };
 		5B4CC48FB0B535436F032FCB /* Pods_iDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC4BBB36034B0AD35174F386 /* Pods-iDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDelivery.debug.xcconfig"; path = "Target Support Files/Pods-iDelivery/Pods-iDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 		E8707F282EAB0B03798D48CF /* Pods-iDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDelivery.release.xcconfig"; path = "Target Support Files/Pods-iDelivery/Pods-iDelivery.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,19 +133,10 @@
 		0485DA242548652400033797 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0485DA2C2548661300033797 /* LoginViewController.swift */,
-				0499B9D025488D72005E9FEF /* SignUpViewController.swift */,
-				04BFC5682549D6F600FCB620 /* SearchByCityController.swift */,
-				04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */,
-				04BC24CC254B90E200F45872 /* MoreDetailsController.swift */,
-				04B2D1BE254C6D3F0044B262 /* PricingTableViewController.swift */,
-				04CF78E8254C776A00981F51 /* PersonalnformationViewController.swift */,
-				040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */,
-				0487405E254D944300F3AA54 /* ToolsTableViewController.swift */,
-				0487406C254DAB4000F3AA54 /* PresentationController.swift */,
-				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
-				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
-				042370C02559D50200E45215 /* EditProfileViewController.swift */,
+				04DDC479255D991600B14003 /* BaseTabController */,
+				04DDC477255D98EF00B14003 /* ProfileController */,
+				04DDC476255D98DA00B14003 /* SearchController */,
+				04DDC475255D98C000B14003 /* Login-SignupController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,17 +156,8 @@
 		0485DA262548654700033797 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04BFC56E2549E21A00FCB620 /* SearchViewCell.swift */,
-				04BFC5712549F0C800FCB620 /* CustomizeButtonsCell.swift */,
-				04BFC5742549FA0B00FCB620 /* CardUserViewCell.swift */,
-				04BC24CF254B955F00F45872 /* PricingTableViewCell.swift */,
-				04B2D1BB254C6CA70044B262 /* PricingInformationCard.swift */,
-				04CF78EB254C783400981F51 /* PersonaleInfoCell.swift */,
-				04874061254D96DC00F3AA54 /* ToolsTableViewCell.swift */,
-				04874064254D9A2400F3AA54 /* ToolsCardCell.swift */,
-				04874069254DAB2400F3AA54 /* FiltersView.swift */,
-				04874070254E029B00F3AA54 /* SortsView.swift */,
-				0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */,
+				04DDC47C255D9A1300B14003 /* ProfileView */,
+				04DDC47A255D99FC00B14003 /* SearchView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,9 +165,8 @@
 		0485DA272548655000033797 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				043930212550A11B003BC235 /* MountainsRawData.swift */,
-				043930242550A138003BC235 /* MountainsController.swift */,
-				044B4B16255C3770008A0BAB /* User.swift */,
+				04DDC480255D9AC200B14003 /* User */,
+				04DDC47F255D9AB000B14003 /* SearchModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -210,6 +177,106 @@
 				044B4B19255C44D5008A0BAB /* API.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		04DDC475255D98C000B14003 /* Login-SignupController */ = {
+			isa = PBXGroup;
+			children = (
+				0485DA2C2548661300033797 /* LoginViewController.swift */,
+				0499B9D025488D72005E9FEF /* SignUpViewController.swift */,
+			);
+			path = "Login-SignupController";
+			sourceTree = "<group>";
+		};
+		04DDC476255D98DA00B14003 /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				04BFC5682549D6F600FCB620 /* SearchByCityController.swift */,
+				04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */,
+				0487406C254DAB4000F3AA54 /* PresentationController.swift */,
+				04DDC478255D98F700B14003 /* DetailsController */,
+			);
+			path = SearchController;
+			sourceTree = "<group>";
+		};
+		04DDC477255D98EF00B14003 /* ProfileController */ = {
+			isa = PBXGroup;
+			children = (
+				042370C02559D50200E45215 /* EditProfileViewController.swift */,
+				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
+				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
+			);
+			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		04DDC478255D98F700B14003 /* DetailsController */ = {
+			isa = PBXGroup;
+			children = (
+				04BC24CC254B90E200F45872 /* MoreDetailsController.swift */,
+				0487405E254D944300F3AA54 /* ToolsTableViewController.swift */,
+				04CF78E8254C776A00981F51 /* PersonalnformationViewController.swift */,
+			);
+			path = DetailsController;
+			sourceTree = "<group>";
+		};
+		04DDC479255D991600B14003 /* BaseTabController */ = {
+			isa = PBXGroup;
+			children = (
+				040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */,
+			);
+			path = BaseTabController;
+			sourceTree = "<group>";
+		};
+		04DDC47A255D99FC00B14003 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				04BFC56E2549E21A00FCB620 /* SearchViewCell.swift */,
+				04BFC5742549FA0B00FCB620 /* CardUserViewCell.swift */,
+				04DDC47E255D9A5300B14003 /* DetailsView */,
+				04DDC47D255D9A2400B14003 /* FiltersView */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
+		04DDC47C255D9A1300B14003 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		04DDC47D255D9A2400B14003 /* FiltersView */ = {
+			isa = PBXGroup;
+			children = (
+				04874070254E029B00F3AA54 /* SortsView.swift */,
+				04874069254DAB2400F3AA54 /* FiltersView.swift */,
+			);
+			path = FiltersView;
+			sourceTree = "<group>";
+		};
+		04DDC47E255D9A5300B14003 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		04DDC47F255D9AB000B14003 /* SearchModel */ = {
+			isa = PBXGroup;
+			children = (
+				043930212550A11B003BC235 /* MountainsRawData.swift */,
+				043930242550A138003BC235 /* MountainsController.swift */,
+			);
+			path = SearchModel;
+			sourceTree = "<group>";
+		};
+		04DDC480255D9AC200B14003 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				044B4B16255C3770008A0BAB /* User.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		89E8DCB4560BF5A61E17DBE8 /* Pods */ = {
@@ -349,26 +416,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B2D1BF254C6D3F0044B262 /* PricingTableViewController.swift in Sources */,
 				04BFC56F2549E21A00FCB620 /* SearchViewCell.swift in Sources */,
 				0485DA2D2548661300033797 /* LoginViewController.swift in Sources */,
-				04CF78EC254C783400981F51 /* PersonaleInfoCell.swift in Sources */,
-				04BFC5722549F0C800FCB620 /* CustomizeButtonsCell.swift in Sources */,
-				04B2D1BC254C6CA70044B262 /* PricingInformationCard.swift in Sources */,
 				04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */,
-				04BC24D0254B955F00F45872 /* PricingTableViewCell.swift in Sources */,
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
 				0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */,
 				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
 				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,
-				04874065254D9A2400F3AA54 /* ToolsCardCell.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
 				0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */,
 				043930252550A138003BC235 /* MountainsController.swift in Sources */,
 				043930222550A11B003BC235 /* MountainsRawData.swift in Sources */,
 				04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */,
-				04874062254D96DC00F3AA54 /* ToolsTableViewCell.swift in Sources */,
 				0485DA10254864DE00033797 /* AppDelegate.swift in Sources */,
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,

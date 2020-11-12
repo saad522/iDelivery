@@ -7,7 +7,7 @@
 
 import UIKit
 class CardPersonalView: UIViewController {
-	
+ 
 	//MARK: Properties
     var user : User! {
         didSet {
@@ -55,9 +55,7 @@ class CardPersonalView: UIViewController {
 
 extension CardPersonalView  {
 	fileprivate func createUI() {
-		view.layer.shadowOpacity = 0.5
-		view.layer.shadowRadius  = 10
-		view.layer.shadowOffset  = .init(width: 0, height: 10)
+        view.shadow()
 		view.layer.cornerRadius  = 5
 		view.backgroundColor = .systemBackground
 		

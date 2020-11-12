@@ -12,7 +12,8 @@ class LoginViewController: UIViewController {
 	
 	
 	//MARK: Properties
-	
+    var prfileViewController : ProfileControllerView?
+    
 	//Titles
 	let logo       = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
 	let loginlabel = UILabel.init(text: "Login", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
@@ -37,6 +38,7 @@ class LoginViewController: UIViewController {
 	let skipButton = UIButton("I'm just a Visitor!","Skip")
 	let signUpButton = UIButton("Don't have an account?","SignUp")
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
+    
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -113,6 +115,8 @@ extension LoginViewController {
                 return
             }
             print("User is logged 👍🏿 ")
+            self.prfileViewController?.fetchUserData()
+            self.prfileViewController?.checkIfUserLoggedIn()
             self.dismiss(animated: true)
         }
 	}
@@ -130,9 +134,9 @@ extension LoginViewController {
 	}
 	@objc fileprivate func handleSignUp() {
 		let signUpViewController = SignUpViewController()
+        signUpViewController.prfileViewController = prfileViewController
 		navigationController?.pushViewController(signUpViewController, animated: true)
-//		signUpViewController.modalPresentationStyle = .fullScreen
-//		present(signUpViewController, animated: true)
+
 		
 	}
 }

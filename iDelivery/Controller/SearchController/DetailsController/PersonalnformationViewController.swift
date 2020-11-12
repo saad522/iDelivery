@@ -9,6 +9,16 @@ import UIKit
 
 
 class PersonalnformationViewController: UIViewController {
+    
+    var user : User? {
+        didSet {
+            profilePicture.sd_setImage(with: URL(string: user?.profileImage ?? ""), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+            name.text = user?.fullName ?? ""
+            city.text = user?.city ?? ""
+            phone.text = user?.phone ?? ""
+        }
+    }
+    
 	let profilePicture = UIImageView(image: #imageLiteral(resourceName: "LmpwZw"))
 	let name = UILabel.init(text: "Saad Saissi Hassni", font: .boldSystemFont(ofSize: 16), textColor: .label)
 	let phone = UILabel.init(text: "0657890122", font: .boldSystemFont(ofSize: 16), textColor: .label)
@@ -29,9 +39,7 @@ class PersonalnformationViewController: UIViewController {
 
 extension PersonalnformationViewController  {
 	fileprivate func createUI() {
-		view.layer.shadowOpacity = 0.5
-		view.layer.shadowRadius  = 10
-		view.layer.shadowOffset  = .init(width: 0, height: 10)
+        view.shadow()
 		view.layer.cornerRadius  = 5
 		view.backgroundColor = .systemBackground
 		

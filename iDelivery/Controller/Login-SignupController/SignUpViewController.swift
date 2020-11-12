@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class SignUpViewController: UIViewController{
 	//MARK: Properties
+    var prfileViewController : ProfileControllerView?
+
 	//Title
 	let logo = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 25)!, textColor: .label)
 	//TextFields
@@ -245,6 +247,7 @@ extension SignUpViewController {
                 print("Failed To set Data 👎🏻 reason : ",error.localizedDescription)
             }
             print("We did it 👍🏿")
+            self.prfileViewController?.fetchUserData()
             self.dismiss(animated: true)
         }
 //            .addDocument(data: values) { (error) in
