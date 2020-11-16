@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 import SDWebImage
 import FirebaseFirestore
 
@@ -22,7 +21,9 @@ class SearchByCityController: UICollectionViewController {
 	private let secondeCellID = "secondeCellID"
     var users = [User]()
     
-	
+    let imageDesign = UIImageView(image : #imageLiteral(resourceName: "undraw_empty_xct9"))
+    let message = UILabel.init(text: "We didn't find anyone here", font: .systemFont(ofSize: 16, weight: .light))
+    
 	
 	
 	//MARK: LifeCycle
@@ -31,9 +32,8 @@ class SearchByCityController: UICollectionViewController {
 		setUpNavigation()
 		configuCollectionView()
 		menus()
+        createDesign()
         fectch()
-        collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
 	}
 	
 	//--ComosotionalLayout Configuration
@@ -81,16 +81,20 @@ extension SearchByCityController {
         }
     }
 
-    @objc fileprivate func handleRefresh() {
-        collectionView.refreshControl?.endRefreshing()
-        fectch()
-    }
+  
 }
 
 //MARK: Configuration Of CollectionView
 extension SearchByCityController {
+    fileprivate func createDesign() {
+        view.addSubview(imageDesign)
+        imageDesign.centerInSuperview(size: .init(width: 284, height: 223))
+        view.addSubview(message)
+        message.translatesAutoresizingMaskIntoConstraints = false
+        message.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        message.topAnchor.constraint(equalTo: imageDesign.bottomAnchor).isActive = true
+    }
 	fileprivate func setUpNavigation() {
-//		navigationItem.title = "Rabat"
 		navigationController?.navigationBar.prefersLargeTitles = true
 	}
 	fileprivate func configuCollectionView() {
@@ -99,6 +103,7 @@ extension SearchByCityController {
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        [imageDesign,message].forEach({$0.isHidden = users.count != 0 })
         return users.count
 	}
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
