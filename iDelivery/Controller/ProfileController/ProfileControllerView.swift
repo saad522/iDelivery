@@ -12,7 +12,7 @@ class ProfileControllerView: UIViewController {
 	//MARK: Properties
 	let cardPersonnaleController = CardPersonalView()
 	let infoUserTableViewController = InformationOfUserTableViewController()
-	let descptionLabel = UILabel.init(text: "complete your profile by adding pricing Stocke price…etc.to helps\n users get to find you 😎", font: .systemFont(ofSize: 13), numberOfLines: 7, textColor: .label)
+	let descptionLabel = UILabel.init(text: "complete your profile by adding pricing Stocke price...\nto helps users get to find you 😎", font: .systemFont(ofSize: 16), numberOfLines: 7, textColor: .label)
 	lazy var  addButton : UIButton =  {
 		let button = UIButton(type: .system)
 		button.setImage(UIImage(systemName: SFSymbols.addInfo), for: .normal)

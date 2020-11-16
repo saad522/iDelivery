@@ -20,6 +20,7 @@ class SearchByCityController: UICollectionViewController {
 	private let topCellID 	  = "topCellID"
 	private let secondeCellID = "secondeCellID"
     var users = [User]()
+    var forReload = [User]()
     
     let imageDesign = UIImageView(image : #imageLiteral(resourceName: "undraw_empty_xct9"))
     let message = UILabel.init(text: "We didn't find anyone here", font: .systemFont(ofSize: 16, weight: .light))
@@ -73,6 +74,7 @@ extension SearchByCityController {
                 return
             }
             self.users = user ?? []
+            self.forReload = user ?? []
 //            self.users.forEach({print("\($0.fullName) \($0.price), \($0.city) \($0.retruns)")})
 //            user?.forEach({print($0.price)})
             DispatchQueue.main.async {
@@ -121,26 +123,24 @@ extension SearchByCityController {
 			present(detailsControlles, animated: true)
 	}
 	func handleFilters(action: UIAction) {
-		let slideVC = FiltersView()
+		let slideVC = FiltersView(users: users)
 		slideVC.modalPresentationStyle = .custom
 		slideVC.transitioningDelegate = self
+        slideVC.searchConntroller = self
 		self.present(slideVC, animated: true)
 	}
 	func handleSort(action: UIAction) {
-		let slideVC = SortsView()
+		let slideVC = SortsView(users: users)
 		slideVC.modalPresentationStyle = .custom
 		slideVC.transitioningDelegate = self
+        slideVC.searchConntroller = self
 		self.present(slideVC, animated: true)
 	}
 	func handleReload(action: UIAction) {
-		collectionView.reloadData()
+        self.users = forReload
+        collectionView.reloadData()
 	}
-	@objc func showMiracle() {
-		let slideVC = SortsView()
-		slideVC.modalPresentationStyle = .custom
-		slideVC.transitioningDelegate = self
-		self.present(slideVC, animated: true, completion: nil)
-	}
+
 }
 struct SearchByCityView: UIViewControllerRepresentable {
 	func makeUIViewController(context: Context) -> UIViewController {

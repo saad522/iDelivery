@@ -10,6 +10,19 @@ import UIKit
 
 class FiltersView: UIViewController {
 	
+    var searchConntroller : SearchByCityController?
+    
+    var users : [User]?
+    
+    init(users : [User]) {
+        self.users = users
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 	//MARK: Properties
 	var slideIdicator : UIView = {
 		let view = UIView()
@@ -55,8 +68,10 @@ class FiltersView: UIViewController {
 		view.addGestureRecognizer(panGesture)
 		creatUI()
 		dismissKeyBoard()
+        setAction()
 	}
 	fileprivate func creatUI() {
+        [textFieldRetrun,textFieldPrice].forEach({$0.keyboardType = .numberPad})
 		view.addSubview(slideIdicator)
 		slideIdicator.translatesAutoresizingMaskIntoConstraints = false
 		slideIdicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 12).isActive = true
@@ -107,4 +122,53 @@ class FiltersView: UIViewController {
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
 	}
+    
+   fileprivate func setAction() {
+    filterButton.addTarget(self, action: #selector(handleFilter), for: .touchUpInside)
+    }
+    @objc func handleFilter() {
+        var array : [User] = []
+        guard let price = textFieldPrice.text else { return }
+        guard let returns = textFieldRetrun.text else { return }
+        
+        if switchPrice.isOn == true && switchReturn.isOn == false {
+            
+             array = users?.filter({ (user) -> Bool in
+               return user.price == price
+             }) ?? users!
+            searchConntroller?.users = array
+            searchConntroller?.collectionView.reloadData()
+            
+        } else if switchReturn.isOn == true && switchPrice.isOn == false {
+          
+             array = users?.filter({ (user) -> Bool in
+               return user.retruns == returns
+             }) ?? users!
+            searchConntroller?.users = array
+            searchConntroller?.collectionView.reloadData()
+            
+        } else if switchReturn.isOn == true && switchPrice.isOn == true {
+           
+             array = users?.filter({ (user) -> Bool in
+                return user.retruns >= returns && user.price >= price
+             }) ?? users!
+            searchConntroller?.users = array
+            searchConntroller?.collectionView.reloadData()
+            
+        } else if switchReturn.isOn == false && switchPrice.isOn == false {
+            searchConntroller?.users = users!
+            searchConntroller?.collectionView.reloadData()
+        }
+        
+        
+        dismiss(animated: true)
+    }
+    
+    func convertingToInt(arrayString : [String]) -> [Int] {
+        var arrayInt : [Int] = []
+        for index in arrayString {
+            arrayInt.append(Int(index)!)
+        }
+        return arrayInt
+    }
 }

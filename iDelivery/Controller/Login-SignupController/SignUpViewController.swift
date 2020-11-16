@@ -208,8 +208,7 @@ extension SignUpViewController {
                 print("Failed To Create User 👎🏿 reason : ",error.localizedDescription)
             }
             guard let userId = result?.user.uid else { return }
-            let imageName = UUID().uuidString
-            let storage = Storage.storage().reference().child("\(imageName).png")
+            let storage = Storage.storage().reference().child("\(userId).png")
             let metaData = StorageMetadata()
             metaData.contentType = "image/png"
             if let uploadData = self.profilePicture.image!.pngData() {
@@ -248,6 +247,7 @@ extension SignUpViewController {
             }
             print("We did it 👍🏿")
             self.prfileViewController?.fetchUserData()
+            self.prfileViewController?.checkIfUserLoggedIn()
             self.dismiss(animated: true)
         }
 //            .addDocument(data: values) { (error) in

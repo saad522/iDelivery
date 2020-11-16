@@ -11,7 +11,19 @@ import UIKit
 class SortsView: UIViewController {
 	
 	//MARK: Properties
-	var slideIdicator : UIView = {
+    var searchConntroller : SearchByCityController?
+    
+    var users : [User]?
+    
+    init(users : [User]) {
+        self.users = users
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    var slideIdicator : UIView = {
 		let view = UIView()
 		view.constrainHeight(constant: 3)
 		view.constrainWidth(constant: 85)
@@ -23,9 +35,9 @@ class SortsView: UIViewController {
 	
 	let highest 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Highest first", color: .label,segFont: .systemFont(ofSize: 18)))
 	
-	let motorcycle 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Only :Motorcycles", color: .label,segFont: .systemFont(ofSize: 18)))
+	let motorcycle 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Motorcycles first", color: .label,segFont: .systemFont(ofSize: 18)))
 	
-	let car 		=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Only :Cars", color: .label,segFont: .systemFont(ofSize: 18)))
+	let car 		=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Cars first", color: .label,segFont: .systemFont(ofSize: 18)))
 	
 	let lowesButton 	=  UISwitch()
 	let highestButton 	=  UISwitch()
@@ -106,13 +118,22 @@ class SortsView: UIViewController {
 		highestButton.addTarget(self, action: #selector(handleHiOn), for: .touchUpInside)
 		carButton.addTarget(self, action: #selector(handleCarOn), for: .touchUpInside)
 		motorButton.addTarget(self, action: #selector(handleMoOn), for: .touchUpInside)
-	
+        sortButton.addTarget(self, action: #selector(handleSort), for: .touchUpInside)
 	}
+    @objc func handleSort() {
+        dismiss(animated: true)
+    }
 	@objc func handleHiOn() {
 		if highestButton.isOn == true {
 			lowesButton.isOn = false
 			carButton.isOn = false
 			motorButton.isOn = false
+            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.price > rhs.price
+            }))!
+            self.searchConntroller?.users.forEach({print($0.price)})
+            self.searchConntroller?.collectionView.reloadData()
+    
 		}
 	}
 	@objc func handleCarOn() {
@@ -120,6 +141,12 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			lowesButton.isOn = false
 			motorButton.isOn = false
+            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.transport == 1
+            }))!
+            self.searchConntroller?.users.forEach({print($0.price)})
+            self.searchConntroller?.collectionView.reloadData()
+            
 		}
 	}
 	@objc func handleMoOn() {
@@ -127,6 +154,12 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			carButton.isOn = false
 			lowesButton.isOn = false
+            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.transport == 0
+            }))!
+            self.searchConntroller?.users.forEach({print($0.price)})
+            self.searchConntroller?.collectionView.reloadData()
+            
 		}
 	}
 	@objc func handleLowOn() {
@@ -134,6 +167,11 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			carButton.isOn = false
 			motorButton.isOn = false
+            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.price < rhs.price
+            }))!
+            self.searchConntroller?.users.forEach({print($0.price)})
+            self.searchConntroller?.collectionView.reloadData()
 		}
 	}
 	
