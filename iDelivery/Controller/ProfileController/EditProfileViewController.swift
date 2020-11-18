@@ -49,6 +49,12 @@ class EditeProfileViewController: UIViewController {
         creatUI()
         setActions()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        updateButton.backgroundColor = color
+    }
 }
 
 //MARK: setup Firebase
@@ -59,9 +65,9 @@ extension EditeProfileViewController {
         guard let stockage = stockText.text else { return }
         let transport = segmentedController.selectedSegmentIndex
         let values : [String:Any] = ["price":price,
-                                 "retruns":retruns,
-                                 "stock":stockage,
-                                 "transport":transport]
+                                     "retruns":retruns,
+                                     "stock":stockage,
+                                     "transport":transport]
         
         guard let uiserID = Auth.auth().currentUser?.uid else { return }
         let db = Firestore.firestore()

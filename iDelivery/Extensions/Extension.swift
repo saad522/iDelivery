@@ -6,10 +6,21 @@
 //
 
 import UIKit
+//Circle
+extension UIView {
+    convenience init(_ color : UIColor,_ size : CGFloat) {
+        self.init(frame:.zero)
+        self.backgroundColor = color
+        self.constrainHeight(constant: size)
+        self.constrainWidth(constant: size)
+        self.layer.cornerRadius = size / 2
+    
+    }
+}
 extension UIButton {
-	convenience init(action : String,background : UIColor) {
+    convenience init(action : String,background : UIColor = .niceBlue) {
 		self.init(type: .system)
-		self.tintColor = .label
+		self.tintColor = .white
 		self.setTitle(action, for: .normal)
 		self.setTitleColor(.systemBackground, for: .normal)
 		self.titleLabel?.font = .boldSystemFont(ofSize: 16)
@@ -55,7 +66,7 @@ extension UIImageView {
 	convenience init(_ icone : String, size : CGFloat = 16) {
 		self.init(frame:.zero)
 		self.image = UIImage(systemName: "\(icone)",withConfiguration: UIImage.SymbolConfiguration(pointSize: size, weight: .regular, scale: .large))?.withRenderingMode(.alwaysTemplate)
-		self.tintColor = .label
+        self.tintColor = .label
 	}
 }
 extension UIView {
@@ -85,7 +96,7 @@ extension UIImageView {
 }
 
 extension UIButton {
-	convenience init(title: String,_ backgroundColor : UIColor = .systemBackground,_ titlColor : UIColor = .label,_ size : CGFloat = 36) {
+	convenience init(title: String,_ backgroundColor : UIColor = .niceBlue,_ titlColor : UIColor = .white,_ size : CGFloat = 36) {
 		self.init(type: .system)
 		self.setTitle(title, for: .normal)
 		self.setTitleColor(titlColor, for: .normal)
@@ -98,12 +109,14 @@ extension UIButton {
 		self.backgroundColor = backgroundColor
 	}
 }
+
 extension UIButton {
-	convenience init(_ message : String, _ action : String) {
+    convenience init(_ message : String, _ action : String) {
 		self.init(type: .system)
 		let attribudeTitle = NSMutableAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)])
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
 		attribudeTitle.append(NSAttributedString(string: action, attributes:
-													[NSAttributedString.Key.foregroundColor : UIColor.label,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .semibold)]))
+													[NSAttributedString.Key.foregroundColor : color,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .semibold)]))
 		self.setAttributedTitle(attribudeTitle, for: .normal)
 	}
 }
@@ -153,4 +166,52 @@ extension UIImage {
 			draw(in: CGRect(origin: .zero, size: size))
 		}
 	}
+}
+
+extension UserDefaults {
+  func colorForKey(key: String) -> UIColor? {
+    var colorReturnded: UIColor?
+    if let colorData = data(forKey: key) {
+      do {
+        if let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(colorData) as? UIColor {
+          colorReturnded = color
+        }
+      } catch {
+        print("Error UserDefaults")
+      }
+    }
+    return colorReturnded
+  }
+  
+  func setColor(color: UIColor?, forKey key: String) {
+    var colorData: NSData?
+    if let color = color {
+      do {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false) as NSData?
+        colorData = data
+      } catch {
+        print("Error UserDefaults")
+      }
+    }
+    set(colorData, forKey: key)
+  }
+    
+    
+    func setMode(index : Int,with key : String) {
+        set(index, forKey: key)
+    }
+    func getTheMode(with key : String) -> Int {
+        var index: Int = 1
+        if let intData = data(forKey: key) {
+          do {
+            if let indexInt = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(intData) as? Int {
+              index = indexInt
+            }
+          } catch {
+            print("Error UserDefaults")
+          }
+        }
+        return index
+        
+    }
 }

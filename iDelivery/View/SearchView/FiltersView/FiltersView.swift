@@ -70,7 +70,14 @@ class FiltersView: UIViewController {
 		dismissKeyBoard()
         setAction()
 	}
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        filterButton.backgroundColor = color
+        [switchPrice,switchReturn].forEach({$0.onTintColor = color})
+    }
 	fileprivate func creatUI() {
+        [switchPrice,switchReturn].forEach({$0.onTintColor = .niceBlue})
         [textFieldRetrun,textFieldPrice].forEach({$0.keyboardType = .numberPad})
 		view.addSubview(slideIdicator)
 		slideIdicator.translatesAutoresizingMaskIntoConstraints = false
@@ -87,8 +94,6 @@ class FiltersView: UIViewController {
 		view.backgroundColor = .systemBackground
 		view.addSubview(filterButton)
 		filterButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 25, right: 25),size: .init(width: 0, height: 48))
-		filterButton.backgroundColor = .label
-		filterButton.setTitleColor(.systemBackground, for: .normal)
 	}
 	override func viewDidLayoutSubviews() {
 		if !hasSetPointOrigin {

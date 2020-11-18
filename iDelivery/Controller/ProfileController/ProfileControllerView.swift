@@ -32,7 +32,7 @@ class ProfileControllerView: UIViewController {
     }()
 	//If User Not Login UI Components
 	let deisgn = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
-	let loginButton = UIButton(action: "Login", background: .systemRed)
+	let loginButton = UIButton(action: "Login", background: .niceBlue)
 //	let registerButton = UIButton(action: "Register", background: .niceBlue)
 	
 	let haveAccountLabel = UILabel.init(text: "Login to manage your account ", font: .systemFont(ofSize: 16), textColor: .label)
@@ -50,6 +50,21 @@ class ProfileControllerView: UIViewController {
         super.viewWillAppear(animated)
         checkIfUserLoggedIn()
         fetchUserData()
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        addButton.backgroundColor = color
+        loginButton.backgroundColor = color
+        [cardPersonnaleController.editPictureButtons,cardPersonnaleController.editProfileButtons].forEach({$0.tintColor = color})
+//        let index = UserDefaults.standard.integer(forKey: Keys.intKey)
+//        if  index == 0 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .light
+//            }
+//        } else if index == 1 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .dark
+//            }
+//        }
+        
     }
 }
 
@@ -98,15 +113,15 @@ extension  ProfileControllerView {
         let vStack = VerticalStackView(arrangedSubviews: [cardPersonnaleController.view,infoUserTableViewController.view,HStackView(arrangedSubviews: [descptionLabel,addButton], spacing: 5),UIView()], spacing: 15)
         
         if Auth.auth().currentUser?.uid == nil {
-            //MARK: User not Login
+//            MARK: User not Login
             view.backgroundColor = .systemBackground
             vStackDesign.alignment = .center
             deisgn.constrainHeight(constant: 200)
             deisgn.constrainWidth(constant: 200)
             view.addSubview(vStackDesign)
             vStackDesign.centerInSuperview()
-            vStack.removeFromSuperview()
-            logoutButton.removeFromSuperview()
+            vStack.isHidden = true
+            logoutButton.isHidden = true
         } else {
             view.addSubview(logoutButton)
             logoutButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 5, left: 0, bottom: 0, right: 10))
@@ -114,7 +129,7 @@ extension  ProfileControllerView {
             cardPersonnaleController.view.constrainHeight(constant: 160)
             view.addSubview(vStack)
             vStack.anchor(top: logoutButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
-            vStackDesign.removeFromSuperview()
+            vStackDesign.isHidden = true
             
         }
     }

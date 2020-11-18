@@ -35,8 +35,8 @@ class LoginViewController: UIViewController {
 	
 	//Buttons
 	let loginButton = UIButton(title: "Login")
-	let skipButton = UIButton("I'm just a Visitor!","Skip")
-	let signUpButton = UIButton("Don't have an account?","SignUp")
+    var skipButton = UIButton()
+	var signUpButton = UIButton()
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
     
 	//MARK: LifeCycle
@@ -46,10 +46,23 @@ class LoginViewController: UIViewController {
 		createUI()
 		dismissKeyBoard()
 		setActions()
-		
-
 	}
-	
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        loginButton.backgroundColor = color
+//        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+//        if  index == 0 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .light
+//            }
+//        } else if index == 1 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .dark
+//            }
+//        }
+ 
+    }
 }
 
 //MARK: Create Login  UI
@@ -59,6 +72,8 @@ extension LoginViewController {
 		view.backgroundColor = .secondarySystemBackground
 	}
 	fileprivate func createUI() {
+        skipButton = UIButton("I'm just a Visitor!","Skip")
+        signUpButton = UIButton("Don't have an account?","SignUp")
 		[skipButton,signUpButton].forEach({$0.tintColor = .label})
 		view.addSubview(logo)
 		logo.translatesAutoresizingMaskIntoConstraints = false

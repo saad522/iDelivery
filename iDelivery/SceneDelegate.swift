@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		let vc = MainTabBarController()
 		// SearchViewController
 		window?.rootViewController = vc
-		
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {

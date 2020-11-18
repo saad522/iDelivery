@@ -30,7 +30,16 @@ class SearchViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSearchViewController()
-        
+//        let index = UserDefaults.standard.integer(forKey: Keys.intKey)
+//        if  index == 0 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .light
+//            }
+//        } else if index == 1 {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = .dark
+//            }
+//        }
     }
 	//MARK: ComposotionalLayout
 	init() {

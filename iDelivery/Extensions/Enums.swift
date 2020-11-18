@@ -34,4 +34,12 @@ enum SFSymbols {
 	static let edit		    = "square.and.pencil"
 	static let editeImage   = "camera.fill"
 	static let addInfo      = "plus.circle"
+    static let setFiltering = "ellipsis.circle.fill"
+    static let setting      = "gear"
+    static let checkmark    = "checkmark"
+}
+
+enum Keys {
+    static let key    = "ColorKey"
+    static let intKey = "IntKey"
 }

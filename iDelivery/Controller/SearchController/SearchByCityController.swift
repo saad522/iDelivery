@@ -36,7 +36,12 @@ class SearchByCityController: UICollectionViewController {
         createDesign()
         fectch()
 	}
-	
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        
+        menus(with: color)
+    }
 	//--ComosotionalLayout Configuration
 	init(city: String?) {
 		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
@@ -53,12 +58,12 @@ class SearchByCityController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	fileprivate func menus() {
+    fileprivate func menus(with color : UIColor = .niceBlue) {
 		let filters = UIMenu(title: "", children: [
-								UIAction(title: "Filters", image: UIImage(systemName: SFSymbols.filter), handler: handleFilters),
-								UIAction(title: "Sorts", image: UIImage(systemName: SFSymbols.sort), handler: handleSort),
-								UIAction(title: "Reloads", image: UIImage(systemName: SFSymbols.reload), handler: handleReload)])
-		let barItem = UIBarButtonItem(title: "", image: #imageLiteral(resourceName: "icons8-filter-100").withTintColor(.label).withRenderingMode(.alwaysOriginal), menu: filters)
+                                UIAction(title: "Filters", image: UIImage(systemName: SFSymbols.filter), handler: handleFilters),
+                                UIAction(title: "Sorts", image: UIImage(systemName: SFSymbols.sort), handler: handleSort),
+                                UIAction(title: "Reloads", image: UIImage(systemName: SFSymbols.reload), handler: handleReload)])
+        let barItem = UIBarButtonItem(title: "", image: UIImage(systemName: SFSymbols.setFiltering)!.withTintColor(color).withRenderingMode(.alwaysOriginal), menu: filters)
 		navigationItem.rightBarButtonItem = barItem
 		
 	}

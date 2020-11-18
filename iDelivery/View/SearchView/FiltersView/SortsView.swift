@@ -30,7 +30,7 @@ class SortsView: UIViewController {
 		view.backgroundColor = .lightGray
 		return view
 	}()
-	let sortButton = UIButton(title: "Sort")
+    let sortButton = UIButton(title: "Sort")
 	let lowest		 = UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Lowest first", color: .label,segFont: .systemFont(ofSize: 18)))
 	
 	let highest 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Highest first", color: .label,segFont: .systemFont(ofSize: 18)))
@@ -43,7 +43,7 @@ class SortsView: UIViewController {
 	let highestButton 	=  UISwitch()
 	let motorButton 	=  UISwitch()
 	let carButton 		=  UISwitch()
-
+    
 	lazy var arrays = [lowesButton,highestButton,motorButton,carButton]
 
 	var hasSetPointOrigin = false
@@ -59,7 +59,17 @@ class SortsView: UIViewController {
 		dismissKeyBoard()
 		setActions()
 	}
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        sortButton.backgroundColor = color
+        [lowesButton,
+         highestButton,
+         motorButton,
+         carButton,].forEach({$0.onTintColor = color})
+}
 	fileprivate func creatUI() {
+        [lowesButton,highestButton,motorButton,carButton].forEach({$0.onTintColor = .niceBlue})
 		view.addSubview(slideIdicator)
 		slideIdicator.translatesAutoresizingMaskIntoConstraints = false
 		slideIdicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 12).isActive = true
@@ -77,8 +87,6 @@ class SortsView: UIViewController {
 		view.backgroundColor = .systemBackground
 		view.addSubview(sortButton)
 		sortButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 20, right: 25),size: .init(width: 0, height: 48))
-		sortButton.backgroundColor = .label
-		sortButton.setTitleColor(.systemBackground, for: .normal)
 	}
 	override func viewDidLayoutSubviews() {
 		if !hasSetPointOrigin {

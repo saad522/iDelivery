@@ -37,6 +37,12 @@ class MoreDetailsController: UIViewController {
 		fetchUserDetailData()
 		creatUI()
 	}
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        dismiss.tintColor = color
+        
+    }
 }
 //MARK: setup Networking
 extension MoreDetailsController {
@@ -52,7 +58,6 @@ extension MoreDetailsController {
         view.backgroundColor = .secondarySystemBackground
         
 		view.addSubview(dismiss)
-		dismiss.tintColor = .label
         dismiss.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 15))
 		dismiss.addTarget(self, action: #selector(handelDismiss), for: .touchUpInside)
 

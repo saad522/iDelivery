@@ -16,8 +16,8 @@ class CardUserViewCell: UICollectionViewCell {
             userIcon.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
             price.text = "Price : \(user.price) DH"
             returns.text = "Return : \(user.retruns) DH"
-            name.text = user.fullName
-            city.text = user.city
+            name.text = "\(user.fullName)"
+            city.text = "\(user.city)"
             if user.transport == 0 {
                 iconTransport.image = #imageLiteral(resourceName: "motorcycle")
             } else {
@@ -89,7 +89,7 @@ extension CardUserViewCell {
 		layer.shadowRadius  = 10
 		layer.shadowOffset  = .init(width: 0, height: 10)
 		layer.cornerRadius  = 5
-		userIcon.image = #imageLiteral(resourceName: "LmpwZw")
+		userIcon.image = #imageLiteral(resourceName: "icons8-administrator-male-100")
 		userIcon.constrainWidth(constant: 85)
 		userIcon.constrainHeight(constant: 85)
 		iconTransport.constrainWidth(constant: 25)
@@ -101,16 +101,16 @@ extension CardUserViewCell {
 		
 		let hStackLocation = HStackView(arrangedSubviews: [iconLocation,city,UIView()], spacing: 5)
 		
-		let hStackTransport = HStackView(arrangedSubviews: [iconReturns,returns,UIView()], spacing: 5)
-		hStackTransport.alignment = .lastBaseline
+		let hStackReturns = HStackView(arrangedSubviews: [iconReturns,returns,UIView()], spacing: 5)
+		hStackReturns.alignment = .lastBaseline
 //		iconTransport.backgroundColor = .systemYellow
-		let hStackRetruns = HStackView(arrangedSubviews: [iconValise,transport,iconTransport,UIView()], spacing: 5)
+		let hStackTransport = HStackView(arrangedSubviews: [iconValise,transport,iconTransport,UIView()], spacing: 5)
 		
-		let vStackLabels = VerticalStackView(arrangedSubviews: [hStackName,hStackTransport,hStackPrice], spacing: 20)
+		let vStackLabels = VerticalStackView(arrangedSubviews: [hStackName,hStackReturns,hStackPrice], spacing: 20)
 		
 		let hStack = HStackView(arrangedSubviews: [userIcon,vStackLabels], spacing: 10)
 		
-		let mainStack = VerticalStackView(arrangedSubviews: [hStack,hStackLocation,hStackRetruns], spacing: 15)
+		let mainStack = VerticalStackView(arrangedSubviews: [hStack,hStackLocation,hStackTransport], spacing: 15)
 		
 		addSubview(mainStack)
 		mainStack.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))

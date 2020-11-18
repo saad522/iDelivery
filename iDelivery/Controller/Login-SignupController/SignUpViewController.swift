@@ -70,6 +70,12 @@ class SignUpViewController: UIViewController{
 		setActions()
 		setupPickeView()
 	}
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        signUpButton.backgroundColor = color
+        
+    }
 }
 
 //MARK: SetUp UIPickeView

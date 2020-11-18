@@ -19,7 +19,7 @@ class CardPersonalView: UIViewController {
         }
     }
     //Profile Picture
-    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "LmpwZw"))
+    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "icons8-administrator-male-100"))
 	//Profile Info
 	let name = UILabel.init(text: "Saad Saissi Hassni", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
 	let phone = UILabel.init(text: "", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
@@ -34,14 +34,16 @@ class CardPersonalView: UIViewController {
 	//Edit Buttons
 	let editProfileButtons : UIButton = {
 		let edit = UIButton(type : .system)
-		edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.edit)!, string: "Edite Profile", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
-		edit.tintColor = .label
+//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
+        edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.edit)!, string: "Edite Profile", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
+//        edit.tintColor = color
 		return edit
 	}()
 	let editPictureButtons : UIButton = {
 		let edit = UIButton(type : .system)
-		edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.editeImage)!, string: "Edite Picture", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
-		edit.tintColor = .label
+//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
+        edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.editeImage)!, string: "Edite Picture", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
+//        edit.tintColor = color
 		return edit
 	}()
 	
@@ -50,6 +52,12 @@ class CardPersonalView: UIViewController {
 		super.viewDidLoad()
 		createUI()
 	}
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
+//        editProfileButtons.tintColor = color
+//        editPictureButtons.tintColor = color
+//    }
 }
 
 
