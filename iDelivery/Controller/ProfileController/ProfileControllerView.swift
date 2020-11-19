@@ -54,16 +54,18 @@ class ProfileControllerView: UIViewController {
         addButton.backgroundColor = color
         loginButton.backgroundColor = color
         [cardPersonnaleController.editPictureButtons,cardPersonnaleController.editProfileButtons].forEach({$0.tintColor = color})
-//        let index = UserDefaults.standard.integer(forKey: Keys.intKey)
-//        if  index == 0 {
-//            UIApplication.shared.windows.forEach { window in
-//                window.overrideUserInterfaceStyle = .light
-//            }
-//        } else if index == 1 {
-//            UIApplication.shared.windows.forEach { window in
-//                window.overrideUserInterfaceStyle = .dark
-//            }
-//        }
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+        if  index == 0 {
+            print(index)
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
+        } else if index == 1 {
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
+            print(index)
+        }
         
     }
 }

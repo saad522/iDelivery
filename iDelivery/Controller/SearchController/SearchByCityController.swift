@@ -39,8 +39,19 @@ class SearchByCityController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        
         menus(with: color)
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+        if  index == 0 {
+            print(index)
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
+        } else if index == 1 {
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
+            print(index)
+        }
     }
 	//--ComosotionalLayout Configuration
 	init(city: String?) {

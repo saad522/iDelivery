@@ -51,16 +51,18 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         loginButton.backgroundColor = color
-//        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
-//        if  index == 0 {
-//            UIApplication.shared.windows.forEach { window in
-//                window.overrideUserInterfaceStyle = .light
-//            }
-//        } else if index == 1 {
-//            UIApplication.shared.windows.forEach { window in
-//                window.overrideUserInterfaceStyle = .dark
-//            }
-//        }
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+        if  index == 0 {
+            print(index)
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
+        } else if index == 1 {
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
+            print(index)
+        }
  
     }
 }

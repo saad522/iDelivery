@@ -36,6 +36,9 @@
 		0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874069254DAB2400F3AA54 /* FiltersView.swift */; };
 		0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487406C254DAB4000F3AA54 /* PresentationController.swift */; };
 		04874071254E029B00F3AA54 /* SortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874070254E029B00F3AA54 /* SortsView.swift */; };
+		049816D92567028D00291FBB /* FontsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816D82567028D00291FBB /* FontsPickerView.swift */; };
+		049816DD25670A2000291FBB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816DC25670A2000291FBB /* CustomFont.swift */; };
+		049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816E025670B7500291FBB /* FontCollectionViewCell.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
 		04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5682549D6F600FCB620 /* SearchByCityController.swift */; };
@@ -77,6 +80,9 @@
 		04874069254DAB2400F3AA54 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 		0487406C254DAB4000F3AA54 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		04874070254E029B00F3AA54 /* SortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortsView.swift; sourceTree = "<group>"; };
+		049816D82567028D00291FBB /* FontsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsPickerView.swift; sourceTree = "<group>"; };
+		049816DC25670A2000291FBB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		049816E025670B7500291FBB /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
 		04BFC5682549D6F600FCB620 /* SearchByCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByCityController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,8 @@
 			children = (
 				0421EF8225656702007971D8 /* ColorPickView.swift */,
 				0421EF86256590A2007971D8 /* BackGroundMode.swift */,
+				049816D82567028D00291FBB /* FontsPickerView.swift */,
+				049816E025670B7500291FBB /* FontCollectionViewCell.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -201,6 +209,7 @@
 		0485DA272548655000033797 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				049816DB256709F400291FBB /* Fonts */,
 				04DDC480255D9AC200B14003 /* User */,
 				04DDC47F255D9AB000B14003 /* SearchModel */,
 			);
@@ -213,6 +222,14 @@
 				044B4B19255C44D5008A0BAB /* API.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		049816DB256709F400291FBB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				049816DC25670A2000291FBB /* CustomFont.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		04DDC475255D98C000B14003 /* Login-SignupController */ = {
@@ -462,6 +479,7 @@
 				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
+				049816D92567028D00291FBB /* FontsPickerView.swift in Sources */,
 				0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */,
 				043930252550A138003BC235 /* MountainsController.swift in Sources */,
 				043930222550A11B003BC235 /* MountainsRawData.swift in Sources */,
@@ -470,6 +488,7 @@
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
 				0485DA3025486A1300033797 /* Extension.swift in Sources */,
+				049816DD25670A2000291FBB /* CustomFont.swift in Sources */,
 				044B4B17255C3770008A0BAB /* User.swift in Sources */,
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
 				0421EF8325656702007971D8 /* ColorPickView.swift in Sources */,
@@ -481,6 +500,7 @@
 				0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,
+				049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */,
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
 				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
 				044B4B1A255C44D5008A0BAB /* API.swift in Sources */,

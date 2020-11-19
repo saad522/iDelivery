@@ -8,17 +8,19 @@
 import UIKit
 
 class BackGroundMode: UIView {
-    let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
-    lazy var segmentedController : UISegmentedControl = {
+    
+    let segmentedController : UISegmentedControl = {
         let segment = UISegmentedControl(items: ["Light","Dark"])
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         segment.selectedSegmentIndex = index
+        segment.addTarget(self, action: #selector(setUIMode), for: .valueChanged)
         return segment
     }()
     override init(frame: CGRect) {
         super.init(frame: .zero)
         creatUI()
-        setUIMode()
     }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,18 +34,20 @@ extension BackGroundMode {
         layer.cornerRadius = 5
         backgroundColor = .secondarySystemBackground
     }
-    func setUIMode() {
-        if index == 0 {
+    @objc func setUIMode() {
+        if segmentedController.selectedSegmentIndex == 0 {
             UserDefaults.standard.set(0, forKey: Keys.intKey)
             UIApplication.shared.windows.forEach { window in
                 window.overrideUserInterfaceStyle = .light
             }
-        } else if index == 1 {
+        } else {
             UserDefaults.standard.set(1, forKey: Keys.intKey)
             UIApplication.shared.windows.forEach { window in
                 window.overrideUserInterfaceStyle = .dark
             }
         }
+        
+        
         
     }
 }

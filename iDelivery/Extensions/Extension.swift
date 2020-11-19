@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//Circle
+//Circle For Colors
 extension UIView {
     convenience init(_ color : UIColor,_ size : CGFloat) {
         self.init(frame:.zero)
@@ -195,23 +195,4 @@ extension UserDefaults {
     }
     set(colorData, forKey: key)
   }
-    
-    
-    func setMode(index : Int,with key : String) {
-        set(index, forKey: key)
-    }
-    func getTheMode(with key : String) -> Int {
-        var index: Int = 1
-        if let intData = data(forKey: key) {
-          do {
-            if let indexInt = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(intData) as? Int {
-              index = indexInt
-            }
-          } catch {
-            print("Error UserDefaults")
-          }
-        }
-        return index
-        
-    }
 }
