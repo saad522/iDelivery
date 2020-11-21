@@ -50,6 +50,9 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
         loginButton.backgroundColor = color
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         if  index == 0 {

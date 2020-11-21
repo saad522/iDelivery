@@ -30,6 +30,10 @@ class SearchViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSearchViewController()
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         if  index == 0 {
             print(index)
@@ -42,6 +46,7 @@ class SearchViewController: UICollectionViewController {
             }
             print(index)
         }
+        
     }
 	//MARK: ComposotionalLayout
 	init() {

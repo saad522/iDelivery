@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ColorPickView: UIView {
+class ColorPickView: UICollectionViewCell {
     
     
     

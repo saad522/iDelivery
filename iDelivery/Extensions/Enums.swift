@@ -42,4 +42,6 @@ enum SFSymbols {
 enum Keys {
     static let key    = "ColorKey"
     static let intKey = "IntKey"
+    static let stringKey = "AppLanguage"
+    static let fontsKeys = "FontsKey"
 }

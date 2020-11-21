@@ -40,6 +40,9 @@ class SearchByCityController: UICollectionViewController {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         menus(with: color)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         if  index == 0 {
             print(index)

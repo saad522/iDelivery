@@ -22,7 +22,7 @@ extension UIButton {
 		self.init(type: .system)
 		self.tintColor = .white
 		self.setTitle(action, for: .normal)
-		self.setTitleColor(.systemBackground, for: .normal)
+		self.setTitleColor(.white, for: .normal)
 		self.titleLabel?.font = .boldSystemFont(ofSize: 16)
 		self.backgroundColor = background
 		self.constrainHeight(constant: 35)
@@ -195,4 +195,40 @@ extension UserDefaults {
     }
     set(colorData, forKey: key)
   }
+}
+
+extension Bundle {
+    private static var bundle: Bundle!
+
+    public static func localizedBundle() -> Bundle! {
+        if bundle == nil {
+            let appLang = UserDefaults.standard.string(forKey: Keys.stringKey) ?? "en"
+            let path = Bundle.main.path(forResource: appLang, ofType: "Localizable")
+            bundle = Bundle(path: path!)
+        }
+
+        return bundle;
+    }
+
+    public static func setLanguage(lang: String) {
+        UserDefaults.standard.set(lang, forKey: Keys.stringKey )
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        bundle = Bundle(path: path!)
+    }
+}
+extension String {
+    var localized: String {
+        if let _ = UserDefaults.standard.string(forKey: Keys.stringKey) {} else {
+            // we set a default, just in case
+            UserDefaults.standard.set("en", forKey: Keys.stringKey)
+            UserDefaults.standard.synchronize()
+        }
+
+        let lang = UserDefaults.standard.string(forKey: Keys.stringKey)
+
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
 }

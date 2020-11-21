@@ -53,6 +53,9 @@ class ProfileControllerView: UIViewController {
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         addButton.backgroundColor = color
         loginButton.backgroundColor = color
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
         [cardPersonnaleController.editPictureButtons,cardPersonnaleController.editProfileButtons].forEach({$0.tintColor = color})
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         if  index == 0 {

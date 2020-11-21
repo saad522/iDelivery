@@ -11,8 +11,8 @@
 		0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF7D25656409007971D8 /* SettingsViewController.swift */; };
 		0421EF8325656702007971D8 /* ColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF8225656702007971D8 /* ColorPickView.swift */; };
 		0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF86256590A2007971D8 /* BackGroundMode.swift */; };
-		0421EF8B2565BB53007971D8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF8A2565BB53007971D8 /* Theme.swift */; };
 		042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042370C02559D50200E45215 /* EditProfileViewController.swift */; };
+		042F26132568535600AD191F /* LanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F26122568535600AD191F /* LanguagePickerView.swift */; };
 		043930222550A11B003BC235 /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930212550A11B003BC235 /* MountainsRawData.swift */; };
 		043930252550A138003BC235 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930242550A138003BC235 /* MountainsController.swift */; };
 		0443E60A255B1200006C209C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0443E609255B1200006C209C /* GoogleService-Info.plist */; };
@@ -54,8 +54,8 @@
 		0421EF7D25656409007971D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0421EF8225656702007971D8 /* ColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickView.swift; sourceTree = "<group>"; };
 		0421EF86256590A2007971D8 /* BackGroundMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundMode.swift; sourceTree = "<group>"; };
-		0421EF8A2565BB53007971D8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		042370C02559D50200E45215 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		042F26122568535600AD191F /* LanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerView.swift; sourceTree = "<group>"; };
 		043930212550A11B003BC235 /* MountainsRawData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		043930242550A138003BC235 /* MountainsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
 		0443E609255B1200006C209C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -123,16 +123,9 @@
 				0421EF86256590A2007971D8 /* BackGroundMode.swift */,
 				049816D82567028D00291FBB /* FontsPickerView.swift */,
 				049816E025670B7500291FBB /* FontCollectionViewCell.swift */,
+				042F26122568535600AD191F /* LanguagePickerView.swift */,
 			);
 			path = SettingsView;
-			sourceTree = "<group>";
-		};
-		0421EF892565BB3D007971D8 /* Theme */ = {
-			isa = PBXGroup;
-			children = (
-				0421EF8A2565BB53007971D8 /* Theme.swift */,
-			);
-			path = Theme;
 			sourceTree = "<group>";
 		};
 		0485DA03254864DE00033797 = {
@@ -198,7 +191,6 @@
 		0485DA262548654700033797 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0421EF892565BB3D007971D8 /* Theme */,
 				0421EF81256566DC007971D8 /* SettingsView */,
 				04DDC47C255D9A1300B14003 /* ProfileView */,
 				04DDC47A255D99FC00B14003 /* SearchView */,
@@ -478,6 +470,7 @@
 				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
 				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,
 				0485DA3A25486BA100033797 /* HStackView.swift in Sources */,
+				042F26132568535600AD191F /* LanguagePickerView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
 				049816D92567028D00291FBB /* FontsPickerView.swift in Sources */,
 				0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */,
@@ -496,7 +489,6 @@
 				040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */,
 				0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */,
 				04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */,
-				0421EF8B2565BB53007971D8 /* Theme.swift in Sources */,
 				0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,

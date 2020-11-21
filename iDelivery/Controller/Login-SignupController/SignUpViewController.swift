@@ -74,7 +74,8 @@ class SignUpViewController: UIViewController{
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         signUpButton.backgroundColor = color
-        
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        tabBarController?.tabBar.tintColor = color
     }
 }
 

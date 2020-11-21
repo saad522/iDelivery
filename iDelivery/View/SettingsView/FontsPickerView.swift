@@ -7,22 +7,31 @@
 
 import UIKit
 
-class FontsPickerView: UIView {
+class FontsPickerView: UICollectionViewCell {
     
     //MARK: Properties
     private let cellID =  "FontCollectionViewCell"
+    
+    let fontsSiez : CGFloat = 25
     //Fonts
-    let fonts:[UIFont] = [
-        UIFont(name: CustomFont.appleSDG,  size: 14)!,
-        UIFont(name: CustomFont.avenir, size: 19)!,
-        UIFont(name: CustomFont.gillSans, size: 30)!,
-        UIFont(name: CustomFont.markerFelt, size: 18)!,
-        UIFont(name: CustomFont.optima, size: 18)!,
-        UIFont(name: CustomFont.palatino, size: 20)!,
-        UIFont(name: CustomFont.thonburi, size: 20)!
+    lazy var fonts:[UIFont] = [
+        UIFont(name: CustomFont.appleSDG,     size: fontsSiez)!,
+        UIFont(name: CustomFont.avenir,       size: fontsSiez)!,
+        UIFont(name: CustomFont.gillSans,     size: fontsSiez)!,
+        UIFont(name: CustomFont.markerFelt,   size: fontsSiez)!,
+        UIFont(name: CustomFont.optima,       size: fontsSiez)!,
+        UIFont(name: CustomFont.palatino,     size: fontsSiez)!,
+        UIFont(name: CustomFont.thonburi,     size: fontsSiez)!,
+        
+        UIFont(name: CustomFont.cochin,       size: fontsSiez)!,
+        UIFont(name: CustomFont.chalkduster,  size: fontsSiez)!,
+        UIFont(name: CustomFont.copperplate,  size: fontsSiez)!,
+        UIFont(name: CustomFont.arialMT,      size: fontsSiez)!,
+        UIFont(name: CustomFont.georgia,      size: fontsSiez)!,
+        UIFont(name: CustomFont.hoeflerText,  size: fontsSiez)!,
+        UIFont(name: CustomFont.chalkboardSE, size: fontsSiez)!
     ]
     
-    let fontName = [ CustomFont.appleSDG, CustomFont.avenir, CustomFont.gillSans, CustomFont.markerFelt, CustomFont.optima, CustomFont.palatino, CustomFont.thonburi ]
     
     lazy var collectionView:UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -73,7 +82,11 @@ extension FontsPickerView : UICollectionViewDelegate , UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let font = fonts[indexPath.item].fontName
+        print("Fonts Name is \(font)")
+        UserDefaults.standard.setValue(font, forKey: Keys.fontsKeys)
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -19,9 +19,10 @@ class CardUserViewCell: UICollectionViewCell {
             name.text = "\(user.fullName)"
             city.text = "\(user.city)"
             if user.transport == 0 {
-                iconTransport.image = #imageLiteral(resourceName: "motorcycle")
+                iconTransport.image = #imageLiteral(resourceName: "motorcycle").withTintColor(.label).withRenderingMode(.alwaysOriginal)
             } else {
-                iconTransport.image = #imageLiteral(resourceName: "car")
+                iconTransport.image = #imageLiteral(resourceName: "car").withTintColor(.label).withRenderingMode(.alwaysOriginal)
+
             }
             
         }

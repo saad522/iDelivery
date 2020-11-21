@@ -7,13 +7,15 @@
 
 import UIKit
 
-class BackGroundMode: UIView {
-    
-    let segmentedController : UISegmentedControl = {
+
+class BackGroundMode: UICollectionViewCell {
+        
+    lazy var segmentedController : UISegmentedControl = {
         let segment = UISegmentedControl(items: ["Light","Dark"])
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         segment.selectedSegmentIndex = index
-        segment.addTarget(self, action: #selector(setUIMode), for: .valueChanged)
+        let tap = UITapGestureRecognizer(target: self , action: #selector(setUIMode))
+        segment.addGestureRecognizer(tap)
         return segment
     }()
     override init(frame: CGRect) {
@@ -30,25 +32,36 @@ class BackGroundMode: UIView {
 extension BackGroundMode {
     fileprivate func creatUI() {
         addSubview(segmentedController)
-        segmentedController.centerInSuperview(size: .init(width:300, height: 0))
+        segmentedController.centerInSuperview(size: .init(width:250, height: 0))
         layer.cornerRadius = 5
         backgroundColor = .secondarySystemBackground
     }
-    @objc func setUIMode() {
-        if segmentedController.selectedSegmentIndex == 0 {
-            UserDefaults.standard.set(0, forKey: Keys.intKey)
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .light
-            }
-        } else {
-            UserDefaults.standard.set(1, forKey: Keys.intKey)
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .dark
+    @objc func setUIMode(gesture : UIGestureRecognizer) {
+        if gesture.state == .ended {
+            if segmentedController.selectedSegmentIndex == 0 {
+                segmentedController.selectedSegmentIndex = 1
+                print("THE Segemened is",segmentedController.selectedSegmentIndex )
+                UserDefaults.standard.set(1, forKey: Keys.intKey)
+                UIApplication.shared.windows.forEach { window in
+                    window.overrideUserInterfaceStyle = .dark
+                }
+            } else {
+                segmentedController.selectedSegmentIndex = 0
+                print("THE Segemened is",segmentedController.selectedSegmentIndex )
+                UserDefaults.standard.set(0, forKey: Keys.intKey)
+                UIApplication.shared.windows.forEach { window in
+                    window.overrideUserInterfaceStyle = .light
+                }
             }
         }
-        
-        
-        
+//        if segmentedController.selectedSegmentIndex == 0 {
+//            delegate?.changeBackgroundMode(selectedSegmented: 0)
+//            print("THE Segemened is",segmentedController.selectedSegmentIndex )
+//        } else {
+//            delegate?.changeBackgroundMode(selectedSegmented: 1)
+//            print("THE Segemened is",segmentedController.selectedSegmentIndex )
+//
+//        }
     }
 }
 

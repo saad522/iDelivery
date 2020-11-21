@@ -15,4 +15,13 @@ struct CustomFont {
     static let avenir = "AvenirNextCondensed-DemiBold"
     static let palatino = "Palatino-Roman"
     static let optima = "Optima-Regular"
+    
+    static let copperplate = "Copperplate"
+    static let georgia = "Georgia-BoldItalic"
+    static let chalkboardSE = "ChalkboardSE-Bold"
+    static let chalkduster = "Chalkduster"
+    
+    static let arialMT = "ArialMT"
+    static let hoeflerText = "HoeflerText-Italic"
+    static let cochin = "Cochin"
 }
