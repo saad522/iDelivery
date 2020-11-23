@@ -14,26 +14,25 @@ class CardUserViewCell: UICollectionViewCell {
     var user : User! {
         didSet {
             userIcon.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
-            price.text = "Price : \(user.price) DH"
+            price.text   = "Price : \(user.price) DH"
             returns.text = "Return : \(user.retruns) DH"
-            name.text = "\(user.fullName)"
-            city.text = "\(user.city)"
+            name.text    = "\(user.fullName)"
+            city.text    = "\(user.city)"
             if user.transport == 0 {
                 iconTransport.image = #imageLiteral(resourceName: "motorcycle").withTintColor(.label).withRenderingMode(.alwaysOriginal)
             } else {
                 iconTransport.image = #imageLiteral(resourceName: "car").withTintColor(.label).withRenderingMode(.alwaysOriginal)
-
             }
-            
         }
     }
     
-	let userIcon = UIImageView(cornerRadius: 5)
-	let name = UILabel.init(text: "Saad Saissi Hassani", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
-	let price = UILabel.init(text: "price: 7$", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
-	let city = UILabel.init(text: "City: Rabat", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
-	let transport = UILabel.init(text: "transport: ", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
-	let returns = UILabel.init(text: "returns: 1$ ", font: UIFont(name: "GeezaPro", size: 16)!, textColor: .label)
+	
+    
+	let name      = UILabel(text: "Saad Saissi Hassani")
+	let price     = UILabel(text: "price: 7$")
+	let city      = UILabel(text: "City: Rabat")
+	let transport = UILabel(text: "transport: ")
+	let returns   = UILabel(text: "returns: 1$ ")
 	
 	//UserState
 	let active : UIView = {
@@ -47,29 +46,14 @@ class CardUserViewCell: UICollectionViewCell {
 	}()
 	
 	//Icons
-	let iconName = UIImageView(SFSymbols.fullName)
-	let iconPrice = UIImageView(SFSymbols.currency)
-	let iconLocation = UIImageView(SFSymbols.location)
-	let iconReturns = UIImageView(SFSymbols.currency)
+    let userIcon = UIImageView(cornerRadius: 5)
+	let iconName      = UIImageView(SFSymbols.fullName)
+	let iconPrice     = UIImageView(SFSymbols.currency)
+	let iconLocation  = UIImageView(SFSymbols.location)
+	let iconReturns   = UIImageView(SFSymbols.currency)
 	let iconTransport = UIImageView(image: #imageLiteral(resourceName: "motorcycle"))
-	let iconValise = UIImageView(SFSymbols.valise)
-	
-	//Buttons
-	let moreDetails : UIButton = {
-		let button = UIButton(type: .system)
-		button.constrainHeight(constant: 35)
-		button.constrainWidth(constant: 104)
-		button.setTitle("More details", for: .normal)
-		button.titleLabel?.font = UIFont(name: "GeezaPro", size: 16)!
-		button.tintColor = .systemBackground
-		button.backgroundColor = .systemTeal
-		button.layer.cornerRadius = 5
-		button.layer.shadowOpacity = 0.4
-		button.layer.shadowRadius  = 8
-		button.layer.shadowOffset  = .init(width: 0, height: 10)
-		return button
-	}()
-	
+	let iconValise    = UIImageView(SFSymbols.valise)
+    
 	
 	//MARK: LifeCycle
 	override init(frame: CGRect) {
@@ -84,13 +68,20 @@ class CardUserViewCell: UICollectionViewCell {
 
 
 extension CardUserViewCell {
+    func setFonts(fontName : String) {
+        price.font = UIFont(name: fontName, size: 16)
+        returns.font = UIFont(name: fontName, size: 16)
+        name.font = UIFont(name: fontName, size: 16)
+        city.font = UIFont(name: fontName, size: 16)
+        transport.font = UIFont(name: fontName, size: 16)
+    }
 	fileprivate func createUI() {
 		backgroundColor = .systemBackground
 		layer.shadowOpacity = 0.5
 		layer.shadowRadius  = 10
 		layer.shadowOffset  = .init(width: 0, height: 10)
 		layer.cornerRadius  = 5
-		userIcon.image = #imageLiteral(resourceName: "icons8-administrator-male-100")
+        userIcon.image = #imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal)
 		userIcon.constrainWidth(constant: 85)
 		userIcon.constrainHeight(constant: 85)
 		iconTransport.constrainWidth(constant: 25)

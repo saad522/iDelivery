@@ -9,12 +9,21 @@ import SwiftUI
 class SettingsViewController: UICollectionViewController {
 
     
-    private let headerId    = "headerId"
-    private let colorCellID = "colorCellID"
-    private let fontsCellID = "fontsCellID"
-    private let modeCellID = "modeCellID"
+    private let headerId       = "headerId"
+    private let colorCellID    = "colorCellID"
+    private let fontsCellID    = "fontsCellID"
+    private let modeCellID     = "modeCellID"
     private let languageCellID = "languageCellID"
-
+    
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    
+    enum Section: CaseIterable {
+        case colors
+        case fonts
+        case mode
+        case language
+    }
     
     init() {
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
@@ -31,8 +40,6 @@ class SettingsViewController: UICollectionViewController {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPaging
-                //                section.contentInsets.leading = 16
-                
                 let kind = UICollectionView.elementKindSectionHeader
                 section.boundarySupplementaryItems = [
                     .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: kind, alignment: .topLeading)
@@ -47,15 +54,28 @@ class SettingsViewController: UICollectionViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    var fontName : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-        creatUI()
         setupCollectionView()
+        
     }
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setFontAndColor()
+        collectionView.reloadData()
+    }
+
+    
+    
+}
+//MARK: set Delegate
+//MARK: CreatUI
+extension SettingsViewController {
+    fileprivate func setFontAndColor() {
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
@@ -75,17 +95,9 @@ class SettingsViewController: UICollectionViewController {
             }
             print(index)
         }
-        
-       
     }
-}
-//MARK: set Delegate
-//MARK: CreatUI
-extension SettingsViewController {
-    
     static func pickerViewSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-        //    item.contentInsets.bottom = 16
         let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)), subitems: [item])
         group.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         let section = NSCollectionLayoutSection(group: group)
@@ -99,71 +111,75 @@ extension SettingsViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Settings"
-    }
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! CompositionalHeader
-        var title: String?
-        if indexPath.section == 0 {
-            title = "Colors"
-        } else if indexPath.section == 1 {
-            title = "Fonts"
-        } else if indexPath.section == 2 {
-            title = "Dark Appearnce"
-        } else {
-            title = "Language"
-        }
-        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
-        header.label.text = title
-        header.label.font = UIFont(name: fontName, size: 20)
-        return header
-    }
-   
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: colorCellID, for: indexPath) as! ColorPickView
-            return cell
-        case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: fontsCellID, for: indexPath) as! FontsPickerView
-            return cell
-        case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: modeCellID, for: indexPath) as! BackGroundMode
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: languageCellID, for: indexPath) as! LanguagePickerView
-            return cell
-        }
+        collectionView.backgroundColor = .systemBackground
     }
     
+}
+//MARK: configure CollectionView
+extension SettingsViewController {
+ 
     func setupCollectionView() {
         collectionView.register(ColorPickView.self, forCellWithReuseIdentifier: colorCellID)
         collectionView.register(FontsPickerView.self, forCellWithReuseIdentifier: fontsCellID)
         collectionView.register(BackGroundMode.self, forCellWithReuseIdentifier: modeCellID)
         collectionView.register(LanguagePickerView.self, forCellWithReuseIdentifier: languageCellID)
         collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-    }
-    fileprivate func creatUI() {
-        collectionView.backgroundColor = .systemBackground
-    }
-}
-class CompositionalHeader: UICollectionReusableView {
-    
-    let label = UILabel.init(text: "Color", font: .systemFont(ofSize: 20, weight: .semibold))
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(label)
-        label.fillSuperview(padding: .init(top: 10, left: 10, bottom: 0, right: 10))
+        configureDataSource()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError()
+    func configureDataSource() {
+        dataSource = .init(collectionView: self.collectionView) { (collectionView, indexPath, object) -> UICollectionViewCell? in
+            switch indexPath.section {
+            case 0:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.colorCellID, for: indexPath) as! ColorPickView
+                return cell
+            case 1:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.fontsCellID, for: indexPath) as! FontsPickerView
+                return cell
+            case 2:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.modeCellID, for: indexPath) as! BackGroundMode
+                return cell
+             case 3:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.languageCellID, for: indexPath) as! LanguagePickerView
+                return cell
+            default :
+                return nil
+            }
+        }
+        setHeaders()
+        var snapshot = self.dataSource.snapshot()
+        snapshot.appendSections([.colors,.fonts,.mode,.language])
+//        snapshot.appendItems([3])
+        snapshot.appendItems([0], toSection: .colors)
+        snapshot.appendItems([1], toSection: .fonts)
+        snapshot.appendItems([2], toSection: .mode)
+        snapshot.appendItems([3], toSection: .language)
+        self.dataSource.apply(snapshot)
+        
+    }
+    //Headers
+    fileprivate func setHeaders() {
+        dataSource.supplementaryViewProvider = .some({ (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerId, for: indexPath) as! CompositionalHeader
+            
+            let snapshot = self.dataSource.snapshot()
+            if let object = self.dataSource.itemIdentifier(for: indexPath) {
+                if let section = snapshot.sectionIdentifier(containingItem: object) {
+                    if section == .colors  {
+                        header.label.text = "Colors"
+                    } else if section == .fonts {
+                        header.label.text = "Fonts"
+                    } else  if section == .mode {
+                        header.label.text = "Dark Appearance"
+                    } else if section == .language {
+                        header.label.text = "Language"
+                    }
+                }
+            }
+            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+            header.label.font = UIFont(name: fontName, size: 20)!
+            return header
+        })
     }
 }
 struct SettingsView: UIViewControllerRepresentable {
@@ -181,7 +197,10 @@ struct SettingsView: UIViewControllerRepresentable {
 
 struct SettingsViewController_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
-            .edgesIgnoringSafeArea(.all)
+            SettingsView()
+                .previewDevice("iPhone 11 Pro")
+                .edgesIgnoringSafeArea(.all)
+
+        
     }
 }

@@ -26,7 +26,7 @@ enum SFSymbols {
 	static let members      = "person.2"
 	static let doc   	    = "doc.text"
 	static let package      = "shippingbox"
-	static let search       = "magnifyingglass"
+	static let nearby       = "aspectratio"
 	static let profile      = "person"
 	static let dismiss      = "multiply.circle.fill"
 	static let selected     = "largecircle.fill.circle"

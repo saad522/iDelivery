@@ -22,6 +22,7 @@
 		0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */; };
 		0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */; };
 		0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */; };
+		04688B1C256C109100858322 /* CompositionalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04688B1B256C109100858322 /* CompositionalHeader.swift */; };
 		0485DA10254864DE00033797 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA0F254864DE00033797 /* AppDelegate.swift */; };
 		0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485DA11254864DE00033797 /* SceneDelegate.swift */; };
 		0485DA19254864E100033797 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0485DA18254864E100033797 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileControllerView.swift; sourceTree = "<group>"; };
 		0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersonalView.swift; sourceTree = "<group>"; };
 		0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationOfUserTableViewController.swift; sourceTree = "<group>"; };
+		04688B1B256C109100858322 /* CompositionalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalHeader.swift; sourceTree = "<group>"; };
 		0485DA0C254864DE00033797 /* iDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0485DA0F254864DE00033797 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0485DA11254864DE00033797 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				049816D82567028D00291FBB /* FontsPickerView.swift */,
 				049816E025670B7500291FBB /* FontCollectionViewCell.swift */,
 				042F26122568535600AD191F /* LanguagePickerView.swift */,
+				04688B1B256C109100858322 /* CompositionalHeader.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */,
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
 				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
+				04688B1C256C109100858322 /* CompositionalHeader.swift in Sources */,
 				044B4B1A255C44D5008A0BAB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

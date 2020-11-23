@@ -14,7 +14,7 @@ class SortsView: UIViewController {
     var searchConntroller : SearchByCityController?
     
     var users : [User]?
-    
+    // dependency injection constructor
     init(users : [User]) {
         self.users = users
         super.init(nibName: nil, bundle: nil)
@@ -24,21 +24,23 @@ class SortsView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     var slideIdicator : UIView = {
-		let view = UIView()
+		let view               = UIView()
+        view.backgroundColor   = .lightGray
 		view.constrainHeight(constant: 3)
 		view.constrainWidth(constant: 85)
-		view.backgroundColor = .lightGray
 		return view
 	}()
     let sortButton = UIButton(title: "Sort")
-	let lowest		 = UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Lowest first", color: .label,segFont: .systemFont(ofSize: 18)))
-	
-	let highest 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Highest first", color: .label,segFont: .systemFont(ofSize: 18)))
-	
-	let motorcycle 	=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Motorcycles first", color: .label,segFont: .systemFont(ofSize: 18)))
-	
-	let car 		=  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.valise)!, string: "Cars first", color: .label,segFont: .systemFont(ofSize: 18)))
-	
+	let lowest     =  UILabel.init(text: "Lowest First", font: .systemFont(ofSize: 18))
+	let highest    =  UILabel.init(text: "Highest First", font: .systemFont(ofSize: 18))
+	let motorcycle =  UILabel.init(text: "Motorocycles First", font: .systemFont(ofSize: 18))
+	let car        =  UILabel.init(text: "Cars First", font: .systemFont(ofSize: 18))
+    
+    let iconLowest  = UIImageView(SFSymbols.currency)
+    let iconHighest = UIImageView(SFSymbols.currency)
+    let iconMotor   = UIImageView(SFSymbols.valise)
+    let iconCar     = UIImageView(SFSymbols.valise)
+    
 	let lowesButton 	=  UISwitch()
 	let highestButton 	=  UISwitch()
 	let motorButton 	=  UISwitch()
@@ -62,7 +64,10 @@ class SortsView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        sortButton.titleLabel?.font = UIFont(name: fontName, size: 36)!
         sortButton.backgroundColor = color
+        [lowest,highest,motorcycle,car].forEach({$0.font = UIFont(name: fontName, size: 18)})
         [lowesButton,
          highestButton,
          motorButton,
@@ -75,11 +80,11 @@ class SortsView: UIViewController {
 		slideIdicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 12).isActive = true
 		slideIdicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-		let hStackLowest = HStackView(arrangedSubviews: [lowest,UIView(),lowesButton], spacing: 0)
+		let hStackLowest = HStackView(arrangedSubviews: [iconLowest,lowest,UIView(),lowesButton], spacing: 0)
 		 lowesButton.isOn = true
-		let hStackHighest = HStackView(arrangedSubviews: [highest,UIView(),highestButton], spacing: 0)
-		let hStackMotorcyle = HStackView(arrangedSubviews: [motorcycle,UIView(),motorButton], spacing: 0)
-		let hStackCar = HStackView(arrangedSubviews: [car,UIView(),carButton], spacing: 5)
+		let hStackHighest = HStackView(arrangedSubviews: [iconHighest,highest,UIView(),highestButton], spacing: 0)
+        let hStackMotorcyle = HStackView(arrangedSubviews: [iconMotor,motorcycle,UIView(),motorButton], spacing: 0)
+		let hStackCar = HStackView(arrangedSubviews: [iconCar,car,UIView(),carButton], spacing: 5)
 		let vStack = VerticalStackView(arrangedSubviews: [hStackLowest,hStackHighest,hStackMotorcyle,hStackCar], spacing: 25)
 		
 		view.addSubview(vStack)

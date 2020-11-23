@@ -15,35 +15,30 @@ class CardPersonalView: UIViewController {
             phone.text = user.phone
             print("Pohone",user.phone)
             city.text = user.city
-            profilePicture.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+            profilePicture.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal))
         }
     }
     //Profile Picture
-    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal))
 	//Profile Info
-	let name = UILabel.init(text: "Saad Saissi Hassni", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
-	let phone = UILabel.init(text: "", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
-	
-	let city =  UILabel.init(text: "Tangier", font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)!, textColor: .label)
+	let name  = UILabel(text: "Saad Saissi Hassni")
+	let phone = UILabel(text: "0605040301")
+	let city  = UILabel(text: "Tangier")
 	
 	//Icons
-	let nameIcon = UIImageView(SFSymbols.fullName)
+	let nameIcon  = UIImageView(SFSymbols.fullName)
 	let phoneIcon = UIImageView(SFSymbols.phone)
-	let cityIcon = UIImageView(SFSymbols.location)
+	let cityIcon  = UIImageView(SFSymbols.location)
 	
 	//Edit Buttons
 	let editProfileButtons : UIButton = {
 		let edit = UIButton(type : .system)
-//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
         edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.edit)!, string: "Edite Profile", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
-//        edit.tintColor = color
 		return edit
 	}()
 	let editPictureButtons : UIButton = {
 		let edit = UIButton(type : .system)
-//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
         edit.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.editeImage)!, string: "Edite Picture", color: .label, imageAlignment: 0, segFont: .boldSystemFont(ofSize: 12)), for: .normal)
-//        edit.tintColor = color
 		return edit
 	}()
 	
@@ -52,12 +47,7 @@ class CardPersonalView: UIViewController {
 		super.viewDidLoad()
 		createUI()
 	}
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        let color = UserDefaults.standard.colorForKey(key: ColorKey.key) ?? .niceBlue
-//        editProfileButtons.tintColor = color
-//        editPictureButtons.tintColor = color
-//    }
+
 }
 
 
@@ -88,6 +78,12 @@ extension CardPersonalView  {
 		hStack.fillSuperview(padding: .init(top: 10, left: 15, bottom: 0, right: 0))
 		hStack.addSubview(editProfileButtons)
 		editProfileButtons.anchor(top: hStack.topAnchor, leading: nil, bottom: nil, trailing: hStack.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 5))
+        
 	}
+    func setFonts(fontName : String) {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        profilePicture.layer.borderColor = color.cgColor
+        [name,phone,city].forEach({$0.font = UIFont(name: fontName, size: 16)})
+    }
 }
 

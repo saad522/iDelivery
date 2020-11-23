@@ -26,38 +26,43 @@ class InformationOfUserTableViewController: UIViewController {
     }
     
     //Separators
-    let linePrice     = UIView(.systemGray5)
-    let lineReturn    = UIView(.systemGray5)
-    let lineStock     = UIView(.systemGray5)
-    let lineTransport = UIView(.systemGray5)
+    let linePrice       = UIView(.systemGray5)
+    let lineReturn      = UIView(.systemGray5)
+    let lineStock       = UIView(.systemGray5)
+    let lineTransport   = UIView(.systemGray5)
     
-    let iconEmail     = UIImageView(SFSymbols.email)
-    let iconPrice     = UIImageView(SFSymbols.currency)
-    let iconRetrun    = UIImageView(SFSymbols.currency)
-    let iconStock     = UIImageView(SFSymbols.package)
-    let iconTransport = UIImageView(SFSymbols.valise)
+    let iconEmail       = UIImageView(SFSymbols.email)
+    let iconPrice       = UIImageView(SFSymbols.currency)
+    let iconRetrun      = UIImageView(SFSymbols.currency)
+    let iconStock       = UIImageView(SFSymbols.package)
+    let iconTransport   = UIImageView(SFSymbols.valise)
     
-    let priceLabel = UILabel.init(text: "Price/Order")
-    let retrunLabel = UILabel.init(text: "Return/Order")
-    let stockLabel = UILabel.init(text: "Stock")
-    let emailLabel = UILabel.init(text: "Email")
-    let transportLabel = UILabel.init(text: "Transport")
+    let priceLabel      = UILabel.init(text: "Price/Order")
+    let retrunLabel     = UILabel.init(text: "Return/Order")
+    let stockLabel      = UILabel.init(text: "Stock")
+    let emailLabel      = UILabel.init(text: "Email")
+    let transportLabel  = UILabel.init(text: "Transport")
     
-    let price = UILabel.init(text: "45 DH")
-    let retrun = UILabel.init(text: "30 DH")
-    let stock = UILabel.init(text: "10 DH")
-    let email = UILabel.init(text: "SaadSaissi@gmail.com")
-    let transport = UILabel.init(text: "Motorcycle")
+    let price           = UILabel.init(text: "45 DH")
+    let retrun          = UILabel.init(text: "30 DH")
+    let stock           = UILabel.init(text: "10 DH")
+    let email           = UILabel.init(text: "SaadSaissi@gmail.com")
+    let transport       = UILabel.init(text: "Motorcycle")
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
         creatUI()
 	}
+    
+    
+    
 }
 
 //MARK: Create UI
 extension InformationOfUserTableViewController {
-    
+    func setFonts(fontName : String) {
+        [priceLabel,retrunLabel,stockLabel,emailLabel,transportLabel,price,retrun,stock,email,transport,].forEach({$0.font = UIFont(name: fontName, size: 16)})
+    }
     func creatUI() {
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15

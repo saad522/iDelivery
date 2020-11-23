@@ -25,7 +25,7 @@ extension UIButton {
 		self.setTitleColor(.white, for: .normal)
 		self.titleLabel?.font = .boldSystemFont(ofSize: 16)
 		self.backgroundColor = background
-		self.constrainHeight(constant: 35)
+		self.constrainHeight(constant: 40)
 		self.constrainWidth(constant: 240)
 		self.layer.cornerRadius = 5
 	}
@@ -57,7 +57,8 @@ extension UIView {
 extension UITextField {
 	convenience init(placholder : String,isPassword : Bool = false) {
 		self.init(frame : .zero)
-		self.attributedPlaceholder = NSAttributedString(string: "\(placholder)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .ultraLight)])
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+		self.attributedPlaceholder = NSAttributedString(string: "\(placholder)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont(name: fontName, size: 19)!])
 		self.borderStyle = .none
 		self.isSecureTextEntry = isPassword
 	}
@@ -113,10 +114,12 @@ extension UIButton {
 extension UIButton {
     convenience init(_ message : String, _ action : String) {
 		self.init(type: .system)
-		let attribudeTitle = NSMutableAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)])
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+		let attribudeTitle = NSMutableAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray,NSAttributedString.Key.font : UIFont(name: fontName, size: 16)!])
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+       
 		attribudeTitle.append(NSAttributedString(string: action, attributes:
-													[NSAttributedString.Key.foregroundColor : color,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 19, weight: .semibold)]))
+                                                [NSAttributedString.Key.foregroundColor :color,NSAttributedString.Key.font : UIFont(name: fontName, size: 19)!]))
 		self.setAttributedTitle(attribudeTitle, for: .normal)
 	}
 }

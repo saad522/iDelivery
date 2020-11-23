@@ -24,14 +24,16 @@ class SearchViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         checkIfUserLoggedIn()
-//        signOut()
 	}
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSearchViewController()
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+
+        navigationController?.navigationBar.titleTextAttributes = [.font : UIFont(name: fontName, size: 25)!,.foregroundColor: color]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.font: UIFont(name: fontName, size: 35)! ]
         navigationController?.navigationBar.tintColor = color
         tabBarController?.tabBar.tintColor = color
         let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
@@ -65,13 +67,13 @@ class SearchViewController: UICollectionViewController {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+    
 }
 //MARK: Configure Firebase
 extension SearchViewController {
     fileprivate func checkIfUserLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
             let loginViewScreen = LoginViewController()
-//            loginViewScreen.
             let controller = UINavigationController(rootViewController: loginViewScreen)
             controller.modalPresentationStyle = .overFullScreen
             present(controller, animated: true)
@@ -89,12 +91,13 @@ extension SearchViewController {
 		<SearchViewCell, MountainsController.Mountain> { (cell, indexPath, mountain) in
 			// Populate the cell with our item description.
 			cell.name.text = mountain.name
+            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+            cell.name.font = UIFont(name: fontName, size: 16)
 		}
 		
 		dataSource = UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>(collectionView: collectionView) {
 			(collectionView: UICollectionView, indexPath: IndexPath, identifier: MountainsController.Mountain) -> UICollectionViewCell? in
 			// Return the cell.
-			
 			return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
 		}
 	}
@@ -125,34 +128,24 @@ extension SearchViewController : UISearchBarDelegate {
 		navigationItem.searchController = searchController
 		navigationItem.hidesSearchBarWhenScrolling = false
 		searchController.searchBar.delegate = self
+        collectionView.backgroundColor = .secondarySystemBackground
 	}
     
     func setupSearchViewController() {
         setUpNavigation()
-        configuerCollectionView()
         configureDataSource()
         performQuery(with: nil)
     }
+    
 }
 
 
 //MARK: configure ColllectionViewController
 extension SearchViewController  {
 	
-	fileprivate func configuerCollectionView() {
-		collectionView.backgroundColor = .secondarySystemBackground
-		collectionView.register(SearchViewCell.self, forCellWithReuseIdentifier: cellID)
-	}
-	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return 45
 	}
-	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SearchViewCell
-
-		return cell
-	}
-	
 	
 }
 extension SearchViewController {

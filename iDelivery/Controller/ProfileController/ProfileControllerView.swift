@@ -9,10 +9,13 @@ import SwiftUI
 import Firebase
 
 class ProfileControllerView: UIViewController {
+    
 	//MARK: Properties
-	let cardPersonnaleController = CardPersonalView()
+	let cardPersonnaleController    = CardPersonalView()
 	let infoUserTableViewController = InformationOfUserTableViewController()
-	let descptionLabel = UILabel.init(text: "complete your profile by adding pricing Stocke price...\nto helps users get to find you 😎", font: .systemFont(ofSize: 16), numberOfLines: 7, textColor: .label)
+    
+    let descptionLabel = UILabel(text: "complete your profile by adding pricing Stocke price...\nto helps users get to find you 😎",numberOfLines: 7)
+    
 	lazy var  addButton : UIButton =  {
 		let button = UIButton(type: .system)
 		button.setImage(UIImage(systemName: SFSymbols.addInfo), for: .normal)
@@ -30,12 +33,11 @@ class ProfileControllerView: UIViewController {
         button.setTitleColor(.systemRed, for: .normal)
         return button
     }()
+    
 	//If User Not Login UI Components
-	let deisgn = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
-	let loginButton = UIButton(action: "Login", background: .niceBlue)
-//	let registerButton = UIButton(action: "Register", background: .niceBlue)
-	
-	let haveAccountLabel = UILabel.init(text: "Login to manage your account ", font: .systemFont(ofSize: 16), textColor: .label)
+	let deisgn           = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
+	let loginButton      = UIButton(action: "Login", background: .niceBlue)
+	let haveAccountLabel = UILabel(text: "Login to manage your account ")
 
 	
 	//MARK: LifeCycle
@@ -44,31 +46,14 @@ class ProfileControllerView: UIViewController {
         checkIfUserLoggedIn()
         fetchUserData()
         setAction()
-//        API.shared.updateUserData()
 	}
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkIfUserLoggedIn()
         fetchUserData()
-        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        addButton.backgroundColor = color
-        loginButton.backgroundColor = color
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
-        navigationController?.navigationBar.tintColor = color
-        tabBarController?.tabBar.tintColor = color
-        [cardPersonnaleController.editPictureButtons,cardPersonnaleController.editProfileButtons].forEach({$0.tintColor = color})
-        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
-        if  index == 0 {
-            print(index)
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .light
-            }
-        } else if index == 1 {
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .dark
-            }
-            print(index)
-        }
+        setFontAndColor()
         
     }
 }
@@ -112,7 +97,6 @@ extension ProfileControllerView {
 //MARK: create UI
 extension  ProfileControllerView {
      func checkIfUserLoggedIn() {
-        
         let vStackDesign = VerticalStackView(arrangedSubviews: [deisgn,haveAccountLabel,loginButton,UIView()], spacing: 10)
         
         let vStack = VerticalStackView(arrangedSubviews: [cardPersonnaleController.view,infoUserTableViewController.view,HStackView(arrangedSubviews: [descptionLabel,addButton], spacing: 5),UIView()], spacing: 15)
@@ -136,6 +120,32 @@ extension  ProfileControllerView {
             vStack.anchor(top: logoutButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
             vStackDesign.isHidden = true
             
+        }
+    }
+    fileprivate func setFontAndColor() {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        [addButton,loginButton].forEach({$0.backgroundColor = color})
+        [descptionLabel,haveAccountLabel].forEach({$0.font = UIFont(name: fontName, size: 16)})
+        logoutButton.titleLabel?.font = UIFont(name: fontName, size: 16)!
+        loginButton.titleLabel?.font = UIFont(name: fontName, size: 36)!
+        cardPersonnaleController.setFonts(fontName: fontName)
+        infoUserTableViewController.setFonts(fontName: fontName)
+        [cardPersonnaleController.editPictureButtons,cardPersonnaleController.editProfileButtons].forEach({$0.tintColor = color})
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+        if  index == 0 {
+            print(index)
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
+        } else if index == 1 {
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
+            print(index)
         }
     }
 	@objc fileprivate func handlePrestenUpdateProfile() {

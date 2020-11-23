@@ -54,17 +54,7 @@ extension BackGroundMode {
                 }
             }
         }
-//        if segmentedController.selectedSegmentIndex == 0 {
-//            delegate?.changeBackgroundMode(selectedSegmented: 0)
-//            print("THE Segemened is",segmentedController.selectedSegmentIndex )
-//        } else {
-//            delegate?.changeBackgroundMode(selectedSegmented: 1)
-//            print("THE Segemened is",segmentedController.selectedSegmentIndex )
-//
-//        }
     }
 }
 
-//UIApplication.shared.windows.forEach { window in
-//    window.overrideUserInterfaceStyle = .light
-//}
+

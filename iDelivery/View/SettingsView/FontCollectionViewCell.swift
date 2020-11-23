@@ -34,22 +34,26 @@ class FontCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        creatUI()
+    }
+    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension FontCollectionViewCell {
+    fileprivate func creatUI() {
         addSubview(backView)
         backView.addSubview(fontText)
         backView.pin(to: self)
         setUpConstraints()
-//        backgroundColor = .systemRed
     }
-    
     func setUpConstraints(){
         NSLayoutConstraint.activate([
             fontText.centerYAnchor.constraint(equalTo: centerYAnchor),
             fontText.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
-

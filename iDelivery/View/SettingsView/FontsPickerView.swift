@@ -52,12 +52,8 @@ class FontsPickerView: UICollectionViewCell {
     //MARK: LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(collectionView)
-        collectionView.pin(to: self)
-        layer.cornerRadius = 5
-        backgroundColor = .secondarySystemBackground
+        creatUI()
 
-//        backgroundColor = .systemYellow
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +61,15 @@ class FontsPickerView: UICollectionViewCell {
     }
 }
 
+//MARK: configure CollectionView
 extension FontsPickerView : UICollectionViewDelegate , UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    fileprivate func creatUI() {
+        addSubview(collectionView)
+        collectionView.pin(to: self)
+        layer.cornerRadius = 5
+        backgroundColor = .secondarySystemBackground
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fonts.count
     }
@@ -73,7 +77,6 @@ extension FontsPickerView : UICollectionViewDelegate , UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! FontCollectionViewCell
         cell.fontText.font = fonts[indexPath.row]
-//        cell.backgroundColor = .black
         return cell
     }
     

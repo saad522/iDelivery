@@ -16,7 +16,7 @@ class SearchViewCell: UICollectionViewCell {
 		super.init(frame: frame)
 		creatUI()
 	}
-	
+    
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	

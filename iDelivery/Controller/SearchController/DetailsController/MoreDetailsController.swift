@@ -12,24 +12,13 @@ class MoreDetailsController: UIViewController {
 	//MARK: Properties
     fileprivate let user: User?
     
-    // dependency injection constructor
-    init(user: User?) {
-        self.user = user
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    let pricingInfo = UILabel.init(text: " Pricing Information", font: UIFont(name: "GillSans-Bold", size: 21)!,textColor: .label)
+    let pricingInfo  = UILabel(text: " Pricing Information")
+    let personalInfo = UILabel(text: "Personal Information")
     
     let toolsTableViewInformation = ToolsTableViewController()
-    let personalInformation = PersonalnformationViewController()
-    
+    let personalInformation       = PersonalnformationViewController()
     
 	let dismiss = UIButton(SFSymbols.dismiss,size: 20)
-	
-		
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
@@ -37,11 +26,19 @@ class MoreDetailsController: UIViewController {
 		fetchUserDetailData()
 		creatUI()
 	}
+    // dependency injection constructor
+    init(user: User?) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        dismiss.tintColor = color
+        setFontAndColor()
         
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 //MARK: setup Networking
@@ -54,7 +51,6 @@ extension MoreDetailsController {
 //MARK: Create UI
 extension MoreDetailsController {
 	fileprivate func creatUI() {
-        let personalInfo = UILabel.init(text: "Personal Information", font: UIFont(name: "GillSans-Bold", size: 21)!,textColor: .label)
         view.backgroundColor = .secondarySystemBackground
         
 		view.addSubview(dismiss)
@@ -67,6 +63,13 @@ extension MoreDetailsController {
         view.addSubview(stack)
         stack.anchor(top: dismiss.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 10))
 	}
+    fileprivate func setFontAndColor() {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        personalInfo.font = UIFont(name: fontName, size: 21)!
+        pricingInfo.font = UIFont(name: fontName, size: 21)!
+        dismiss.tintColor = color
+    }
 	@objc func handelDismiss() {
 		dismiss(animated: true)
 	}

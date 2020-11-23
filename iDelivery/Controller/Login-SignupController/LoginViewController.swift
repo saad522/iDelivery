@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
 	
 	//Icons
 	let emailIcon     = UIImageView(SFSymbols.email)
-	let passwordIcon = UIImageView(SFSymbols.password)
+	let passwordIcon  = UIImageView(SFSymbols.password)
 	
 	
 	//TextFields
@@ -30,13 +30,13 @@ class LoginViewController: UIViewController {
 	
 	//Containers
 	let emailContainer     = UIView(shadowOpacity: 0.4)
-	let passwordContainer = UIView(shadowOpacity: 0.4)
+	let passwordContainer  = UIView(shadowOpacity: 0.4)
 	
 	
 	//Buttons
-	let loginButton = UIButton(title: "Login")
-    var skipButton = UIButton()
-	var signUpButton = UIButton()
+	let loginButton    = UIButton(title: "Login")
+    var skipButton     = UIButton()
+	var signUpButton   = UIButton()
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
     
 	//MARK: LifeCycle
@@ -47,25 +47,11 @@ class LoginViewController: UIViewController {
 		dismissKeyBoard()
 		setActions()
 	}
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
-        navigationController?.navigationBar.tintColor = color
-        tabBarController?.tabBar.tintColor = color
-        loginButton.backgroundColor = color
-        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
-        if  index == 0 {
-            print(index)
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .light
-            }
-        } else if index == 1 {
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .dark
-            }
-            print(index)
-        }
+        setFontAndColor()
  
     }
 }
@@ -80,17 +66,9 @@ extension LoginViewController {
         skipButton = UIButton("I'm just a Visitor!","Skip")
         signUpButton = UIButton("Don't have an account?","SignUp")
 		[skipButton,signUpButton].forEach({$0.tintColor = .label})
-		view.addSubview(logo)
-		logo.translatesAutoresizingMaskIntoConstraints = false
-		logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		logo.constrainWidth(constant: 140)
-		view.addSubview(loginlabel)
-		loginlabel.translatesAutoresizingMaskIntoConstraints = false
-		loginlabel.topAnchor.constraint(equalTo: logo.bottomAnchor,constant: 65).isActive = true
-		loginlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		loginlabel.constrainWidth(constant: 100)
-		
+
+        let vStack = VerticalStackView(arrangedSubviews: [logo,loginlabel], spacing: 65)
+        vStack.alignment = .center
 		let emailStack = HStackView(arrangedSubviews: [emailIcon,emailText,UIView()])
 		emailContainer.addSubview(emailStack)
 		emailStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 0))
@@ -100,13 +78,13 @@ extension LoginViewController {
 		passwordContainer.addSubview(passwordStack)
 		passwordStack.fillSuperview(padding: .init(top: 0, left: 10, bottom: 0, right: 10))
 		
-		let vStackContainer = VerticalStackView(arrangedSubviews: [emailContainer,passwordContainer,loginButton,skipButton], spacing: 30)
+		let vStackContainer = VerticalStackView(arrangedSubviews: [vStack,emailContainer,passwordContainer,loginButton,skipButton], spacing: 30)
 		view.addSubview(vStackContainer)
 		
 		
 		[emailContainer,passwordContainer,loginButton].forEach({$0.constrainHeight(constant: 50)})
 		
-		vStackContainer.anchor(top: loginlabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 25, left: 25, bottom: 0, right: 25))
+        vStackContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 0, right: 25))
 		view.addSubview(signUpButton)
 		signUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 25, right: 25))
 	}
@@ -115,6 +93,30 @@ extension LoginViewController {
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
 	}
+    fileprivate func setFontAndColor() {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
+        loginButton.backgroundColor = color
+        loginButton.titleLabel?.font = UIFont(name: fontName, size: 36)
+        [loginlabel,logo].forEach({$0.font = UIFont(name: fontName, size: 36)})
+        
+        [emailText,passwordText].forEach({$0.font = UIFont(name: fontName, size: 19)})
+        let index =  UserDefaults.standard.integer(forKey: Keys.intKey)
+        if  index == 0 {
+            print(index)
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
+        } else if index == 1 {
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
+            print(index)
+        }
+    }
 }
 //MARK: Set Actions & Auth with Firebase
 

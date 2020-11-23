@@ -11,19 +11,19 @@ class ColorPickView: UICollectionViewCell {
     
     
     
-    let flower  = UIImageView(image : #imageLiteral(resourceName: "1f338"))
-    let octupus = UIImageView(image : #imageLiteral(resourceName: "1f419"))
-    let fire    = UIImageView(image : #imageLiteral(resourceName: "1f525"))
-    let avocado = UIImageView(image : #imageLiteral(resourceName: "1f951"))
-    let heart   = UIImageView(image : #imageLiteral(resourceName: "1f499"))
-    let star    = UIImageView(image : #imageLiteral(resourceName: "2b50"))
-    
-    let pink   = UIView(.systemPink,40)
-    let purple = UIView(.systemPurple,40)
-    let orange = UIView(#colorLiteral(red: 0.9555904269, green: 0.3629895449, blue: 0.1352315545, alpha: 1),40)
-    let green  = UIView(.systemGreen,40)
-    let blue   = UIView(.systemBlue,40)
-    let yellow = UIView(#colorLiteral(red: 1, green: 0.6766466498, blue: 0.1204051599, alpha: 1),40)
+    let flower          = UIImageView(image : #imageLiteral(resourceName: "1f338"))
+    let octupus         = UIImageView(image : #imageLiteral(resourceName: "1f419"))
+    let fire            = UIImageView(image : #imageLiteral(resourceName: "1f525"))
+    let avocado         = UIImageView(image : #imageLiteral(resourceName: "1f951"))
+    let heart           = UIImageView(image : #imageLiteral(resourceName: "1f499"))
+    let star            = UIImageView(image : #imageLiteral(resourceName: "2b50"))
+             
+    let pink            = UIView(.systemPink,40)
+    let purple          = UIView(.systemPurple,40)
+    let orange          = UIView(#colorLiteral(red: 0.9555904269, green: 0.3629895449, blue: 0.1352315545, alpha: 1),40)
+    let green           = UIView(.systemGreen,40)
+    let blue            = UIView(.systemBlue,40)
+    let yellow          = UIView(#colorLiteral(red: 1, green: 0.6766466498, blue: 0.1204051599, alpha: 1),40)
     
     let checkmarkPink   = UIImageView.init(SFSymbols.checkmark)
     let checkmarkPurple = UIImageView.init(SFSymbols.checkmark)

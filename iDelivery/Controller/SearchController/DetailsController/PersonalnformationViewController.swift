@@ -10,6 +10,7 @@ import UIKit
 
 class PersonalnformationViewController: UIViewController {
     
+    //MARK: Properties
     var user : User? {
         didSet {
             profilePicture.sd_setImage(with: URL(string: user?.profileImage ?? ""), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
@@ -20,24 +21,32 @@ class PersonalnformationViewController: UIViewController {
     }
     
 	let profilePicture = UIImageView(image: #imageLiteral(resourceName: "LmpwZw"))
-	let name = UILabel.init(text: "Saad Saissi Hassni", font: .boldSystemFont(ofSize: 16), textColor: .label)
-	let phone = UILabel.init(text: "0657890122", font: .boldSystemFont(ofSize: 16), textColor: .label)
+	let name      = UILabel.init(text: "Saad Saissi Hassni")
+	let phone     = UILabel.init(text: "0657890122")
+	let city      = UILabel.init(text: "Tangier")
 	
-	let city =  UILabel.init(text: "Tangier", font: .boldSystemFont(ofSize: 16), textColor: .label)
-	
-	let nameIcon = UIImageView(SFSymbols.fullName)
+	let nameIcon  = UIImageView(SFSymbols.fullName)
 	let phoneIcon = UIImageView(SFSymbols.phone)
-	let cityIcon = UIImageView(SFSymbols.location)
+	let cityIcon  = UIImageView(SFSymbols.location)
 	
-	
+ 
+    //MARK: Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setFontAndColor()
+    }
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		createUI()
 	}
 }
 
-
+//MARK: Create UI
 extension PersonalnformationViewController  {
+    fileprivate func setFontAndColor() {
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        [name,phone,city].forEach({$0.font = UIFont(name: fontName, size: 16)})
+    }
 	fileprivate func createUI() {
         view.shadow()
 		view.layer.cornerRadius  = 5

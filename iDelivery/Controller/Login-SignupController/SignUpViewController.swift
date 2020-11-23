@@ -12,9 +12,7 @@ import FirebaseFirestore
 class SignUpViewController: UIViewController{
 	//MARK: Properties
     var prfileViewController : ProfileControllerView?
-
-	//Title
-	let logo = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 25)!, textColor: .label)
+	
 	//TextFields
 	let fullNameText = UITextField(placholder: "Full-Name")
 	let phoneText    = UITextField(placholder: "Phone (Required)")
@@ -45,7 +43,6 @@ class SignUpViewController: UIViewController{
 	//Buttons
 	let loginUpButton  = UIButton("Aleardy have an account?","Login")
 	let signUpButton   = UIButton(title: "SignUp")
-//	let cameraIcon     = UIButton(SFSymbols.camera)
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
 	
 	//Separators
@@ -65,17 +62,11 @@ class SignUpViewController: UIViewController{
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpNavigation()
-		createUI()
-		dismissKeyBoard()
-		setActions()
-		setupPickeView()
+		
 	}
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        signUpButton.backgroundColor = color
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
-        tabBarController?.tabBar.tintColor = color
+        setFontAndColor()
     }
 }
 
@@ -103,30 +94,20 @@ extension SignUpViewController : UIPickerViewDelegate, UIPickerViewDataSource {
 		locationText.inputView = pickerView
 	}
 }
+
+//MARK: Create UI of Signup
 extension SignUpViewController {
 	fileprivate func setUpNavigation() {
 		view.backgroundColor = .secondarySystemBackground
 		navigationController?.navigationBar.isHidden = true
+        createUI()
 	}
 	fileprivate func createUI() {
-		//LogoView
-		loginUpButton.tintColor = .label
-		view.addSubview(logo)
-		logo.translatesAutoresizingMaskIntoConstraints = false
-		logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		
 		//PictureView
 		view.addSubview(profilePicture)
 		profilePicture.translatesAutoresizingMaskIntoConstraints = false
-		profilePicture.topAnchor.constraint(equalTo: logo.bottomAnchor).isActive = true
+        profilePicture.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 		profilePicture.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//		//Camera Icon
-//		profilePicture.addSubview(cameraIcon)
-//		cameraIcon.tintColor = .systemGray
-//		profilePicture.isUserInteractionEnabled = true
-//		cameraIcon.centerInSuperview()
-
 		// StackViews
 		// FullName StackView
 		let fullNameHS = HStackView(arrangedSubviews: [fullNameIcon,fullNameText,UIView()])
@@ -162,7 +143,19 @@ extension SignUpViewController {
 		//Login Button
 		view.addSubview(loginUpButton)
 		loginUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor,padding: .init(top: 0, left: 25, bottom: 0, right: 25))
+        dismissKeyBoard()
+        setActions()
+        setupPickeView()
 	}
+    fileprivate func setFontAndColor() {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        signUpButton.titleLabel?.font = UIFont(name: fontName, size: 36)
+        [fullNameText,phoneText,emailText,passwordText,locationText].forEach({$0.font = UIFont(name: fontName, size: 19)!})
+        signUpButton.backgroundColor = color
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+        tabBarController?.tabBar.tintColor = color
+    }
 	fileprivate func dismissKeyBoard() {
 		let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
 		tap.cancelsTouchesInView = false
@@ -191,13 +184,12 @@ extension SignUpViewController: UIImagePickerControllerDelegate & UINavigationCo
 	}
 }
 
-
+//MARK: setup Firebase Auth and FirebaseStorage & FireStore
 extension SignUpViewController {
 	fileprivate func setActions() {
 		loginUpButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 		hiddenPassword.addTarget(self, action: #selector(handlePassword), for: .touchUpInside)
 		signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-//		profilePicture.
 	}
 	
 	@objc func handleSignUp() {
@@ -240,9 +232,6 @@ extension SignUpViewController {
                  
                 }
             }
-            
-            
-            
         }
         
 	}
@@ -257,9 +246,6 @@ extension SignUpViewController {
             self.prfileViewController?.checkIfUserLoggedIn()
             self.dismiss(animated: true)
         }
-//            .addDocument(data: values) { (error) in
-//
-//        }
     }
 	@objc fileprivate func handlePassword() {
 		if passwordText.isSecureTextEntry == true {

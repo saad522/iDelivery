@@ -31,32 +31,32 @@ class FiltersView: UIViewController {
 		view.backgroundColor = .lightGray
 		return view
 	}()
-	let filterButton = UIButton(title: "Filter")
-	let price = UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Price", color: .label,segFont: .systemFont(ofSize: 18)))
-	
-	let retruns =  UIImageView.init(image: UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.currency)!, string: "Retrun", color: .label,segFont: .systemFont(ofSize: 18)))
-	
-	let priceMad = UILabel.init(text: "MAD", font: .systemFont(ofSize: 18))
-	let retrunMad = UILabel.init(text: "MAD", font: .systemFont(ofSize: 18))
-	
+    let filterButton = UIButton(title: "Filter")
+    let price        = UILabel.init(text: "Price", font: .systemFont(ofSize: 18))
+	let retruns      = UILabel.init(text: "Retruns", font: .systemFont(ofSize: 18))
+	let priceMad     = UILabel.init(text: "MAD", font: .systemFont(ofSize: 18))
+	let retrunMad    = UILabel.init(text: "MAD", font: .systemFont(ofSize: 18))
+    let iconPrice    = UIImageView(SFSymbols.currency)
+    let iconRetrun   = UIImageView(SFSymbols.currency)
+    
 	let textFieldPrice : UITextField = {
-		let text = UITextField()
-		text.borderStyle = .line
-		text.placeholder = " 10"
+		let text          = UITextField()
+		text.borderStyle  = .line
+		text.placeholder  = " 10"
 		text.keyboardType = .numberPad
 		text.constrainWidth(constant: 100)
 		return text
 	}()
 	let textFieldRetrun : UITextField = {
-		let text = UITextField()
-		text.borderStyle = .line
-		text.placeholder = " 5"
+		let text          = UITextField()
+		text.borderStyle  = .line
+		text.placeholder  = " 5"
 		text.keyboardType = .numberPad
 		text.constrainWidth(constant: 100)
 		return text
 	}()
-	let switchPrice = UISwitch()
-	let switchReturn = UISwitch()
+	let switchPrice       = UISwitch()
+	let switchReturn      = UISwitch()
 	var hasSetPointOrigin = false
 	var pointOrigin: CGPoint?
 	
@@ -73,6 +73,9 @@ class FiltersView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        filterButton.titleLabel?.font = UIFont(name: fontName, size: 36)!
+        [priceMad,retrunMad,price,retruns].forEach({$0.font = UIFont(name: fontName, size: 18)!})
         filterButton.backgroundColor = color
         [switchPrice,switchReturn].forEach({$0.onTintColor = color})
     }
@@ -85,8 +88,8 @@ class FiltersView: UIViewController {
 		slideIdicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 //		slideIdicator.roundCorners(.allCorners, radius: 10)
 
-		let hStackPrice = HStackView(arrangedSubviews: [price,textFieldPrice,priceMad,UIView(),switchPrice], spacing: 10)
-		let hStackRetrun = HStackView(arrangedSubviews: [retruns,textFieldRetrun,retrunMad,UIView(),switchReturn], spacing: 10)
+		let hStackPrice = HStackView(arrangedSubviews: [iconPrice,price,textFieldPrice,priceMad,UIView(),switchPrice], spacing: 10)
+		let hStackRetrun = HStackView(arrangedSubviews: [iconRetrun,retruns,textFieldRetrun,retrunMad,UIView(),switchReturn], spacing: 10)
 		let vStack = VerticalStackView(arrangedSubviews: [hStackPrice,hStackRetrun], spacing: 25)
 		
 		view.addSubview(vStack)

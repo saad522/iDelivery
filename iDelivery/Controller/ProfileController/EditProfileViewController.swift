@@ -47,13 +47,12 @@ class EditeProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         creatUI()
-        setActions()
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
-        updateButton.backgroundColor = color
+        setFontAndColor()
     }
 }
 
@@ -86,9 +85,22 @@ extension EditeProfileViewController {
         updateButton.addTarget(self, action: #selector(handleUpdate), for: .touchUpInside)
     }
     
+    @objc func handleCancel(){
+        dismiss(animated: true, completion: nil)
+    }
 }
 //MARK: Create UI
 extension EditeProfileViewController {
+    fileprivate func setFontAndColor() {
+        let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
+        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+        [priceText,retrunText,stockText].forEach({$0.font = UIFont(name: fontName, size: 19)})
+        updateButton.titleLabel?.font = UIFont(name: fontName, size: 36)
+        updateButton.backgroundColor = color
+        navigationController?.navigationBar.tintColor = color
+        tabBarController?.tabBar.tintColor = color
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+    }
     fileprivate func creatUI() {
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancle", style: .done, target: self, action: #selector(handleCancel))
@@ -113,12 +125,13 @@ extension EditeProfileViewController {
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 25, left: 25, bottom: 0, right: 25))
         view.addSubview(updateButton)
         updateButton.anchor(top: stack.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 35, left: 25, bottom: 0, right: 25))
+        
+        // Set Action Of Buttons
+        setActions()
     }
     
     
-    @objc func handleCancel(){
-        dismiss(animated: true, completion: nil)
-    }
+   
 }
 
 
