@@ -113,12 +113,13 @@ extension  ProfileControllerView {
             logoutButton.isHidden = true
         } else {
             view.addSubview(logoutButton)
-            logoutButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 5, left: 0, bottom: 0, right: 10))
+            logoutButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 5, left: 0, bottom: 0, right: 10),size: .init(width: 55, height: 55))
             view.backgroundColor = .secondarySystemBackground
             cardPersonnaleController.view.constrainHeight(constant: 160)
             view.addSubview(vStack)
             vStack.anchor(top: logoutButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
             vStackDesign.isHidden = true
+            
             
         }
     }
