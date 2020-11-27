@@ -13,6 +13,9 @@
 		0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF86256590A2007971D8 /* BackGroundMode.swift */; };
 		042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042370C02559D50200E45215 /* EditProfileViewController.swift */; };
 		042F26132568535600AD191F /* LanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F26122568535600AD191F /* LanguagePickerView.swift */; };
+		04337DC725714BF000F27921 /* MyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DC625714BF000F27921 /* MyListViewController.swift */; };
+		04337DCB257153CC00F27921 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DCA257153CC00F27921 /* ListViewCell.swift */; };
+		04337DCF25715B2B00F27921 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DCE25715B2B00F27921 /* AddListViewController.swift */; };
 		043930222550A11B003BC235 /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930212550A11B003BC235 /* MountainsRawData.swift */; };
 		043930252550A138003BC235 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043930242550A138003BC235 /* MountainsController.swift */; };
 		0443E60A255B1200006C209C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0443E609255B1200006C209C /* GoogleService-Info.plist */; };
@@ -57,6 +60,9 @@
 		0421EF86256590A2007971D8 /* BackGroundMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundMode.swift; sourceTree = "<group>"; };
 		042370C02559D50200E45215 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		042F26122568535600AD191F /* LanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerView.swift; sourceTree = "<group>"; };
+		04337DC625714BF000F27921 /* MyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewController.swift; sourceTree = "<group>"; };
+		04337DCA257153CC00F27921 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
+		04337DCE25715B2B00F27921 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		043930212550A11B003BC235 /* MountainsRawData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		043930242550A138003BC235 /* MountainsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
 		0443E609255B1200006C209C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -131,6 +137,23 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
+		04337DC525714BDA00F27921 /* MyLists */ = {
+			isa = PBXGroup;
+			children = (
+				04337DC625714BF000F27921 /* MyListViewController.swift */,
+				04337DCE25715B2B00F27921 /* AddListViewController.swift */,
+			);
+			path = MyLists;
+			sourceTree = "<group>";
+		};
+		04337DC9257153B700F27921 /* ListsView */ = {
+			isa = PBXGroup;
+			children = (
+				04337DCA257153CC00F27921 /* ListViewCell.swift */,
+			);
+			path = ListsView;
+			sourceTree = "<group>";
+		};
 		0485DA03254864DE00033797 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +193,7 @@
 		0485DA242548652400033797 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04337DC525714BDA00F27921 /* MyLists */,
 				0421EF7C256563E7007971D8 /* SettingsController */,
 				04DDC479255D991600B14003 /* BaseTabController */,
 				04DDC477255D98EF00B14003 /* ProfileController */,
@@ -194,6 +218,7 @@
 		0485DA262548654700033797 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04337DC9257153B700F27921 /* ListsView */,
 				0421EF81256566DC007971D8 /* SettingsView */,
 				04DDC47C255D9A1300B14003 /* ProfileView */,
 				04DDC47A255D99FC00B14003 /* SearchView */,
@@ -464,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04337DCF25715B2B00F27921 /* AddListViewController.swift in Sources */,
 				0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */,
 				04BFC56F2549E21A00FCB620 /* SearchViewCell.swift in Sources */,
 				0485DA2D2548661300033797 /* LoginViewController.swift in Sources */,
@@ -482,6 +508,7 @@
 				04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */,
 				0485DA10254864DE00033797 /* AppDelegate.swift in Sources */,
 				04CF78E9254C776A00981F51 /* PersonalnformationViewController.swift in Sources */,
+				04337DC725714BF000F27921 /* MyListViewController.swift in Sources */,
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
 				0485DA3025486A1300033797 /* Extension.swift in Sources */,
 				049816DD25670A2000291FBB /* CustomFont.swift in Sources */,
@@ -499,6 +526,7 @@
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
 				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
 				04688B1C256C109100858322 /* CompositionalHeader.swift in Sources */,
+				04337DCB257153CC00F27921 /* ListViewCell.swift in Sources */,
 				044B4B1A255C44D5008A0BAB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

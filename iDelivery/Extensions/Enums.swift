@@ -29,14 +29,17 @@ enum SFSymbols {
 	static let nearby       = "aspectratio"
 	static let profile      = "person"
 	static let dismiss      = "multiply.circle.fill"
-	static let selected     = "largecircle.fill.circle"
-	static let unSelected   = "circle"
+//	static let sunelected   = "largecircle.fill.circle"
+	static let selected     = "circle"
 	static let edit		    = "square.and.pencil"
 	static let editeImage   = "camera.fill"
 	static let addInfo      = "plus.circle"
     static let setFiltering = "ellipsis.circle.fill"
     static let setting      = "gear"
     static let checkmark    = "checkmark"
+    static let addList      = "rectangle.stack.badge.plus"
+    static let list         = "list.star"
+    static let eyedropper   = "eyedropper"
 }
 
 enum Keys {

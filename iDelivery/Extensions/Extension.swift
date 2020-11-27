@@ -14,7 +14,15 @@ extension UIView {
         self.constrainHeight(constant: size)
         self.constrainWidth(constant: size)
         self.layer.cornerRadius = size / 2
-    
+    }
+}
+extension UIButton {
+    convenience init(_ size : CGFloat = 45,_ color : UIColor = .systemGray) {
+        self.init(type: .custom)
+        self.constrainHeight(constant: size)
+        self.constrainWidth(constant: size)
+        self.layer.cornerRadius = size / 2
+        self.backgroundColor = color
     }
 }
 extension UIButton {
@@ -48,10 +56,11 @@ extension UILabel {
 	}
 }
 extension UIView {
-    func shadow(){
+    func shadow(_ color : UIColor = .black){
         layer.shadowOpacity = 0.5
         layer.shadowRadius  = 10
         layer.shadowOffset  = .init(width: 0, height: 10)
+        layer.shadowColor   = color.cgColor
     }
 }
 extension UITextField {
@@ -78,13 +87,13 @@ extension UIView {
 	}
 }
 extension UIView {
-	convenience init(shadowOpacity : Float) {
+    convenience init(shadowOpacity : Float = 0.4,_ cornerRadius : CGFloat = 5,_ backgroundColor : UIColor = .systemBackground) {
 		self.init(frame:.zero)
 		self.layer.shadowOpacity = shadowOpacity
 		self.layer.shadowRadius = 10
 		self.layer.shadowOffset = .init(width: 0, height: 10)
-		self.layer.cornerRadius = 5
-		self.backgroundColor = .systemBackground
+		self.layer.cornerRadius = cornerRadius
+		self.backgroundColor = backgroundColor
 	}
 }
 extension UIImageView {
@@ -137,7 +146,8 @@ extension UIColor {
 	
 }
 
-//MARK: advanced  func from stackoverflow 🤓
+//MARK: advanced  funcs from stackoverflow 🤓
+
 extension UIImage {
 	
 	class func textEmbededImage(image: UIImage, string: String, color:UIColor, imageAlignment: Int = 0, segFont: UIFont? = nil) -> UIImage {
