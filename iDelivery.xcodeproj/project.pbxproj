@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */; };
+		040DC2342572D8F10043B753 /* ListDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DC2332572D8F10043B753 /* ListDetailViewCell.swift */; };
+		0411B5F325729AF60093C348 /* ListDetailViewControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411B5F225729AF60093C348 /* ListDetailViewControlller.swift */; };
+		0411B5FA2572A0270093C348 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411B5F92572A0270093C348 /* UserList.swift */; };
 		0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF7D25656409007971D8 /* SettingsViewController.swift */; };
 		0421EF8325656702007971D8 /* ColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF8225656702007971D8 /* ColorPickView.swift */; };
 		0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF86256590A2007971D8 /* BackGroundMode.swift */; };
@@ -55,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		040CD109254C8C0E00A9C6ED /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		040DC2332572D8F10043B753 /* ListDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewCell.swift; sourceTree = "<group>"; };
+		0411B5F225729AF60093C348 /* ListDetailViewControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewControlller.swift; sourceTree = "<group>"; };
+		0411B5F92572A0270093C348 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		0421EF7D25656409007971D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0421EF8225656702007971D8 /* ColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickView.swift; sourceTree = "<group>"; };
 		0421EF86256590A2007971D8 /* BackGroundMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundMode.swift; sourceTree = "<group>"; };
@@ -116,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0411B5F825729FE80093C348 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				0411B5F92572A0270093C348 /* UserList.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
 		0421EF7C256563E7007971D8 /* SettingsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +156,7 @@
 			children = (
 				04337DC625714BF000F27921 /* MyListViewController.swift */,
 				04337DCE25715B2B00F27921 /* AddListViewController.swift */,
+				0411B5F225729AF60093C348 /* ListDetailViewControlller.swift */,
 			);
 			path = MyLists;
 			sourceTree = "<group>";
@@ -150,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				04337DCA257153CC00F27921 /* ListViewCell.swift */,
+				040DC2332572D8F10043B753 /* ListDetailViewCell.swift */,
 			);
 			path = ListsView;
 			sourceTree = "<group>";
@@ -229,6 +245,7 @@
 		0485DA272548655000033797 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0411B5F825729FE80093C348 /* Lists */,
 				049816DB256709F400291FBB /* Fonts */,
 				04DDC480255D9AC200B14003 /* User */,
 				04DDC47F255D9AB000B14003 /* SearchModel */,
@@ -502,6 +519,7 @@
 				042F26132568535600AD191F /* LanguagePickerView.swift in Sources */,
 				0485DA3725486B8C00033797 /* VerticalStackView.swift in Sources */,
 				049816D92567028D00291FBB /* FontsPickerView.swift in Sources */,
+				040DC2342572D8F10043B753 /* ListDetailViewCell.swift in Sources */,
 				0487405F254D944300F3AA54 /* ToolsTableViewController.swift in Sources */,
 				043930252550A138003BC235 /* MountainsController.swift in Sources */,
 				043930222550A11B003BC235 /* MountainsRawData.swift in Sources */,
@@ -525,8 +543,10 @@
 				049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */,
 				0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */,
 				0465BD8B2551C0A70093F8FA /* ProfileControllerView.swift in Sources */,
+				0411B5F325729AF60093C348 /* ListDetailViewControlller.swift in Sources */,
 				04688B1C256C109100858322 /* CompositionalHeader.swift in Sources */,
 				04337DCB257153CC00F27921 /* ListViewCell.swift in Sources */,
+				0411B5FA2572A0270093C348 /* UserList.swift in Sources */,
 				044B4B1A255C44D5008A0BAB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

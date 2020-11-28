@@ -40,6 +40,9 @@ enum SFSymbols {
     static let addList      = "rectangle.stack.badge.plus"
     static let list         = "list.star"
     static let eyedropper   = "eyedropper"
+    static let pencil       = "pencil"
+    static let check        = "checkmark.circle"
+    static let trash        = "trash"
 }
 
 enum Keys {

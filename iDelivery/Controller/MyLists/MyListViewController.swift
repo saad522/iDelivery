@@ -7,9 +7,33 @@
 
 import SwiftUI
 
+struct List : Hashable {
+    
+    let id    = UUID().uuidString
+    let color : UIColor
+    let name  : String
+    
+    static func == (lhs: List, rhs: List) -> Bool {
+        lhs.id == rhs.id
+    }
+}
 class MyListViewController: UICollectionViewController {
+ 
+    
     //MARK: Properties
     private let cellID = "cellID"
+    let listImage = UIImageView(image : #imageLiteral(resourceName: "undraw_No_data_re_kwbl"))
+    let listTitle = UILabel.init(text: "Create your own Lists 😎", font: .systemFont(ofSize: 35, weight: .semibold), numberOfLines: 2)
+    
+    enum Section {
+        case main
+    }
+    lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, List> = .init(collectionView: collectionView) { (collection, indexPath, list) -> UICollectionViewCell? in
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: self.cellID, for: indexPath) as! ListViewCell
+        cell.circle.backgroundColor = list.color
+        cell.name.text = list.name
+        return cell
+    }
     init() {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/2), heightDimension: .fractionalHeight(1)))
         item.contentInsets = .init(top: 0, leading: 5, bottom: 5, trailing: 5)
@@ -34,8 +58,14 @@ extension MyListViewController {
     @objc func handleAddNewList() {
         print("Presnting AddListViewController...")
         let addListViewController = AddListViewController()
+        addListViewController.didAddList = { name, color in
+            let newList = List(color: color, name: name)
+            var snapshot = self.diffableDataSource.snapshot()
+            snapshot.appendItems([newList])
+            self.diffableDataSource.apply(snapshot)
+            self.dismiss(animated: true)
+        }
         present(addListViewController, animated: true)
-        
     }
 }
 //MARK: Configure CollectionView
@@ -47,23 +77,42 @@ extension MyListViewController {
         let barItem = UIBarButtonItem(image: UIImage(systemName: SFSymbols.addList)?.withTintColor(.label).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddNewList))
         navigationItem.rightBarButtonItem = barItem
         cellRefistration()
-        creatUI()
+        setupSource()
+//        creatUI()
+    }
+    fileprivate func creatUI() {
+        let vStack = VerticalStackView(arrangedSubviews: [listImage,listTitle], spacing: 5)
+        vStack.alignment = .center
+        listImage.constrainWidth(constant: 300)
+        listImage.constrainHeight(constant: 300)
+        collectionView.addSubview(vStack)
+        vStack.anchor(top: collectionView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 0, left: 10, bottom: 0, right: 10))
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let listDeatail = ListDetailViewControlller(style: .insetGrouped)
+        navigationController?.pushViewController(listDeatail, animated: true)
+        print("HOLO...")
+    }
     fileprivate func cellRefistration() {
         collectionView.register(ListViewCell.self, forCellWithReuseIdentifier: cellID)
     }
-    fileprivate func creatUI() {
-       
+ 
+    fileprivate func setupSource() {
+        collectionView.dataSource = diffableDataSource
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([
+            List(color: .systemGreen, name: "Casablanca List"),
+            List(color: .systemBlue, name: "Fes List"),
+            List(color: .systemOrange, name: "Squad List"),
+            List(color: .systemPink, name: "top 10 "),
+            List(color: .systemYellow, name: "Tangier List"),
+        ], toSection: .main)
+        diffableDataSource.apply(snapshot)
+        
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ListViewCell
-        return cell
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
+
 }
 
 struct MyListView: UIViewControllerRepresentable {

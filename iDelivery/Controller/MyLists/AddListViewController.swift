@@ -64,9 +64,17 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
         clearInputButton.isHidden = true
         colorPicker.delegate = self
     }
+    var didAddList : (String,UIColor) -> () = {_,_ in }
+    
 }
 //MARK: set Actions with PickerColor Controller
 extension AddListViewController: UIColorPickerViewControllerDelegate {
+    
+    @objc fileprivate func handleAddList() {
+        guard let name : String = inputListName.text else {return}
+        didAddList(name,pickedColor)
+    }
+    
     fileprivate func setActions() {
         cancel.addTarget(self, action: #selector(handleCancle), for: .touchUpInside)
         clearInputButton.addTarget(self, action: #selector(handleClearInput), for: .touchUpInside)
@@ -78,9 +86,12 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
         purple.addTarget(self, action: #selector(handlePurple), for: .touchUpInside)
         brown.addTarget(self, action: #selector(handleBrown), for: .touchUpInside)
         eyedropperIcon.addTarget(self, action: #selector(handlePickerColor), for: .touchUpInside)
+        done.addTarget(self, action: #selector(handleAddList), for: .touchUpInside)
     }
+    
     func setCircleClor(color : UIColor,button : UIButton) {
         circle.backgroundColor = color
+        pickedColor = color
         circle.layer.shadowColor = color.cgColor
         button.layer.borderColor = UIColor.label.cgColor
         button.layer.borderWidth = 2
@@ -103,7 +114,6 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
         print("Ima 7na")
         buttonAction(sender: green, color: .systemGreen)
     }
-   
     @objc fileprivate func handleBlue(button : UIButton) {
         print("Ima 7na")
         buttonAction(sender: blue, color: .systemBlue)
@@ -240,7 +250,12 @@ struct AddListView: UIViewControllerRepresentable {
 
 struct AddListViewController_Previews: PreviewProvider {
     static var previews: some View {
-        AddListView()
-            .edgesIgnoringSafeArea(.all)
+        Group {
+            AddListView()
+                .edgesIgnoringSafeArea(.all)
+            AddListView()
+                .previewDevice("iPod touch (7th generation)")
+                .edgesIgnoringSafeArea(.all)
+        }
     }
 }
