@@ -10,7 +10,7 @@ import UIKit
 
 class FiltersView: UIViewController {
 	
-    var searchConntroller : SearchByCityController?
+    var didFilters : ([User]) -> () = {_ in }
     
     var users : [User]?
     
@@ -144,32 +144,22 @@ class FiltersView: UIViewController {
              array = users?.filter({ (user) -> Bool in
                return user.price == price
              }) ?? users!
-            searchConntroller?.users = array
-            searchConntroller?.collectionView.reloadData()
-            
+            didFilters(array)
         } else if switchReturn.isOn == true && switchPrice.isOn == false {
           
              array = users?.filter({ (user) -> Bool in
                return user.retruns == returns
              }) ?? users!
-            searchConntroller?.users = array
-            searchConntroller?.collectionView.reloadData()
-            
+            didFilters(array)
         } else if switchReturn.isOn == true && switchPrice.isOn == true {
            
              array = users?.filter({ (user) -> Bool in
                 return user.retruns >= returns && user.price >= price
              }) ?? users!
-            searchConntroller?.users = array
-            searchConntroller?.collectionView.reloadData()
-            
+            didFilters(array)
         } else if switchReturn.isOn == false && switchPrice.isOn == false {
-            searchConntroller?.users = users!
-            searchConntroller?.collectionView.reloadData()
+            didFilters(array)
         }
-        
-        
-        dismiss(animated: true)
     }
     
     func convertingToInt(arrayString : [String]) -> [Int] {

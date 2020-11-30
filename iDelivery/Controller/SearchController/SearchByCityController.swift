@@ -34,14 +34,15 @@ class SearchByCityController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configuCollectionView()
-
+        collectionView.reloadData()
+//        configureDataSource()
 	}
 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
         setFontAndColor()
+        collectionView.reloadData()
     }
     
 	//--ComosotionalLayout Configuration with dependency injection constructor
@@ -138,9 +139,10 @@ extension SearchByCityController {
 
     
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<CardUserViewCell, User> { (cell, indexPath, _) in
+        collectionView.dataSource = dataSource
+        collectionView.reloadData()
+        let cellRegistration = UICollectionView.CellRegistration<CardUserViewCell, User> { (cell, indexPath, user) in
             // Populate the cell with our item description.
-            let user = self.users[indexPath.item]
             cell.user = user
             let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
             cell.setFonts(fontName: fontName)
@@ -167,21 +169,38 @@ extension SearchByCityController {
 extension SearchByCityController {
     func handleFilters(action: UIAction) {
         let slideVC = FiltersView(users: users)
+        slideVC.didFilters = {user in
+            print("All Users : ")
+            user.forEach({print($0.price)})
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems(self.users)
+            snapshot.appendItems(user)
+            self.dataSource.apply(snapshot)
+            self.dismiss(animated: true)
+        }
         slideVC.modalPresentationStyle = .custom
         slideVC.transitioningDelegate = self
-        slideVC.searchConntroller = self
         self.present(slideVC, animated: true)
     }
     func handleSort(action: UIAction) {
         let slideVC = SortsView(users: users)
+        slideVC.didSorts = {user in
+            print("All Users : ")
+            user.forEach({print($0.price)})
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems(self.users)
+            snapshot.appendItems(user)
+            self.dataSource.apply(snapshot)
+        }
         slideVC.modalPresentationStyle = .custom
         slideVC.transitioningDelegate = self
-        slideVC.searchConntroller = self
         self.present(slideVC, animated: true)
     }
     func handleReload(action: UIAction) {
-        self.users = forReload
-        collectionView.reloadData()
+        var snapshot = self.dataSource.snapshot()
+        snapshot.deleteItems(self.users)
+        snapshot.appendItems(forReload)
+        self.dataSource.apply(snapshot)
     }
 }
 struct SearchByCityView: UIViewControllerRepresentable {

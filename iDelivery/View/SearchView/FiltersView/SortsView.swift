@@ -12,8 +12,10 @@ class SortsView: UIViewController {
 	
 	//MARK: Properties
     var searchConntroller : SearchByCityController?
-    
+    var didSorts : ([User]) -> () = {_ in }
     var users : [User]?
+    var usersSorts = [User]()
+    
     // dependency injection constructor
     init(users : [User]) {
         self.users = users
@@ -141,12 +143,10 @@ class SortsView: UIViewController {
 			lowesButton.isOn = false
 			carButton.isOn = false
 			motorButton.isOn = false
-            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+            usersSorts = (users?.sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.price > rhs.price
             }))!
-            self.searchConntroller?.users.forEach({print($0.price)})
-            self.searchConntroller?.collectionView.reloadData()
-    
+            didSorts(usersSorts)
 		}
 	}
 	@objc func handleCarOn() {
@@ -154,12 +154,10 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			lowesButton.isOn = false
 			motorButton.isOn = false
-            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+            usersSorts = (users?.sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.transport == 1
             }))!
-            self.searchConntroller?.users.forEach({print($0.price)})
-            self.searchConntroller?.collectionView.reloadData()
-            
+            didSorts(usersSorts)
 		}
 	}
 	@objc func handleMoOn() {
@@ -167,12 +165,10 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			carButton.isOn = false
 			lowesButton.isOn = false
-            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+            usersSorts = (users?.sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.transport == 0
             }))!
-            self.searchConntroller?.users.forEach({print($0.price)})
-            self.searchConntroller?.collectionView.reloadData()
-            
+            didSorts(usersSorts)
 		}
 	}
 	@objc func handleLowOn() {
@@ -180,11 +176,10 @@ class SortsView: UIViewController {
 			highestButton.isOn = false
 			carButton.isOn = false
 			motorButton.isOn = false
-            self.searchConntroller?.users = (users?.sorted(by: { (lhs, rhs) -> Bool in
+            usersSorts = (users?.sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.price < rhs.price
             }))!
-            self.searchConntroller?.users.forEach({print($0.price)})
-            self.searchConntroller?.collectionView.reloadData()
+            didSorts(usersSorts)
 		}
 	}
 	
