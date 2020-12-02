@@ -18,13 +18,23 @@ class MoreDetailsController: UIViewController {
     let toolsTableViewInformation = ToolsTableViewController()
     let personalInformation       = PersonalnformationViewController()
     
-	let dismiss = UIButton(SFSymbols.dismiss,size: 20)
-	
+	let dismiss = UIButton(SFSymbols.dismiss,size: 18)
+    let configuration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold, scale: .medium)
+    lazy var  addToList : UIButton = {
+        let button = UIButton(type : .system)
+        button.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.list,withConfiguration: configuration)!, string: "Add To List", color: .white, imageAlignment: 0, segFont: UIFont.systemFont(ofSize: 30, weight: .semibold)), for: .normal)
+        button.layer.cornerRadius = 5
+        button.shadow()
+        button.backgroundColor = .niceBlue
+        return button
+    }()
+    
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		fetchUserDetailData()
 		creatUI()
+        
 	}
     // dependency injection constructor
     init(user: User?) {
@@ -47,21 +57,31 @@ extension MoreDetailsController {
         personalInformation.user = user
         toolsTableViewInformation.user = user
     }
+    fileprivate func setActions() {
+        addToList.addTarget(self, action: #selector(handleAddToList), for: .touchUpInside)
+    }
+    @objc fileprivate func handleAddToList() {
+        let creatListViewController = CreateListViewController()
+        present(creatListViewController, animated: true)
+    }
 }
 //MARK: Create UI
 extension MoreDetailsController {
 	fileprivate func creatUI() {
+        setActions()
         view.backgroundColor = .secondarySystemBackground
-        
 		view.addSubview(dismiss)
         dismiss.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 15))
 		dismiss.addTarget(self, action: #selector(handelDismiss), for: .touchUpInside)
 
-        
+      
         let stack = VerticalStackView(arrangedSubviews: [personalInfo,personalInformation.view,UIView(),UIView(),pricingInfo,toolsTableViewInformation.view], spacing: 10)
-        personalInformation.view.constrainHeight(constant: 120)
+        personalInformation.view.constrainHeight(constant: 110)
         view.addSubview(stack)
-        stack.anchor(top: dismiss.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 10))
+        stack.anchor(top: dismiss.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: 10))
+        view.addSubview(addToList)
+        addToList.anchor(top: stack.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 15, left: 55, bottom: 0, right: 55),size: .init(width: 0, height: 48))
+        addToList.tintColor = .white
 	}
     fileprivate func setFontAndColor() {
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue

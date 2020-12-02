@@ -17,11 +17,19 @@ class UserListSource : UITableViewDiffableDataSource<SectionType,UserList> {
     }
 }
 class ListDetailViewControlller: UITableViewController {
+    var users = [
+            UserList(userID: "12", name: "Afatim Bor", phone: "09299393", image: "aj"),
+            UserList(userID: "1", name: "Kibaro Lofi", phone: "30399393", image: "aja"),
+            UserList(userID: "33", name: "Staki bandi", phone: "388388", image: "aj"),
+            UserList(userID: "3", name: "McBoff Li", phone: "338383", image: "aia")
+        ]
+
    private let cellID = "cellID"
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
     }
+    
     
     lazy var source : UserListSource = .init(tableView: self.tableView) { (tableView, indexPath, userList) -> UITableViewCell? in
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath) as! ListDetailViewCell
@@ -38,17 +46,17 @@ extension ListDetailViewControlller {
         setupSource()
         menus()
     }
-
+    
+    @objc func handleButton() {
+        let addLiost = AddListViewController()
+        present(addLiost, animated: true)
+    }
+    
     private func setupSource() {
         var snapshot = source.snapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems([
-            .init(userID: "1", name: "Amine Jabir", phone: "Phone",image: "Image"),
-            .init(userID: "2", name: "Yasser Zawin", phone: "Phone",image: "Image"),
-            .init(userID: "3", name: "Zobir Modarif", phone: "Phone",image: "Image"),
-            .init(userID: "4", name: "Samir Khadiri", phone: "Phone",image: "Image"),
-            .init(userID: "5", name: "Saad Saissi Hassani", phone: "Phone",image: "Image")
-           ],toSection: .main)
+        snapshot.appendItems(users,toSection: .main)
+//        snapshot
         source.apply(snapshot)
     }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -62,7 +70,7 @@ extension ListDetailViewControlller {
             guard let userList = self.source.itemIdentifier(for: indexPath) else { return }
             
             snapshot.deleteItems([userList])
-            
+            self.users.remove(at: indexPath.item)
             self.source.apply(snapshot)
         }
         return .init(actions: [deleteAction])
@@ -77,6 +85,27 @@ extension ListDetailViewControlller {
         let barItem = UIBarButtonItem(title: "", image: UIImage(systemName: SFSymbols.setFiltering)!.withTintColor(color).withRenderingMode(.alwaysOriginal), menu: filters)
         navigationItem.rightBarButtonItem = barItem
         
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let imagDefauls = UIImageView(image : #imageLiteral(resourceName: "undraw_Add_notes_re_ln36"))
+        let hStack = HStackView(arrangedSubviews: [UIView(),imagDefauls,UIView()], spacing: 5)
+        hStack.distribution = .equalCentering
+        imagDefauls.constrainHeight(constant: 200)
+        imagDefauls.constrainWidth(constant: 200)
+        imagDefauls.isUserInteractionEnabled = true
+     if users.count == 0 {
+            imagDefauls.isHidden = false
+            return hStack
+        } else {
+            imagDefauls.isHidden = true
+            return UIView()
+        }
+    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if users.count == 0 {
+            return 400
+        }
+        return 0
     }
      func handelMenu(action: UIAction) {
         print("Dreams Jma3a Chmal... ")

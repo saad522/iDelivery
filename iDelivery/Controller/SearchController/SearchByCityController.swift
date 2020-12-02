@@ -157,10 +157,12 @@ extension SearchByCityController {
     }
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let user = users[indexPath.item]
-			let detailsControlles = MoreDetailsController(user: user)
-			detailsControlles.modalPresentationStyle = .fullScreen
-			present(detailsControlles, animated: true)
+        let object = dataSource.itemIdentifier(for: indexPath)
+        if let user = object {
+            let detailsControlles = MoreDetailsController(user: user)
+            detailsControlles.modalPresentationStyle = .fullScreen
+            present(detailsControlles, animated: true)
+        }
 	}
 
 

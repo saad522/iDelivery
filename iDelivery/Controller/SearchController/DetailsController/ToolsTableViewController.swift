@@ -70,7 +70,7 @@ extension ToolsTableViewController {
    fileprivate func creatUI() {
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
-        view.constrainHeight(constant: 200)
+        view.constrainHeight(constant: 210)
         //Price
         let hStackPrice = HStackView(arrangedSubviews: [iconPrice,priceLabel,UIView(),price], spacing: 5)
         

@@ -73,6 +73,7 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
     @objc fileprivate func handleAddList() {
         guard let name : String = inputListName.text else {return}
         didAddList(name,pickedColor)
+        dismiss(animated: true)
     }
     
     fileprivate func setActions() {
