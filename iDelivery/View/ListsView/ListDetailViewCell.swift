@@ -6,41 +6,23 @@
 //
 
 import SwiftUI
-struct UserListRowView : View {
-    @ObservedObject var viewModel = UserListViewModel()
-    var body: some View {
-        HStack {
-            Image(uiImage: #imageLiteral(resourceName: "LmpwZw"))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 65.0, height: 65.0)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.black, lineWidth: 2))
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: SFSymbols.fullName)
-                    Text(viewModel.name)
-                        .bold()
-                }
-                HStack {
-                    Image(systemName: SFSymbols.phone)
-                    Text("06060050550")
-                        .foregroundColor(.secondary)
-                        .padding(5)
-                }
 
-            }.padding(5)
-            Spacer()
-        }.padding(10)
-        
-    }
-}
+
+
 class ListDetailViewCell: UITableViewCell {
-    let viewModel = UserListViewModel()
-    lazy var userListRowView = UserListRowView(viewModel: viewModel)
-    var userList : UserList! {
+    
+    let name = UILabel.init(text: "Marto Mi Sissi")
+    let phone = UILabel.init(text: "0908")
+    //Profile Picture
+    let profilePicture = UIImageView(image: #imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal))
+    let iconName = UIImageView(SFSymbols.fullName)
+    let iconPhone = UIImageView(SFSymbols.phone)
+
+    var item : Item! {
         didSet {
-            viewModel.name = userList.name
+            name.text = item.name ?? "Tnaket"
+            phone.text = item.phone ?? "dont't have one"
+            profilePicture.sd_setImage(with: URL(string: item.image!),placeholderImage: #imageLiteral(resourceName: "LmpwZw"))
         }
     }
     
@@ -49,9 +31,19 @@ class ListDetailViewCell: UITableViewCell {
         creatUI()
     }
     fileprivate func creatUI() {
-        let controller = UIHostingController(rootView: userListRowView)
-        addSubview(controller.view)
-        controller.view.fillSuperview()
+        let hStackName = HStackView(arrangedSubviews: [iconName,name], spacing: 5)
+        let hStackPhone = HStackView(arrangedSubviews: [iconPhone,phone], spacing: 5)
+        let vStack = VerticalStackView(arrangedSubviews: [hStackName,hStackPhone], spacing: 5)
+        let hStack = HStackView(arrangedSubviews: [profilePicture,vStack], spacing: 5)
+        let imageSize : CGFloat = 85
+        profilePicture.constrainWidth(constant: imageSize)
+        profilePicture.constrainHeight(constant: imageSize)
+        profilePicture.layer.cornerRadius = imageSize / 2
+        profilePicture.clipsToBounds = true
+        profilePicture.layer.borderColor = UIColor.label.cgColor
+        profilePicture.layer.borderWidth = 1
+        addSubview(hStack)
+        hStack.fillSuperview(padding: .init(top: 5, left: 5, bottom: 5, right: 5))
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

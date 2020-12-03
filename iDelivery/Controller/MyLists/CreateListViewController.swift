@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreData
+
 enum SectionList {
     case main
 }
@@ -15,43 +17,16 @@ class CreateListDataSource : UITableViewDiffableDataSource<SectionList,List> {
     }
 }
 class CreateListViewController: UITableViewController {
-    var users = [List(color: .systemRed, name: "Squad List"),
-                 List(color: .systemGreen, name: "Doom Patroll"),
-                 List(color: .systemBlue, name: "Gang"),
-                 List(color: .systemOrange, name: "Top 10"),
-                 List(color: .systemYellow, name: "Candors"),]
+    var list = [List]()
+    var item : Item?
+   
     
-//    let cancel : UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Cancel", for: .normal)
-//        button.setTitleColor(.systemBlue, for: .normal)
-//        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-//        return button
-//    }()
-//    let done : UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Done", for: .normal)
-//        button.setTitleColor(.systemBlue, for: .normal)
-//        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
-//        return button
-//    }()
-//    let titleLable = UILabel(text: "Add To List 📋", font: .systemFont(ofSize: 17, weight: .black))
-//    let configuration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold, scale: .medium)
-//    lazy var  creatList : UIButton = {
-//        let button = UIButton(type : .system)
-//        button.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.list,withConfiguration: configuration)!, string: "Create New List", color: .white, imageAlignment: 0, segFont: UIFont.systemFont(ofSize: 30, weight: .semibold)), for: .normal)
-//        button.layer.cornerRadius = 5
-//        button.shadow()
-//        button.backgroundColor = .niceBlue
-//        return button
-//    }()
-    
+    let button = UIButton(type : .system)
     private let cellID = "CellID"
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         creatUI()
-
     }
     
     lazy var source : CreateListDataSource = .init(tableView: self.tableView) { (tableView, indexPath, list) -> UITableViewCell? in
@@ -70,39 +45,60 @@ extension CreateListViewController {
         setupSource()
     }
     private func setupSource() {
-        var snapshot = source.snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(users,toSection: .main)
-        source.apply(snapshot)
+        let fetchLists : NSFetchRequest<List> = List.fetchRequest()
+        do {
+            let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
+            self.list = fetchedList
+            self.list.forEach({print("IDs :\($0.id ?? UUID()) \n")})
+            var snapshot = source.snapshot()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(self.list, toSection: .main)
+            source.apply(snapshot,animatingDifferences: true)
+            tableView.dataSource = source
+        } catch let errorLoadLists {
+            print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
+        }
     }
     fileprivate func setActions() {
-//        creatList.addTarget(self, action: #selector(handleCreateList), for: .touchUpInside)
-//        cancel.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
-//        let tap = <#value#>
-        
+        button.addTarget(self, action: #selector(handleCreateList), for: .touchUpInside)
     }
-    @objc fileprivate func handleDismiss() {
-        dismiss(animated: true)
-        print("Buggi ...")
-    }
+
     @objc fileprivate func handleCreateList() {
         let creatListViewController = AddListViewController()
+        creatListViewController.didAddList = { [weak self] name, color in
+            let newList = List(context: PersistenceServce.context)
+            newList.color = color.encode()
+            newList.name = name
+            newList.id = UUID()
+            PersistenceServce.saveContext()
+            self?.list.append(newList)
+            var snapshot = self?.source.snapshot()
+            snapshot?.appendItems([newList])
+            self?.source.apply(snapshot!)
+            self?.dismiss(animated: true)
+        }
         present(creatListViewController, animated: true)
     }
     fileprivate func creatUI() {
         setActions()
-//        let hStackTitles = HStackView(arrangedSubviews: [cancel,UIView(),titleLable,UIView(),done], spacing: 5)
-//        hStackTitles.distribution = .equalCentering
-//        tableView.addSubview(hStackTitles)
-//        hStackTitles.translatesAutoresizingMaskIntoConstraints = false
-//        hStackTitles.topAnchor.constraint(equalTo: tableView.safeAreaLayoutGuide.topAnchor).isActive = true
-//        hStackTitles.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        hStackTitles.constrainWidth(constant:360)
-//        hStackTitles.constrainHeight(constant:35)
-//        hStackTitles.centerXInSuperview()
 
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let parentList = list[indexPath.item]
+        
+        let newItem = Item(context: PersistenceServce.context)
+        newItem.city    = item?.city
+        newItem.email   = item?.email
+        newItem.image   = item?.image
+        newItem.price   = item?.price ?? "00"
+        newItem.returns = item?.returns ?? "00"
+        newItem.stock   = item?.stock ?? "00"
+        newItem.machine = item?.machine ?? 0
+        newItem.name    = item?.name
+        newItem.id      = item?.id
+        newItem.phone   = item?.phone
+        newItem.parentList = parentList
+        PersistenceServce.saveContext()
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         dismiss(animated: true)
     }
@@ -115,16 +111,18 @@ extension CreateListViewController {
         imagDefauls.constrainHeight(constant: 200)
         imagDefauls.constrainWidth(constant: 200)
         imagDefauls.isUserInteractionEnabled = true
-     if users.count == 0 {
+     if list.count == 0 {
             imagDefauls.isHidden = false
             return hStack
         } else {
+            imagDefauls.constrainWidth(constant: 0)
+            imagDefauls.constrainHeight(constant: 0)
             imagDefauls.isHidden = true
             return UIView()
         }
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if users.count == 0 {
+        if list.count == 0 {
             return 400
         }
         return 50
@@ -133,7 +131,7 @@ extension CreateListViewController {
         
         
         let configuration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold, scale: .medium)
-            let button = UIButton(type : .system)
+            
             button.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.list,withConfiguration: configuration)!, string: "Create New List", color: .white, imageAlignment: 0, segFont: UIFont.systemFont(ofSize: 30, weight: .semibold)), for: .normal)
             button.layer.cornerRadius = 5
             button.shadow()

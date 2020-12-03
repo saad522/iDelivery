@@ -64,6 +64,9 @@ class SignUpViewController: UIViewController{
 		setUpNavigation()
 		
 	}
+    deinit {
+        print("No Retain Cycle For Signup")
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setFontAndColor()

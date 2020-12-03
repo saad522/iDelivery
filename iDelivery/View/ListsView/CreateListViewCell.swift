@@ -11,7 +11,7 @@ class CreateListViewCell : UITableViewCell {
     var list : List? {
         didSet {
             name.text = list?.name
-            circle.backgroundColor = list?.color
+            circle.backgroundColor = UIColor.color(data: (list?.color)!)
         }
     }
     

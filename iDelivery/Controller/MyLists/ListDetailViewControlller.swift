@@ -6,34 +6,36 @@
 //
 
 import SwiftUI
-
+import CoreData
 
 enum SectionType {
     case main
 }
-class UserListSource : UITableViewDiffableDataSource<SectionType,UserList> {
+class UserListSource : UITableViewDiffableDataSource<SectionType,Item> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
 }
 class ListDetailViewControlller: UITableViewController {
-    var users = [
-            UserList(userID: "12", name: "Afatim Bor", phone: "09299393", image: "aj"),
-            UserList(userID: "1", name: "Kibaro Lofi", phone: "30399393", image: "aja"),
-            UserList(userID: "33", name: "Staki bandi", phone: "388388", image: "aj"),
-            UserList(userID: "3", name: "McBoff Li", phone: "338383", image: "aia")
-        ]
-
-   private let cellID = "cellID"
+    var items = [Item]()
+    var parentList : List? {
+        didSet {
+            setupSource()
+        }
+    }
+    
+    private let cellID = "cellID"
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
     }
+    deinit {
+        print("No Ratain Cycle For Items in List")
+    }
     
-    
-    lazy var source : UserListSource = .init(tableView: self.tableView) { (tableView, indexPath, userList) -> UITableViewCell? in
+    lazy var source : UserListSource = .init(tableView: self.tableView) { (tableView, indexPath, item) -> UITableViewCell? in
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath) as! ListDetailViewCell
-        cell.userList = userList
+        cell.item = item
         return cell
     }
 }
@@ -53,15 +55,27 @@ extension ListDetailViewControlller {
     }
     
     private func setupSource() {
-        var snapshot = source.snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(users,toSection: .main)
-//        snapshot
-        source.apply(snapshot)
+        let fetchItems : NSFetchRequest<Item> = Item.fetchRequest()
+        let predicate = NSPredicate(format: "parentList.id == %@","\(parentList?.id ?? UUID())")
+        fetchItems.predicate = predicate
+        print(" in Setup :  \(parentList?.name ?? "AZO"))")
+        
+        do {
+            let fetchedList =  try PersistenceServce.context.fetch(fetchItems)
+            self.items = fetchedList
+            var snapshot = source.snapshot()
+            snapshot.appendSections([.main])
+            fetchedList.forEach({print($0.city ?? "NO" )})
+            snapshot.appendItems(items,toSection: .main)
+            source.apply(snapshot)
+            tableView.dataSource = source
+        } catch let errorLoadItems {
+            print("Somthing Wroong reason : ",errorLoadItems.localizedDescription)
+        }
     }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, completion) in
             completion(true)
             
             var snapshot = self.source.snapshot()
@@ -70,7 +84,7 @@ extension ListDetailViewControlller {
             guard let userList = self.source.itemIdentifier(for: indexPath) else { return }
             
             snapshot.deleteItems([userList])
-            self.users.remove(at: indexPath.item)
+            self.items.remove(at: indexPath.item)
             self.source.apply(snapshot)
         }
         return .init(actions: [deleteAction])
@@ -93,7 +107,7 @@ extension ListDetailViewControlller {
         imagDefauls.constrainHeight(constant: 200)
         imagDefauls.constrainWidth(constant: 200)
         imagDefauls.isUserInteractionEnabled = true
-     if users.count == 0 {
+     if items.count == 0 {
             imagDefauls.isHidden = false
             return hStack
         } else {
@@ -102,7 +116,7 @@ extension ListDetailViewControlller {
         }
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if users.count == 0 {
+        if items.count == 0 {
             return 400
         }
         return 0

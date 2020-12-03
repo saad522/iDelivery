@@ -6,21 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
-struct List : Hashable {
-    
-    let id    = UUID().uuidString
-    let color : UIColor
-    let name  : String
-    
-    static func == (lhs: List, rhs: List) -> Bool {
-        lhs.id == rhs.id
-    }
-}
 class MyListViewController: UICollectionViewController {
  
     
     //MARK: Properties
+    var list = [List]()
     private let cellID = "cellID"
     let listImage = UIImageView(image : #imageLiteral(resourceName: "undraw_No_data_re_kwbl"))
     let listTitle = UILabel.init(text: "Create your own Lists 😎", font: .systemFont(ofSize: 35, weight: .semibold), numberOfLines: 2)
@@ -30,9 +22,13 @@ class MyListViewController: UICollectionViewController {
     }
     lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, List> = .init(collectionView: collectionView) { (collection, indexPath, list) -> UICollectionViewCell? in
         let cell = collection.dequeueReusableCell(withReuseIdentifier: self.cellID, for: indexPath) as! ListViewCell
-        cell.circle.backgroundColor = list.color
+        cell.circle.backgroundColor = UIColor.color(data: list.color!)
         cell.name.text = list.name
+        cell.numberOfItemInList.text = "\(list.items?.count ?? 0)"
         return cell
+    }
+    deinit {
+        print("No Retain cycle For List")
     }
     init() {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/2), heightDimension: .fractionalHeight(1)))
@@ -51,6 +47,21 @@ class MyListViewController: UICollectionViewController {
         super.viewDidLoad()
         setUpNvigation()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let fetchLists : NSFetchRequest<List> = List.fetchRequest()
+        do {
+            let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
+            self.list = fetchedList
+            self.list.forEach({print("IDs :\($0.id ?? UUID()) \n")})
+            var snapshot = diffableDataSource.snapshot()
+            snapshot.appendItems(self.list)
+            diffableDataSource.apply(snapshot,animatingDifferences: false)
+            collectionView.dataSource = diffableDataSource
+        } catch let errorLoadLists {
+            print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
+        }
+    }
 }
 
 //MARK: setup Core-Data
@@ -58,12 +69,17 @@ extension MyListViewController {
     @objc func handleAddNewList() {
         print("Presnting AddListViewController...")
         let addListViewController = AddListViewController()
-        addListViewController.didAddList = { name, color in
-            let newList = List(color: color, name: name)
-            var snapshot = self.diffableDataSource.snapshot()
-            snapshot.appendItems([newList])
-            self.diffableDataSource.apply(snapshot)
-            self.dismiss(animated: true)
+        addListViewController.didAddList = { [weak self] name, color in
+            let newList = List(context: PersistenceServce.context)
+            newList.color = color.encode()
+            newList.name = name
+            newList.id = UUID()
+            PersistenceServce.saveContext()
+            self?.list.append(newList)
+            var snapshot = self?.diffableDataSource.snapshot()
+            snapshot?.appendItems([newList])
+            self?.diffableDataSource.apply(snapshot!)
+            self?.dismiss(animated: true)
         }
         
         present(addListViewController, animated: true)
@@ -91,7 +107,9 @@ extension MyListViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let parentList = list[indexPath.item]
         let listDeatail = ListDetailViewControlller(style: .insetGrouped)
+        listDeatail.parentList = parentList
         navigationController?.pushViewController(listDeatail, animated: true)
         print("HOLO...")
     }
@@ -100,18 +118,19 @@ extension MyListViewController {
     }
  
     fileprivate func setupSource() {
-        collectionView.dataSource = diffableDataSource
-        var snapshot = diffableDataSource.snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems([
-            List(color: .systemGreen, name: "Casablanca List"),
-            List(color: .systemBlue, name: "Fes List"),
-            List(color: .systemOrange, name: "Squad List"),
-            List(color: .systemPink, name: "top 10 "),
-            List(color: .systemYellow, name: "Tangier List"),
-        ], toSection: .main)
-        diffableDataSource.apply(snapshot)
-        
+        let fetchLists : NSFetchRequest<List> = List.fetchRequest()
+        do {
+            let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
+            self.list = fetchedList
+            self.list.forEach({print("IDs :\($0.id ?? UUID()) \n")})
+            var snapshot = diffableDataSource.snapshot()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(self.list, toSection: .main)
+            diffableDataSource.apply(snapshot,animatingDifferences: false)
+            collectionView.dataSource = diffableDataSource
+        } catch let errorLoadLists {
+            print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
+        }
     }
 
 }

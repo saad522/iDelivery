@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CoreData
 class MoreDetailsController: UIViewController {
 	
 	//MARK: Properties
@@ -47,6 +47,9 @@ class MoreDetailsController: UIViewController {
         setFontAndColor()
         
     }
+    deinit {
+        print("No Retain cycle More detal")
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -62,6 +65,18 @@ extension MoreDetailsController {
     }
     @objc fileprivate func handleAddToList() {
         let creatListViewController = CreateListViewController()
+        let item = Item(context: PersistenceServce.context)
+        item.city = user?.city
+        item.email = user?.email
+        item.image = user?.profileImage
+        item.price = user?.price ?? "00"
+        item.returns = user?.retruns ?? "00"
+        item.stock = user?.stock ?? "00"
+        item.machine = Int16(user?.transport ?? 0)
+        item.name = user?.fullName
+        item.phone = user?.phone
+        item.id = UUID()
+        creatListViewController.item = item
         present(creatListViewController, animated: true)
     }
 }

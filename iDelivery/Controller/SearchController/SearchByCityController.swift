@@ -38,7 +38,9 @@ class SearchByCityController: UICollectionViewController {
 //        configureDataSource()
 	}
 
-    
+    deinit {
+        print("No Retain cycle 👍🏼")
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setFontAndColor()
@@ -67,7 +69,7 @@ class SearchByCityController: UICollectionViewController {
 //MARK: setup Firebase with DiffabledataSource
 extension SearchByCityController {
     func performQuery() {
-        API.shared.fetchUsersData(city: city) { (user, error)   in
+        API.shared.fetchUsersData(city: city) { [unowned self] (user, error)   in
             if let error = error {
                 print("We could not fetch users data reason ",error.localizedDescription)
                 return
@@ -76,7 +78,7 @@ extension SearchByCityController {
             snapshot.appendSections([.main])
             self.users = user ?? []
             self.forReload = user ?? []
-            [self.imageDesign,self.message].forEach({$0.isHidden = self.users.count != 0 })
+            [self.imageDesign,self.message].forEach({$0!.isHidden = self.users.count != 0 })
             snapshot.appendItems(self.users)
             self.dataSource.apply(snapshot)
             
@@ -171,9 +173,7 @@ extension SearchByCityController {
 extension SearchByCityController {
     func handleFilters(action: UIAction) {
         let slideVC = FiltersView(users: users)
-        slideVC.didFilters = {user in
-            print("All Users : ")
-            user.forEach({print($0.price)})
+        slideVC.didFilters = {[unowned self] user in
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteItems(self.users)
             snapshot.appendItems(user)
@@ -186,9 +186,7 @@ extension SearchByCityController {
     }
     func handleSort(action: UIAction) {
         let slideVC = SortsView(users: users)
-        slideVC.didSorts = {user in
-            print("All Users : ")
-            user.forEach({print($0.price)})
+        slideVC.didSorts = { [unowned self] user in
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteItems(self.users)
             snapshot.appendItems(user)
