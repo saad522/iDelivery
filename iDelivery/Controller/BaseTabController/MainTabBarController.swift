@@ -27,7 +27,6 @@ extension MainTabBarController {
         viewControllers = [
             setControllers(SearchViewController(), "Nearby", SFSymbols.nearby),
             setControllers(MyListViewController(), "My Lists", SFSymbols.list),
-            setControllersWithoutNav(ProfileControllerView(), "Profile", SFSymbols.profile),
             setControllers(SettingsViewController(), "Setting", SFSymbols.setting),
         ]
     }

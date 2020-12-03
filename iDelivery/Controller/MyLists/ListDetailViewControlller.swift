@@ -82,10 +82,15 @@ extension ListDetailViewControlller {
             
             // figure out the contact we need to delete
             guard let userList = self.source.itemIdentifier(for: indexPath) else { return }
-            
+            let item = items[indexPath.item]
+            PersistenceServce.context.delete(item)
+            print("The stuff been deleted 😎")
+            PersistenceServce.saveContext()
             snapshot.deleteItems([userList])
             self.items.remove(at: indexPath.item)
             self.source.apply(snapshot)
+            
+            
         }
         return .init(actions: [deleteAction])
     }

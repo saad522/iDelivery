@@ -43,4 +43,10 @@ class PersistenceServce {
             }
         }
     }
+    
+    // MARK: - Core Data deleting support
+    func delete(_ object: NSManagedObject) {
+        PersistenceServce.context.delete(object)
+        PersistenceServce.saveContext()
+    }
 }

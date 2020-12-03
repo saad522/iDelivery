@@ -11,24 +11,49 @@ import Firebase
 class SearchViewController: UICollectionViewController {
 	//MARK: Properties
 	private let cellID = "cellID"
+    var user : User!
+    
 	let searchController = UISearchController(searchResultsController: nil)
 	var nameFilter: String?
 	var dataSource: UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>!
-
+    //Profile Picture
+    lazy var profileButton : UIButton = {
+        let button = UIButton(type : .custom)
+        button.setImage(#imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal), for: .normal)
+        let imageSize : CGFloat = 30
+        button.constrainWidth(constant: imageSize)
+        button.constrainHeight(constant: imageSize)
+        button.layer.cornerRadius = imageSize / 2
+        button.clipsToBounds = true
+        button.layer.borderColor = UIColor.label.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(handelProfileButton), for: .touchUpInside)
+        return button
+    }()
 	enum Section: CaseIterable {
 		case main
 	}
+    @objc fileprivate func handelProfileButton() {
+        let profileViewController = ProfileControllerView()
+        if user != nil {
+            profileViewController.cardPersonnaleController.user = user
+            profileViewController.infoUserTableViewController.user = user
+        }
+        present(profileViewController, animated: true)
+    }
 	let mountainsController = MountainsController()
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
         checkIfUserLoggedIn()
+        fetchUserData()
 	}
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSearchViewController()
+        fetchUserData()
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
 
@@ -129,12 +154,25 @@ extension SearchViewController : UISearchBarDelegate {
 		navigationItem.hidesSearchBarWhenScrolling = false
 		searchController.searchBar.delegate = self
         collectionView.backgroundColor = .secondarySystemBackground
+        let barItem = UIBarButtonItem(customView: profileButton)
+        navigationItem.rightBarButtonItem = barItem
 	}
-    
+    func fetchUserData() {
+       API.shared.fetchUserData { (user, error) in
+           if let error = error {
+               print("Failed To Load Data 👎🏻 reason ",error.localizedDescription)
+               return
+           }
+        self.user = user
+        guard let image = user?.profileImage else {return}
+        self.profileButton.sd_setImage(with: URL(string: image), for: .normal)
+       }
+   }
     func setupSearchViewController() {
         setUpNavigation()
         configureDataSource()
         performQuery(with: nil)
+        
     }
     
 }
