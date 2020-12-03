@@ -31,11 +31,11 @@ class ListDetailViewCell: UITableViewCell {
         creatUI()
     }
     fileprivate func creatUI() {
-        let hStackName = HStackView(arrangedSubviews: [iconName,name], spacing: 5)
-        let hStackPhone = HStackView(arrangedSubviews: [iconPhone,phone], spacing: 5)
-        let vStack = VerticalStackView(arrangedSubviews: [hStackName,hStackPhone], spacing: 5)
-        let hStack = HStackView(arrangedSubviews: [profilePicture,vStack], spacing: 5)
-        let imageSize : CGFloat = 85
+        let hStackName = HStackView(arrangedSubviews: [iconName,name,UIView()], spacing: 5)
+        let hStackPhone = HStackView(arrangedSubviews: [iconPhone,phone,UIView()], spacing: 5)
+        let vStack = VerticalStackView(arrangedSubviews: [hStackName,hStackPhone], spacing: 15)
+        let hStack = HStackView(arrangedSubviews: [profilePicture,vStack], spacing: 15)
+        let imageSize : CGFloat = 75
         profilePicture.constrainWidth(constant: imageSize)
         profilePicture.constrainHeight(constant: imageSize)
         profilePicture.layer.cornerRadius = imageSize / 2
