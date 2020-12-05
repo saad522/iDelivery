@@ -173,7 +173,7 @@ extension SearchByCityController {
 extension SearchByCityController {
     func handleFilters(action: UIAction) {
         let slideVC = FiltersView(users: users)
-        slideVC.didFilters = {[unowned self] user in
+        slideVC.didFilters = { user in
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteItems(self.users)
             snapshot.appendItems(user)
@@ -186,7 +186,7 @@ extension SearchByCityController {
     }
     func handleSort(action: UIAction) {
         let slideVC = SortsView(users: users)
-        slideVC.didSorts = { [unowned self] user in
+        slideVC.didSorts = {  user in
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteItems(self.users)
             snapshot.appendItems(user)

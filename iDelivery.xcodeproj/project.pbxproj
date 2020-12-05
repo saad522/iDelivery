@@ -53,6 +53,8 @@
 		049816D92567028D00291FBB /* FontsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816D82567028D00291FBB /* FontsPickerView.swift */; };
 		049816DD25670A2000291FBB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816DC25670A2000291FBB /* CustomFont.swift */; };
 		049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816E025670B7500291FBB /* FontCollectionViewCell.swift */; };
+		0499A34E257C09E50050631C /* EditPersonaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */; };
+		0499A351257C1DEA0050631C /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
 		04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5682549D6F600FCB620 /* SearchByCityController.swift */; };
@@ -112,6 +114,8 @@
 		049816D82567028D00291FBB /* FontsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsPickerView.swift; sourceTree = "<group>"; };
 		049816DC25670A2000291FBB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		049816E025670B7500291FBB /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
+		0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonaleInfoViewController.swift; sourceTree = "<group>"; };
+		0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
 		04BFC5682549D6F600FCB620 /* SearchByCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByCityController.swift; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				042370C02559D50200E45215 /* EditProfileViewController.swift */,
 				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
 				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
+				0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */,
+				0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */,
 			);
 			path = ProfileController;
 			sourceTree = "<group>";
@@ -577,6 +583,8 @@
 				04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */,
 				0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,
+				0499A351257C1DEA0050631C /* EditProfilePictureViewController.swift in Sources */,
+				0499A34E257C09E50050631C /* EditPersonaleInfoViewController.swift in Sources */,
 				0477825725794F51000883C2 /* PersistenceServce.swift in Sources */,
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,
 				049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */,

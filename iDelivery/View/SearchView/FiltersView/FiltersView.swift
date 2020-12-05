@@ -154,7 +154,7 @@ class FiltersView: UIViewController {
         } else if switchReturn.isOn == true && switchPrice.isOn == true {
            
              array = users?.filter({ (user) -> Bool in
-                return user.retruns >= returns && user.price >= price
+                return user.retruns == returns && user.price == price
              }) ?? users!
             didFilters(array)
         } else if switchReturn.isOn == false && switchPrice.isOn == false {

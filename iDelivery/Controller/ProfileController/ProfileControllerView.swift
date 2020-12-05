@@ -13,6 +13,7 @@ class ProfileControllerView: UIViewController {
 	//MARK: Properties
 	let cardPersonnaleController    = CardPersonalView()
 	let infoUserTableViewController = InformationOfUserTableViewController()
+    var user : User!
     
     let descptionLabel = UILabel(text: "complete your profile by adding pricing Stocke price...\nto helps users get to find you 😎",numberOfLines: 7)
     
@@ -27,12 +28,7 @@ class ProfileControllerView: UIViewController {
 		button.tintColor = .systemBackground
 		return button
 	}()
-    let logoutButton : UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Logout", for: .normal)
-        button.setTitleColor(.systemRed, for: .normal)
-        return button
-    }()
+
     
 	//If User Not Login UI Components
 	let deisgn           = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
@@ -46,6 +42,7 @@ class ProfileControllerView: UIViewController {
         checkIfUserLoggedIn()
         fetchUserData()
         setAction()
+        setNavigation()
 	}
 
     
@@ -60,6 +57,12 @@ class ProfileControllerView: UIViewController {
 
 //MARK: setupFirebase
 extension ProfileControllerView {
+    fileprivate func setNavigation() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancle", style: .done, target: self, action: #selector(handleCancel))
+    }
+    @objc func handleCancel(){
+        dismiss(animated: true, completion: nil)
+    }
     fileprivate func signOut() {
         do {
             try Auth.auth().signOut()
@@ -69,8 +72,9 @@ extension ProfileControllerView {
         }
     }
     func setAction() {
-        logoutButton.addTarget(self, action: #selector(handelLogout), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(handelLogin), for: .touchUpInside)
+        cardPersonnaleController.editProfileButtons.addTarget(self, action: #selector(handlePrestenEditPersonnaleInfo), for: .touchUpInside)
+        cardPersonnaleController.editPictureButtons.addTarget(self, action: #selector(handlePrestenEditPicture), for: .touchUpInside)
     }
     
     @objc func handelLogout() {
@@ -89,6 +93,7 @@ extension ProfileControllerView {
                 print("Failed To Load Data 👎🏻 reason ",error.localizedDescription)
                 return
             }
+            self.user = user
             self.cardPersonnaleController.user = user
             self.infoUserTableViewController.user = user
         }
@@ -110,16 +115,13 @@ extension  ProfileControllerView {
             view.addSubview(vStackDesign)
             vStackDesign.centerInSuperview()
             vStack.isHidden = true
-            logoutButton.isHidden = true
         } else {
-            view.addSubview(logoutButton)
-            logoutButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 5, left: 0, bottom: 0, right: 10),size: .init(width: 55, height: 55))
             view.backgroundColor = .secondarySystemBackground
             cardPersonnaleController.view.constrainHeight(constant: 160)
             view.addSubview(vStack)
-            vStack.anchor(top: logoutButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
+            vStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 10))
             vStackDesign.isHidden = true
-            
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handelLogout))
             
         }
     }
@@ -128,7 +130,6 @@ extension  ProfileControllerView {
         let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
         [addButton,loginButton].forEach({$0.backgroundColor = color})
         [descptionLabel,haveAccountLabel].forEach({$0.font = UIFont(name: fontName, size: 16)})
-        logoutButton.titleLabel?.font = UIFont(name: fontName, size: 16)!
         loginButton.titleLabel?.font = UIFont(name: fontName, size: 36)!
         cardPersonnaleController.setFonts(fontName: fontName)
         infoUserTableViewController.setFonts(fontName: fontName)
@@ -155,6 +156,21 @@ extension  ProfileControllerView {
         let controller = UINavigationController(rootViewController: editeProfileViwController)
 		present(controller, animated: true)
 	}
+    @objc fileprivate func handlePrestenEditPersonnaleInfo() {
+        let editeProfileViwController = EditPersonaleInfoViewController()
+        editeProfileViwController.profileViewController = self
+        editeProfileViwController.personal = user
+        let controller = UINavigationController(rootViewController: editeProfileViwController)
+        present(controller, animated: true)
+    }
+    @objc fileprivate func handlePrestenEditPicture() {
+        let editePictureViwController = EditProfilePictureViewController()
+        editePictureViwController.profileViewController = self
+        editePictureViwController.picture = user
+        let controller = UINavigationController(rootViewController: editePictureViwController)
+        present(controller, animated: true)
+    }
+    
 }
 
 

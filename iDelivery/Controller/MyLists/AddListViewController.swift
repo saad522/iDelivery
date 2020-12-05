@@ -63,6 +63,8 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
         creatUI()
         inputListName.delegate = self
         clearInputButton.isHidden = true
+        done.alpha = 0.5
+        done.isUserInteractionEnabled = false
         colorPicker.delegate = self
     }
     var didAddList : (String,UIColor) -> () = {_,_ in }
@@ -143,6 +145,8 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
     @objc fileprivate func handleClearInput() {
         inputListName.text = ""
         clearInputButton.isHidden = true
+        done.alpha = 0.5
+        done.isUserInteractionEnabled = false
     }
     @objc fileprivate func handleCancle() {
         dismiss(animated: true)
@@ -177,8 +181,12 @@ extension AddListViewController {
             let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             if !text.isEmpty{
                 clearInputButton.isHidden = false
+                done.alpha = 1.0
+                done.isUserInteractionEnabled = true
             } else {
                 clearInputButton.isHidden = true
+                done.alpha = 0.5
+                done.isUserInteractionEnabled = false
             }
             return true
         }

@@ -56,7 +56,8 @@ class SignUpViewController: UIViewController{
 	var pickerView = UIPickerView()
 	let cities = MountainsController().generateMountains()
 	var titles : [String] = []
-	
+  
+    
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {

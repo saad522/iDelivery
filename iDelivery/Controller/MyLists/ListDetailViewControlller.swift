@@ -43,7 +43,7 @@ class ListDetailViewControlller: UITableViewController {
 extension ListDetailViewControlller {
     func configureHierarchy() {
         tableView.register(ListDetailViewCell.self, forCellReuseIdentifier: cellID)
-        navigationItem.title = "Squad List"
+        navigationItem.title = parentList?.name ?? "Azo"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupSource()
         menus()

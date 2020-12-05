@@ -39,6 +39,14 @@ extension UIButton {
 	}
 }
 extension UIButton {
+    convenience init(with icons: String) {
+        self.init(type: .custom)
+        self.tintColor = .label
+        let configuration = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+        self.setImage(UIImage(systemName: icons, withConfiguration: configuration)?.withRenderingMode(.alwaysTemplate), for: .normal)
+    }
+}
+extension UIButton {
 	convenience init(_ icon: String,size : CGFloat = 35,color : UIColor = .systemGray) {
 		self.init(type: .system)
 		self.tintColor = color

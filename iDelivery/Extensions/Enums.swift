@@ -29,13 +29,13 @@ enum SFSymbols {
 	static let nearby       = "aspectratio"
 	static let profile      = "person"
 	static let dismiss      = "multiply.circle.fill"
-//	static let sunelected   = "largecircle.fill.circle"
-	static let selected     = "circle"
+	static let selected     = "largecircle.fill.circle"
+//	static let selected     = "circle"
 	static let edit		    = "square.and.pencil"
 	static let editeImage   = "camera.fill"
 	static let addInfo      = "plus.circle"
     static let setFiltering = "ellipsis.circle.fill"
-    static let setting      = "gear"
+    static let setting      = "gearshape"
     static let checkmark    = "checkmark"
     static let addList      = "rectangle.stack.badge.plus"
     static let list         = "list.star"
@@ -43,6 +43,9 @@ enum SFSymbols {
     static let pencil       = "pencil"
     static let check        = "checkmark.circle"
     static let trash        = "trash"
+    static let slecteImage  = "photo.on.rectangle.angled"
+    static let saved        = "square.and.arrow.down"
+    
 }
 
 enum Keys {
