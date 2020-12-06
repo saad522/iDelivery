@@ -7,6 +7,30 @@
 
 import UIKit
 //Circle For Colors
+struct Alert {
+    static func alerts(title : String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+        
+        alert.view.addSubview(activityIndicator)
+        alert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+        
+        return alert
+    }
+    
+    static func showInteractiveAlert(_ on: UIViewController ,with title: String ,and message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+        on.present(alert, animated: true, completion: nil)
+    }
+}
+
 extension UIView {
     convenience init(_ color : UIColor,_ size : CGFloat) {
         self.init(frame:.zero)

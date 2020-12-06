@@ -105,6 +105,7 @@ extension EditPersonaleInfoViewController {
         updateButton.addTarget(self, action: #selector(handleUpdate), for: .touchUpInside)
     }
     @objc func handleUpdate() {
+        let updateAlert =  Alert.alerts(title: "Updating your account...")
         
         guard let name  = fullNameText.text else { return }
         guard let city  = cityText.text else { return }
@@ -117,11 +118,16 @@ extension EditPersonaleInfoViewController {
         db.collection(DB_Keys.collectionKey).document(userId).setData(values,merge: true) { (error) in
             if let error = error {
                 print("Error reason : ",error.localizedDescription)
+                Alert.showInteractiveAlert(self, with: "Failed To update your information 😶", and: "\(error.localizedDescription)")
                 return
             }
+            self.present(updateAlert, animated: true)
             print("Its's Done ✅")
             self.profileViewController?.fetchUserData()
-            self.dismiss(animated: true)
+            updateAlert.dismiss(animated: true) {
+                self.dismiss(animated: true)
+            }
+            
         }
 
     }

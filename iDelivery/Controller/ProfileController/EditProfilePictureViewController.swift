@@ -102,6 +102,9 @@ extension EditProfilePictureViewController {
         saveChanges.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
     }
     @objc fileprivate func handleSaveButton() {
+        let savingAlert =  Alert.alerts(title: "Saving Picture...")
+        
+        
         guard let userID  = Auth.auth().currentUser?.uid else { return }
         let storage = Storage.storage()
         // Create a reference to the file to delete
@@ -122,11 +125,13 @@ extension EditProfilePictureViewController {
         if let uploadData = self.pictureProfil.image!.pngData() {
             uploadToStorage.putData(uploadData, metadata: metaData) { (metadata, error) in
                 if let error = error {
-                    print("Failed To Upload Image  👎🏾reason : ",error.localizedDescription)
+                    print("Failed To Upload Image  👎🏾 reason : ",error.localizedDescription)
+                    Alert.showInteractiveAlert(self, with: "Failed To Upload your picture 😶", and: "\(error.localizedDescription)")
                 }
                 uploadToStorage.downloadURL { (url, error) in
                     if let error = error {
                         print("Failed To download URL of Image 👎🏽 reason : ",error.localizedDescription)
+                        Alert.showInteractiveAlert(self, with: "Failed To download your picture 😶", and: "\(error.localizedDescription)")
                     }
                     guard let imageURL = url?.absoluteString else {return}
                     let values : [String:Any] = ["profileImage":imageURL]
@@ -134,12 +139,17 @@ extension EditProfilePictureViewController {
                     db.collection(DB_Keys.collectionKey).document(userID).setData(values, merge: true) { (error) in
                         if let error = error {
                             print("Failed to set Image Data 👎🏻 reason ",error.localizedDescription)
+                            Alert.showInteractiveAlert(self, with: "Failed To set your picture with data 😶", and: "\(error.localizedDescription)")
                             return
                         }
+                        self.present(savingAlert, animated: true)
                         print("Its's Done ✅")
                         print("Saved Picture")
                         self.profileViewController?.fetchUserData()
-                        self.dismiss(animated: true)
+                        savingAlert.dismiss(animated: true) {
+                            self.dismiss(animated: true)
+                        }
+                        
                     }
                 }
              

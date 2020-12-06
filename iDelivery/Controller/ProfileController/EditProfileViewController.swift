@@ -12,7 +12,13 @@ import FirebaseFirestore
 class EditeProfileViewController: UIViewController {
     //MARK:Properties
     var profileViewController : ProfileControllerView?
-    
+//    var infomation : User? {
+//        didSet {
+//            priceText.text = infomation?.price ?? "Order Price 0 DH"
+//            stockText.text = infomation?.stock ?? "Stcoke Price DH"
+//            retrunText.text = infomation?.retruns ?? "Retrun Price 0 DH"
+//        }
+//    }
     //TextFields
     let priceText  = UITextField(placholder: "Order Price  30 MAD")
     let retrunText = UITextField(placholder: "Retrun Price 10 MAD")
@@ -47,7 +53,7 @@ class EditeProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         creatUI()
-      
+        dismissKeyBoard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +65,21 @@ class EditeProfileViewController: UIViewController {
 //MARK: setup Firebase
 extension EditeProfileViewController {
     @objc func handleUpdate() {
-        guard let price = priceText.text else { return }
-        guard let retruns = retrunText.text else { return }
-        guard let stockage = stockText.text else { return }
+        let updateAlert =  Alert.alerts(title: "Updating your account...")
+        
+        guard let price = priceText.text else {
+            Alert.showInteractiveAlert(self, with: "Complet All Filed", and: "")
+            return
+            
+        }
+        guard let retruns = retrunText.text else {
+            Alert.showInteractiveAlert(self, with: "Complet All Filed", and: "")
+            return
+        }
+        guard let stockage = stockText.text else {
+            Alert.showInteractiveAlert(self, with: "Complet All Filed", and: "")
+            return
+        }
         let transport = segmentedController.selectedSegmentIndex
         let values : [String:Any] = ["price":price,
                                      "retruns":retruns,
@@ -73,11 +91,16 @@ extension EditeProfileViewController {
         db.collection(DB_Keys.collectionKey).document(uiserID).setData(values, merge: true) { (error) in
             if let error = error {
                 print("Failed to set Data 👎🏻 reason ",error.localizedDescription)
+                Alert.showInteractiveAlert(self, with: "Failed To update your information 😶", and: "\(error.localizedDescription)")
                 return
             }
+            self.present(updateAlert, animated: true)
             print("Its's Done ✅")
             self.profileViewController?.fetchUserData()
-            self.dismiss(animated: true)
+            updateAlert.dismiss(animated: true) {
+                self.dismiss(animated: true)
+            }
+           
         }
     }
     
@@ -87,6 +110,11 @@ extension EditeProfileViewController {
     
     @objc func handleCancel(){
         dismiss(animated: true, completion: nil)
+    }
+    fileprivate func dismissKeyBoard() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 }
 //MARK: Create UI

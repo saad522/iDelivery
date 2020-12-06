@@ -127,19 +127,28 @@ extension LoginViewController {
 		skipButton.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
 		loginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 	}
-	@objc func handleLogin() {
+    
+    @objc func handleLogin() {
+        let logginAlert =  Alert.alerts(title: "Logging...")
+       
         guard let email    = emailText.text else { return  }
         guard let password = passwordText.text else { return }
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Failed to Login user 👎🏾 reason :",error.localizedDescription)
+                Alert.showInteractiveAlert(self, with: "Invalid Information 👎🏾", and: "\(error.localizedDescription)")
                 return
             }
+           
+            self.present(logginAlert, animated: true)
             print("User is logged 👍🏿 ")
             self.prfileViewController?.fetchUserData()
             self.prfileViewController?.checkIfUserLoggedIn()
-            self.dismiss(animated: true)
+            logginAlert.dismiss(animated: true) {
+                self.dismiss(animated: true)
+            }
+           
         }
 	}
 	@objc func handleSkip() {

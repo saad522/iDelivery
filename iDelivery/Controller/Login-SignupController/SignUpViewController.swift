@@ -203,13 +203,15 @@ extension SignUpViewController {
 		guard let email    = emailText.text else { return  }
 		guard let password = passwordText.text else { return  }
 		
-        
-        
+       
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Failed To Create User 👎🏿 reason : ",error.localizedDescription)
+                Alert.showInteractiveAlert(self, with: "Invalid Information 👎🏾", and: "\(error.localizedDescription)")
+                return
             }
+            
             guard let userId = result?.user.uid else { return }
             let storage = Storage.storage().reference().child("\(userId).png")
             let metaData = StorageMetadata()
@@ -218,10 +220,14 @@ extension SignUpViewController {
                 storage.putData(uploadData, metadata: metaData) { (metadata, error) in
                     if let error = error {
                         print("Failed To Upload Image  👎🏾reason : ",error.localizedDescription)
+                        Alert.showInteractiveAlert(self, with: "Something wroong with Picture 😶", and: "\(error.localizedDescription)")
+                        return
                     }
                     storage.downloadURL { (url, error) in
                         if let error = error {
                             print("Failed To download URL of Image 👎🏽 reason : ",error.localizedDescription)
+                            Alert.showInteractiveAlert(self, with: "Couldn't download the Image 😶", and: "\(error.localizedDescription)")
+                            return
                         }
                         guard let imageURL = url?.absoluteString else {return}
                         let values : [String:Any] = ["city":location,
@@ -231,6 +237,8 @@ extension SignUpViewController {
                                                      "phone" : phone,
                                                      "profileImage":imageURL,
                                                      "userId":userId]
+                       
+                      
                         self.uploadUserData(values: values, docmentID: userId)
                     }
                  
@@ -240,15 +248,22 @@ extension SignUpViewController {
         
 	}
     private func uploadUserData(values : [String:Any],docmentID : String) {
+        let signingAlert =  Alert.alerts(title: "Creating your account...")
+       
         let database = Firestore.firestore()
         database.collection(DB_Keys.collectionKey).document(docmentID).setData(values) { (error) in
             if let error = error {
                 print("Failed To set Data 👎🏻 reason : ",error.localizedDescription)
+                Alert.showInteractiveAlert(self, with: "Failed To upload your information 😶", and: "\(error.localizedDescription)")
+                return
             }
             print("We did it 👍🏿")
+            self.present(signingAlert, animated: true)
             self.prfileViewController?.fetchUserData()
             self.prfileViewController?.checkIfUserLoggedIn()
-            self.dismiss(animated: true)
+            signingAlert.dismiss(animated: true) {
+                self.dismiss(animated: true)
+            }
         }
     }
 	@objc fileprivate func handlePassword() {
