@@ -108,8 +108,9 @@ extension EditProfilePictureViewController {
         guard let userID  = Auth.auth().currentUser?.uid else { return }
         let storage = Storage.storage()
         // Create a reference to the file to delete
-        let desertRef = storage.reference().child(userID)
-
+        let desertRef = storage.reference().child("\(userID).png")
+        
+        
         // Delete the file
         desertRef.delete { error in
           if let error = error {
@@ -119,16 +120,16 @@ extension EditProfilePictureViewController {
           }
         }
         
-        let uploadToStorage = storage.reference().child("\(userID).png")
+       
         let metaData = StorageMetadata()
         metaData.contentType = "image/png"
         if let uploadData = self.pictureProfil.image!.pngData() {
-            uploadToStorage.putData(uploadData, metadata: metaData) { (metadata, error) in
+            desertRef.putData(uploadData, metadata: metaData) { (metadata, error) in
                 if let error = error {
                     print("Failed To Upload Image  👎🏾 reason : ",error.localizedDescription)
                     Alert.showInteractiveAlert(self, with: "Failed To Upload your picture 😶", and: "\(error.localizedDescription)")
                 }
-                uploadToStorage.downloadURL { (url, error) in
+                desertRef.downloadURL { (url, error) in
                     if let error = error {
                         print("Failed To download URL of Image 👎🏽 reason : ",error.localizedDescription)
                         Alert.showInteractiveAlert(self, with: "Failed To download your picture 😶", and: "\(error.localizedDescription)")
@@ -152,7 +153,6 @@ extension EditProfilePictureViewController {
                         
                     }
                 }
-             
             }
         }
     }

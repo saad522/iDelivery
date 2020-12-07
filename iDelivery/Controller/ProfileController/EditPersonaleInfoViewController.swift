@@ -127,9 +127,7 @@ extension EditPersonaleInfoViewController {
             updateAlert.dismiss(animated: true) {
                 self.dismiss(animated: true)
             }
-            
         }
-
     }
 }
 struct EditPersonaleInfoView: UIViewControllerRepresentable {
