@@ -231,6 +231,10 @@ extension AddListViewController {
         
         
         view.addSubview(vStack)
+        
+        
+        
+        
         vStack.anchor(top: hStackTitles.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 45, left: 15, bottom: 00, right: 15))
         
         setActions()
@@ -260,12 +264,8 @@ struct AddListView: UIViewControllerRepresentable {
 
 struct AddListViewController_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
             AddListView()
                 .edgesIgnoringSafeArea(.all)
-            AddListView()
-                .previewDevice("iPod touch (7th generation)")
-                .edgesIgnoringSafeArea(.all)
-        }
+         
     }
 }

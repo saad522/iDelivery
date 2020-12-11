@@ -16,6 +16,9 @@
 		0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF86256590A2007971D8 /* BackGroundMode.swift */; };
 		042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042370C02559D50200E45215 /* EditProfileViewController.swift */; };
 		042F26132568535600AD191F /* LanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F26122568535600AD191F /* LanguagePickerView.swift */; };
+		04315FC32580C00100A5BDFA /* AddMyServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315FC22580C00100A5BDFA /* AddMyServiceViewController.swift */; };
+		04315FCA2580C6CB00A5BDFA /* AddMyServiceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315FC92580C6CB00A5BDFA /* AddMyServiceViewCell.swift */; };
+		04315FCD2580DB0400A5BDFA /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315FCC2580DB0400A5BDFA /* NewProfileViewController.swift */; };
 		04337DC725714BF000F27921 /* MyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DC625714BF000F27921 /* MyListViewController.swift */; };
 		04337DCB257153CC00F27921 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DCA257153CC00F27921 /* ListViewCell.swift */; };
 		04337DCF25715B2B00F27921 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04337DCE25715B2B00F27921 /* AddListViewController.swift */; };
@@ -50,12 +53,18 @@
 		0487406A254DAB2400F3AA54 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874069254DAB2400F3AA54 /* FiltersView.swift */; };
 		0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487406C254DAB4000F3AA54 /* PresentationController.swift */; };
 		04874071254E029B00F3AA54 /* SortsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04874070254E029B00F3AA54 /* SortsView.swift */; };
+		04886814257E71FA00CC975B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04886816257E71FA00CC975B /* Localizable.strings */; };
 		049816D92567028D00291FBB /* FontsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816D82567028D00291FBB /* FontsPickerView.swift */; };
 		049816DD25670A2000291FBB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816DC25670A2000291FBB /* CustomFont.swift */; };
 		049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049816E025670B7500291FBB /* FontCollectionViewCell.swift */; };
 		0499A34E257C09E50050631C /* EditPersonaleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */; };
 		0499A351257C1DEA0050631C /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */; };
 		0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499B9D025488D72005E9FEF /* SignUpViewController.swift */; };
+		04BA30E62583739300AC1868 /* CompositionalHeaderForDetailProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30E52583739300AC1868 /* CompositionalHeaderForDetailProfile.swift */; };
+		04BA30E925837C0D00AC1868 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30E825837C0D00AC1868 /* Wave.swift */; };
+		04BA30EC25837CA100AC1868 /* WaveFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30EB25837CA100AC1868 /* WaveFilled.swift */; };
+		04BA30F02583EF0E00AC1868 /* MesServicesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */; };
+		04BA30F32584060500AC1868 /* MoreLikesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
 		04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5682549D6F600FCB620 /* SearchByCityController.swift */; };
 		04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */; };
@@ -76,6 +85,9 @@
 		0421EF86256590A2007971D8 /* BackGroundMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundMode.swift; sourceTree = "<group>"; };
 		042370C02559D50200E45215 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		042F26122568535600AD191F /* LanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerView.swift; sourceTree = "<group>"; };
+		04315FC22580C00100A5BDFA /* AddMyServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyServiceViewController.swift; sourceTree = "<group>"; };
+		04315FC92580C6CB00A5BDFA /* AddMyServiceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyServiceViewCell.swift; sourceTree = "<group>"; };
+		04315FCC2580DB0400A5BDFA /* NewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		04337DC625714BF000F27921 /* MyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewController.swift; sourceTree = "<group>"; };
 		04337DCA257153CC00F27921 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		04337DCE25715B2B00F27921 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
@@ -111,12 +123,22 @@
 		04874069254DAB2400F3AA54 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 		0487406C254DAB4000F3AA54 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		04874070254E029B00F3AA54 /* SortsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortsView.swift; sourceTree = "<group>"; };
+		04886812257E71EB00CC975B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		04886815257E71FA00CC975B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		04886817257E720300CC975B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		04886819257E7A6200CC975B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		0488681A257E7A6200CC975B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049816D82567028D00291FBB /* FontsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsPickerView.swift; sourceTree = "<group>"; };
 		049816DC25670A2000291FBB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		049816E025670B7500291FBB /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
 		0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonaleInfoViewController.swift; sourceTree = "<group>"; };
 		0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
 		0499B9D025488D72005E9FEF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		04BA30E52583739300AC1868 /* CompositionalHeaderForDetailProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalHeaderForDetailProfile.swift; sourceTree = "<group>"; };
+		04BA30E825837C0D00AC1868 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
+		04BA30EB25837CA100AC1868 /* WaveFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFilled.swift; sourceTree = "<group>"; };
+		04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesServicesViewCell.swift; sourceTree = "<group>"; };
+		04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreLikesViewCell.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
 		04BFC5682549D6F600FCB620 /* SearchByCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByCityController.swift; sourceTree = "<group>"; };
 		04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +248,7 @@
 		0485DA0E254864DE00033797 /* iDelivery */ = {
 			isa = PBXGroup;
 			children = (
+				0488680D257E71B200CC975B /* Localization */,
 				0477824825794C27000883C2 /* Core-Data */,
 				0485DA282548655900033797 /* API */,
 				0485DA272548655000033797 /* Model */,
@@ -297,6 +320,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		0488680D257E71B200CC975B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				04886816257E71FA00CC975B /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		049816DB256709F400291FBB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +361,7 @@
 			children = (
 				042370C02559D50200E45215 /* EditProfileViewController.swift */,
 				0465BD8A2551C0A70093F8FA /* ProfileControllerView.swift */,
+				04315FCC2580DB0400A5BDFA /* NewProfileViewController.swift */,
 				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
 				0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */,
 				0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */,
@@ -370,6 +402,8 @@
 			isa = PBXGroup;
 			children = (
 				0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */,
+				04315FC22580C00100A5BDFA /* AddMyServiceViewController.swift */,
+				04315FC92580C6CB00A5BDFA /* AddMyServiceViewCell.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -386,6 +420,11 @@
 		04DDC47E255D9A5300B14003 /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				04BA30E52583739300AC1868 /* CompositionalHeaderForDetailProfile.swift */,
+				04BA30E825837C0D00AC1868 /* Wave.swift */,
+				04BA30EB25837CA100AC1868 /* WaveFilled.swift */,
+				04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */,
+				04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -470,6 +509,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				fr,
 			);
 			mainGroup = 0485DA03254864DE00033797;
 			packageReferences = (
@@ -490,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0485DA1C254864E100033797 /* LaunchScreen.storyboard in Resources */,
+				04886814257E71FA00CC975B /* Localizable.strings in Resources */,
 				0485DA19254864E100033797 /* Assets.xcassets in Resources */,
 				0443E60A255B1200006C209C /* GoogleService-Info.plist in Resources */,
 			);
@@ -545,11 +587,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				04337DCF25715B2B00F27921 /* AddListViewController.swift in Sources */,
+				04BA30E62583739300AC1868 /* CompositionalHeaderForDetailProfile.swift in Sources */,
 				0421EF87256590A2007971D8 /* BackGroundMode.swift in Sources */,
 				04BFC56F2549E21A00FCB620 /* SearchViewCell.swift in Sources */,
 				0485DA2D2548661300033797 /* LoginViewController.swift in Sources */,
 				04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */,
+				04315FC32580C00100A5BDFA /* AddMyServiceViewController.swift in Sources */,
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
+				04BA30EC25837CA100AC1868 /* WaveFilled.swift in Sources */,
 				0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */,
 				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
 				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,
@@ -571,8 +616,11 @@
 				0485DA12254864DE00033797 /* SceneDelegate.swift in Sources */,
 				0464A5732578298C002BBCB8 /* CreateListViewCell.swift in Sources */,
 				0485DA3025486A1300033797 /* Extension.swift in Sources */,
+				04BA30F02583EF0E00AC1868 /* MesServicesViewCell.swift in Sources */,
 				04E0AB2C2577E31E0074BE5D /* CreateListViewController.swift in Sources */,
+				04BA30F32584060500AC1868 /* MoreLikesViewCell.swift in Sources */,
 				049816DD25670A2000291FBB /* CustomFont.swift in Sources */,
+				04315FCA2580C6CB00A5BDFA /* AddMyServiceViewCell.swift in Sources */,
 				044B4B17255C3770008A0BAB /* User.swift in Sources */,
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
 				0421EF8325656702007971D8 /* ColorPickView.swift in Sources */,
@@ -580,11 +628,13 @@
 				040CD10A254C8C0E00A9C6ED /* MainTabBarController.swift in Sources */,
 				0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */,
 				0477824B25794C4D000883C2 /* Model.xcdatamodeld in Sources */,
+				04315FCD2580DB0400A5BDFA /* NewProfileViewController.swift in Sources */,
 				04BFC5752549FA0B00FCB620 /* CardUserViewCell.swift in Sources */,
 				0421EF7E25656409007971D8 /* SettingsViewController.swift in Sources */,
 				0485DA3D254872EB00033797 /* Enums.swift in Sources */,
 				0499A351257C1DEA0050631C /* EditProfilePictureViewController.swift in Sources */,
 				0499A34E257C09E50050631C /* EditPersonaleInfoViewController.swift in Sources */,
+				04BA30E925837C0D00AC1868 /* Wave.swift in Sources */,
 				0477825725794F51000883C2 /* PersistenceServce.swift in Sources */,
 				0485DA3425486B6600033797 /* UIView+Layout.swift in Sources */,
 				049816E125670B7500291FBB /* FontCollectionViewCell.swift in Sources */,
@@ -606,8 +656,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				0485DA1B254864E100033797 /* Base */,
+				04886812257E71EB00CC975B /* ar */,
+				04886819257E7A6200CC975B /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		04886816257E71FA00CC975B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04886815257E71FA00CC975B /* ar */,
+				04886817257E720300CC975B /* en */,
+				0488681A257E7A6200CC975B /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -617,6 +679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -678,6 +741,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

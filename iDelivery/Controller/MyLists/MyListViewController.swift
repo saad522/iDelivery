@@ -61,6 +61,13 @@ class MyListViewController: UICollectionViewController {
         } catch let errorLoadLists {
             print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
         }
+        if let downcastStrings = self.tabBarController?.tabBar.items
+        {
+            downcastStrings[0].title = "Nearby".localized
+            downcastStrings[1].title = "My Lists".localized
+            downcastStrings[2].title = "Settings".localized
+            
+        }
     }
 }
 

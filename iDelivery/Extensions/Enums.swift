@@ -45,6 +45,7 @@ enum SFSymbols {
     static let trash        = "trash"
     static let slecteImage  = "photo.on.rectangle.angled"
     static let saved        = "square.and.arrow.down"
+    static let menu         = "text.justify"
     
 }
 

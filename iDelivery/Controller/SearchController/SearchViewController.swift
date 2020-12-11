@@ -56,6 +56,13 @@ class SearchViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         setupSearchViewController()
         fetchUserData()
+        if let downcastStrings = self.tabBarController?.tabBar.items
+        {
+            downcastStrings[0].title = "Nearby".localized
+            downcastStrings[1].title = "My Lists".localized
+            downcastStrings[2].title = "Settings".localized
+            
+        }
         let color = UserDefaults.standard.colorForKey(key: Keys.key) ?? .niceBlue
         let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
 

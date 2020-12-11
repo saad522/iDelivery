@@ -12,13 +12,7 @@ import FirebaseFirestore
 class EditeProfileViewController: UIViewController {
     //MARK:Properties
     var profileViewController : ProfileControllerView?
-//    var infomation : User? {
-//        didSet {
-//            priceText.text = infomation?.price ?? "Order Price 0 DH"
-//            stockText.text = infomation?.stock ?? "Stcoke Price DH"
-//            retrunText.text = infomation?.retruns ?? "Retrun Price 0 DH"
-//        }
-//    }
+
     //TextFields
     let priceText  = UITextField(placholder: "Order Price  30 MAD")
     let retrunText = UITextField(placholder: "Retrun Price 10 MAD")

@@ -45,6 +45,13 @@ class SearchByCityController: UICollectionViewController {
         super.viewWillAppear(animated)
         setFontAndColor()
         collectionView.reloadData()
+        if let downcastStrings = self.tabBarController?.tabBar.items
+        {
+            downcastStrings[0].title = "Nearby".localized
+            downcastStrings[1].title = "My Lists".localized
+            downcastStrings[2].title = "Settings".localized
+            
+        }
     }
     
 	//--ComosotionalLayout Configuration with dependency injection constructor
@@ -159,12 +166,16 @@ extension SearchByCityController {
     }
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let object = dataSource.itemIdentifier(for: indexPath)
-        if let user = object {
-            let detailsControlles = MoreDetailsController(user: user)
-            detailsControlles.modalPresentationStyle = .fullScreen
-            present(detailsControlles, animated: true)
-        }
+        let profileController = NewProfileViewController()
+        profileController.modalPresentationStyle = .fullScreen
+        present(profileController, animated: true)
+//        navigationController?.pushViewController(profileController, animated: true)
+//        let object = dataSource.itemIdentifier(for: indexPath)
+//        if let user = object {
+//            let detailsControlles = MoreDetailsController(user: user)
+//            detailsControlles.modalPresentationStyle = .fullScreen
+//            present(detailsControlles, animated: true)
+//        }
 	}
 
 

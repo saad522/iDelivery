@@ -116,6 +116,7 @@ extension EditProfilePictureViewController {
           if let error = error {
             // Uh-oh, an error occurred!
             print("Error to Delete image reason : ",error.localizedDescription)
+            Alert.showInteractiveAlert(self, with: "Failed to Delete image 😶", and: "\(error.localizedDescription)")
             return
           }
         }
@@ -150,7 +151,6 @@ extension EditProfilePictureViewController {
                         savingAlert.dismiss(animated: true) {
                             self.dismiss(animated: true)
                         }
-                        
                     }
                 }
             }

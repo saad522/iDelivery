@@ -15,6 +15,13 @@ class SettingsViewController: UICollectionViewController {
     private let modeCellID     = "modeCellID"
     private let languageCellID = "languageCellID"
     
+    let colors = "Colors".localized
+    let fonts = "Fonts".localized
+    let darkAppearance = "Dark Appearance".localized
+    let language = "Language".localized
+    let settings = "Settings".localized
+    
+    
     
     var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
     
@@ -67,6 +74,15 @@ class SettingsViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         setFontAndColor()
         collectionView.reloadData()
+
+        if let downcastStrings = self.tabBarController?.tabBar.items
+        {
+            downcastStrings[0].title = "Nearby".localized
+            downcastStrings[1].title = "My Lists".localized
+            downcastStrings[2].title = "Settings".localized
+            
+        }
+        navigationItem.title = settings
     }
 
     
@@ -110,7 +126,6 @@ extension SettingsViewController {
     fileprivate func setupNavigation() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Settings"
         collectionView.backgroundColor = .systemBackground
     }
     
@@ -157,6 +172,7 @@ extension SettingsViewController {
         self.dataSource.apply(snapshot)
         
     }
+    
     //Headers
     fileprivate func setHeaders() {
         dataSource.supplementaryViewProvider = .some({ (collectionView, kind, indexPath) -> UICollectionReusableView? in
@@ -166,13 +182,13 @@ extension SettingsViewController {
             if let object = self.dataSource.itemIdentifier(for: indexPath) {
                 if let section = snapshot.sectionIdentifier(containingItem: object) {
                     if section == .colors  {
-                        header.label.text = "Colors"
+                        header.label.text = self.colors
                     } else if section == .fonts {
-                        header.label.text = "Fonts"
+                        header.label.text = self.fonts
                     } else  if section == .mode {
-                        header.label.text = "Dark Appearance"
+                        header.label.text = self.darkAppearance
                     } else if section == .language {
-                        header.label.text = "Language"
+                        header.label.text = self.language
                     }
                 }
             }
