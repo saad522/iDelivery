@@ -12,7 +12,7 @@ import FirebaseFirestore
 class SearchByCityController: UICollectionViewController {
 	
 	//MARK: Properties
-  
+    
     fileprivate let city: String
     
 	private let topCellID 	  = "topCellID"
@@ -88,7 +88,6 @@ extension SearchByCityController {
             [self.imageDesign,self.message].forEach({$0!.isHidden = self.users.count != 0 })
             snapshot.appendItems(self.users)
             self.dataSource.apply(snapshot)
-            
         }
     }
     
@@ -137,7 +136,7 @@ extension SearchByCityController {
     }
 	fileprivate func configuCollectionView() {
         navigationController?.navigationBar.prefersLargeTitles = true
-		collectionView.backgroundColor = .secondarySystemBackground
+		collectionView.backgroundColor = .systemBackground
 		collectionView.register(CardUserViewCell.self, forCellWithReuseIdentifier: secondeCellID)
         configureDataSource()
         performQuery()
@@ -149,12 +148,12 @@ extension SearchByCityController {
     
     func configureDataSource() {
         collectionView.dataSource = dataSource
-        collectionView.reloadData()
         let cellRegistration = UICollectionView.CellRegistration<CardUserViewCell, User> { (cell, indexPath, user) in
             // Populate the cell with our item description.
-            cell.user = user
-            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
-            cell.setFonts(fontName: fontName)
+                cell.user = user
+//            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+//            cell.setFonts(fontName: fontName)
+
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, User>(collectionView: collectionView) {
@@ -166,16 +165,13 @@ extension SearchByCityController {
     }
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let profileController = NewProfileViewController()
-        profileController.modalPresentationStyle = .fullScreen
-        present(profileController, animated: true)
-//        navigationController?.pushViewController(profileController, animated: true)
-//        let object = dataSource.itemIdentifier(for: indexPath)
-//        if let user = object {
-//            let detailsControlles = MoreDetailsController(user: user)
-//            detailsControlles.modalPresentationStyle = .fullScreen
-//            present(detailsControlles, animated: true)
-//        }
+        
+        let object = dataSource.itemIdentifier(for: indexPath)
+        if let user = object {
+            let profileController = NewProfileViewController(user: user)
+            profileController.modalPresentationStyle = .fullScreen
+            present(profileController, animated: true)
+        }
 	}
 
 

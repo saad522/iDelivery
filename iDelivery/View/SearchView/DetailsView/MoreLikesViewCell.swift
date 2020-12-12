@@ -8,6 +8,15 @@
 import UIKit
 
 class MoreLikesViewCell: UICollectionViewCell {
+    var user : User! {
+        didSet {
+            profile.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
+            price.text = "MAD \(user.price).00"
+            city.text  = user.city
+            name.text  = user.fullName
+        }
+    }
+    
     let profile = UIImageView(image : #imageLiteral(resourceName: "Image 2"))
     let price = UILabel.init(text: "MAD 15.00", font: .systemFont(ofSize: 15, weight: .semibold))
     let name = UILabel.init(text: "Ragnar Lothbroke", font: .systemFont(ofSize: 19, weight: .semibold))

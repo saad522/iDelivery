@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct NeumorphicButtonStyle: ButtonStyle {
     var bgColor: Color
@@ -28,16 +29,36 @@ struct NeumorphicButtonStyle: ButtonStyle {
             .animation(.spring())
     }
 }
+class ContactViewModel: ObservableObject {
+    @Published var name      = ""
+    @Published var city      = ""
+    @Published var price     = ""
+    @Published var phone     = ""
+    @Published var transport = ""
+    @Published var image     = ""
+}
 struct WaveFilled: View {
     var dismiss: (() -> Void)?
+    @ObservedObject var viewModel: ContactViewModel
+    
+   @State private var randomColor = Color(.random)
+    @State private var color : Color = Color(.random)
     var body: some View {
+       
         ZStack {
             VStack {
                 Wave()
-                    .fill(Color.purple)
+                    .fill(color)
+                    .onAppear {
+                        let baseAnimation = Animation.easeInOut(duration: 1).speed(0.4)
+                        let repeated = baseAnimation.repeatForever(autoreverses: true)
+                        return withAnimation(repeated) {
+                            self.color = randomColor
+                        }
+                    }
                     .frame(height: 280.0)
-                    .shadow(color: .purple, radius:  10, x: 10, y: 5)
-                    .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true))
+                    .shadow(color: color, radius:  10, x: 10, y: 5)
+                    
                     .overlay(
                         
                         VStack(alignment : .trailing) {
@@ -56,7 +77,7 @@ struct WaveFilled: View {
                             }.padding(.bottom,5)
                             .padding(.leading,10)
                             HStack(alignment : .top) {
-                                Image("LmpwZw")
+                                WebImage(url: URL(string: viewModel.image))
                                     .resizable()
                                     .clipShape(Circle())
                                     .frame(width: 75, height: 75, alignment: .leading)
@@ -65,12 +86,12 @@ struct WaveFilled: View {
                                     .padding(5)
                                 
                                 VStack(alignment: .leading) {
-                                    Text("Saad Saissi Hassni")
+                                    Text(viewModel.name)
                                         .font(.title2)
                                         .fontWeight(.bold)
                                     HStack {
                                         Image(systemName: SFSymbols.location)
-                                        Text("Agadir")
+                                        Text(viewModel.city)
                                         Spacer()
                                         Button(action: {}, label: {
                                             
@@ -88,7 +109,7 @@ struct WaveFilled: View {
                                     Text("Phone")
                                     HStack {
                                         Image(systemName: SFSymbols.phone)
-                                        Text("0656399124")
+                                        Text(viewModel.phone)
                                     }
                                 }
                                 Spacer()
@@ -96,14 +117,14 @@ struct WaveFilled: View {
                                     Text("Tarif")
                                     HStack {
                                         Text("MAD")
-                                        Text("15.00")
+                                        Text(viewModel.price)
                                     }
                                 }
                                 Spacer()
                                 VStack {
                                     Text("On")
                                     HStack {
-                                        Text("Motorcycle")
+                                        Text(viewModel.transport)
                                     }
                                 }
                             }
@@ -125,6 +146,6 @@ struct WaveFilled: View {
 
 struct WaveFilled_Previews: PreviewProvider {
     static var previews: some View {
-        WaveFilled()
+        WaveFilled(viewModel: ContactViewModel())
     }
 }

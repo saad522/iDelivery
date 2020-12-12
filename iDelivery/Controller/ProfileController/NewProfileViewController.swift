@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 class NewProfileViewController: UICollectionViewController & UICollectionViewDelegateFlowLayout {
     var services = [
@@ -16,11 +17,21 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
         Service(image: #imageLiteral(resourceName: "icons8-package-100-2"), name: "Retour gratuits"),
         Service(image: #imageLiteral(resourceName: "icons8-bank-cards-100"), name: "Transfert bancaire")
     ]
+    
+    fileprivate let user: User?
+    var users = [User]()
+    
     private let cellID = "cellID"
     private let secondCellID = "secondCellID"
     private let headerID = "headerID"
     private let headerItemID = "headerItemID"
-    init() {
+    
+    deinit {
+        print("Free From leak of memory ✅")
+    }
+    // dependency injection constructor
+    init(user: User?) {
+        self.user = user
         let layout = UICollectionViewCompositionalLayout { (numberOfSection, _) -> NSCollectionLayoutSection? in
             if numberOfSection == 0 {
                 let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
@@ -66,10 +77,30 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         creatUI()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchUsersData()
     }
 }
 
-
+//MARK: Networking
+extension NewProfileViewController {
+    fileprivate func fetchUsersData() {
+        guard let city = user?.city , let price = user?.price, let name = user?.fullName else { return }
+        API.shared.fetchMoreLikesHim(like: name, on: city, with: price) { (users, error) in
+            if let error = error {
+                print("Failed to fetch users Likes \(name) reason : ",error.localizedDescription)
+                return
+            }
+            self.users = users ?? []
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+}
  extension NewProfileViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
@@ -77,19 +108,20 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerItemID, for: indexPath) as! CompositionalHeader
         header.label.font = .systemFont(ofSize: 25, weight: .heavy)
-        header.label.textColor = #colorLiteral(red: 0.2759500146, green: 0.2905508578, blue: 0.2989829779, alpha: 1)
+        header.label.textColor = .systemGray
         if indexPath.section == 0 {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! CompositionalHeaderForDetailProfile
             header.dismissDidTaped = {
                 self.dismiss(animated: true)
             }
+            header.user = user
             return header
         } else  if indexPath.section == 1 {
             header.label.text = "Mon Services"
             
             return header
         } else {
-            header.label.text = "More Like Saad Saissi Hassni"
+            header.label.text = "More Like \(user?.fullName ?? "unknown")"
             return header
         }
     }
@@ -101,7 +133,7 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
         } else if section == 1 {
             return services.count
         } else {
-            return 5
+            return users.count
         }
         
 
@@ -116,6 +148,8 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondCellID, for: indexPath) as! MoreLikesViewCell
+            let likeHim = users[indexPath.item]
+            cell.user = likeHim
             return cell
         }
         
@@ -151,7 +185,7 @@ private extension NewProfileViewController {
 
 struct NewProfileView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        let controller =  NewProfileViewController()
+        let controller =  NewProfileViewController(user: nil)
         return controller
     }
     

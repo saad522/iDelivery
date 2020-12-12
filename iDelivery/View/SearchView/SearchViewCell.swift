@@ -26,9 +26,13 @@ class SearchViewCell: UICollectionViewCell {
 extension SearchViewCell {
 	fileprivate func creatUI() {
 		addSubview(name)
-		name.fillSuperview(padding: .init(top: 0, left: 5, bottom: 0, right: 0))
-		backgroundColor = .systemBackground
-		layer.borderWidth = 1
-		layer.borderColor = UIColor.label.cgColor
+		name.fillSuperview(padding: .init(top: 0, left: 5, bottom: 0, right: 5))
+        name.textAlignment = .center
+		backgroundColor = .tertiarySystemBackground
+		layer.cornerRadius = 15
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius  = 2
+        layer.shadowColor = UIColor.label.cgColor
+        layer.shadowOffset  = .init(width: 0, height: 2)
 	}
 }

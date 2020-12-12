@@ -162,7 +162,7 @@ extension SearchViewController : UISearchBarDelegate {
 		navigationItem.searchController = searchController
 		navigationItem.hidesSearchBarWhenScrolling = false
 		searchController.searchBar.delegate = self
-        collectionView.backgroundColor = .secondarySystemBackground
+        collectionView.backgroundColor = .systemBackground
         let barItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = barItem
 	}

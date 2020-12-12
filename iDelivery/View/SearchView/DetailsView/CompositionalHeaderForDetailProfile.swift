@@ -7,14 +7,38 @@
 
 import SwiftUI
 
+
 class CompositionalHeaderForDetailProfile: UICollectionReusableView {
-    let waveFilled = WaveFilled()
-    var  dismissDidTaped : () -> Void = {}
     
-    let label = UILabel.init(text: "Color", font: .systemFont(ofSize: 20, weight: .semibold))
+    let viewModel = ContactViewModel()
+    var randomColor = UIColor()
+    
+    var  dismissDidTaped : () -> Void = {}
+    var random : UIColor! {
+        didSet {
+            randomColor = random
+        }
+    }
+    
+    var user : User! {
+        didSet {
+            viewModel.name = user.fullName
+            viewModel.city = user.city
+            viewModel.phone = user.phone
+            viewModel.price = user.price
+            viewModel.image = user.profileImage
+            if user.transport == 0 {
+                viewModel.transport = "Motorocyle"
+            } else {
+                viewModel.transport = "Car"
+            }
+        }
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let waveFilled = WaveFilled(viewModel: viewModel)
         let hostingHeader = UIHostingController(rootView: waveFilled)
         addSubview(hostingHeader.view)
         hostingHeader.view.fillSuperview()

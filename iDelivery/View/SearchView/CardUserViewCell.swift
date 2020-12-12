@@ -5,109 +5,143 @@
 //  Created by mac on 10/28/20.
 //
 
-import UIKit
+import SwiftUI
+import SDWebImageSwiftUI
+
+struct CardUserView: View {
+    @ObservedObject var viewModel: ContactViewModel
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [Color(.displayP3, white: 0.3, opacity: 0.5), Color(.random),
+        ]),startPoint: .bottomLeading, endPoint: .topTrailing).overlay(
+            VStack(alignment : .trailing) {
+                HStack {
+                    Button(action: {}, label: {
+                        Image(systemName: SFSymbols.menu2)
+                            .font(.system(size: 25.0))
+                            .padding(.trailing,15)
+                            .foregroundColor(.white)
+                    })
+                }.padding(.bottom,5)
+                
+                .padding(.leading,10)
+                HStack(alignment : .center) {
+                    WebImage(url: URL(string: viewModel.image))
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 75, height: 75, alignment: .leading)
+                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        
+                        .padding(5)
+                    
+                    VStack(alignment: .leading) {
+                        Text(viewModel.name)
+                            .font(.title2)
+                            .fontWeight(.black)
+                            .foregroundColor(.white)
+                            .padding(5)
+                        HStack {
+                            Image(systemName: SFSymbols.location)
+                                .foregroundColor(.white)
+                            Text(viewModel.city)
+                                .foregroundColor(.white)
+                            
+                        }
+                    }
+                    .padding(.bottom,5)
+                    Spacer()
+                }
+                .padding(.bottom)
+                HStack {
+                    VStack {
+                        Text("Phone")
+                            .foregroundColor(.white)
+                        HStack {
+                            Image(systemName: SFSymbols.phone)
+                                .foregroundColor(.white)
+                            Text(viewModel.phone)
+                                .fixedSize()
+                                .foregroundColor(.white)
+                        }
+                    }
+                    Spacer()
+                    VStack {
+                        Text("Tarif")
+                            .foregroundColor(.white)
+                        HStack {
+                            Text("MAD")
+                                .foregroundColor(.white)
+                            Text(viewModel.price)
+                                .fixedSize()
+                                .foregroundColor(.white)
+                        }
+                    }
+                    Spacer()
+                    VStack {
+                        Text("On")
+                            .foregroundColor(.white)
+                        Text(viewModel.transport)
+                            .fixedSize()
+                                .foregroundColor(.white)
+                        
+                    }
+                }
+            }
+            .padding(.leading,5)
+            .padding(.trailing,5)
+
+        
+        )
+        
+    }
+}
+
 
 
 class CardUserViewCell: UICollectionViewCell {
-	//MARK: Properties
-	//Labels
-    var user : User! {
-        didSet {
-            userIcon.sd_setImage(with: URL(string: user.profileImage), placeholderImage: #imageLiteral(resourceName: "icons8-administrator-male-100"))
-            price.text   = "Price : \(user.price) DH"
-            returns.text = "Return : \(user.retruns) DH"
-            name.text    = "\(user.fullName)"
-            city.text    = "\(user.city)"
-            if user.transport == 0 {
-                iconTransport.image = #imageLiteral(resourceName: "motorcycle").withTintColor(.label).withRenderingMode(.alwaysOriginal)
-            } else {
-                iconTransport.image = #imageLiteral(resourceName: "car").withTintColor(.label).withRenderingMode(.alwaysOriginal)
+    //MARK: Properties
+    let viewModel = ContactViewModel()
+    //Labels
+        var user : User! {
+            didSet {
+                viewModel.image = user.profileImage
+                viewModel.price   = "\(user.price).00"
+                viewModel.phone = user.phone
+                viewModel.name    = user.fullName
+                viewModel.city  = user.city
+                if user.transport == 0 {
+                    viewModel.transport = "Motorcycle"
+                } else {
+                    viewModel.transport = "Car"
+                }
             }
         }
+  
+    
+    
+    //MARK: LifeCycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        createUI()
     }
     
-	
-    
-	let name      = UILabel(text: "Saad Saissi Hassani")
-	let price     = UILabel(text: "price: 7$")
-	let city      = UILabel(text: "City: Rabat")
-	let transport = UILabel(text: "transport: ")
-	let returns   = UILabel(text: "returns: 1$ ")
-	
-	//UserState
-	let active : UIView = {
-		let on = UIView()
-		let size : CGFloat = 15
-		on.backgroundColor = .systemGreen
-		on.constrainHeight(constant: size)
-		on.constrainWidth(constant: size)
-		on.layer.cornerRadius = size / 2
-		return on
-	}()
-	
-	//Icons
-    let userIcon = UIImageView(cornerRadius: 5)
-	let iconName      = UIImageView(SFSymbols.fullName)
-	let iconPrice     = UIImageView(SFSymbols.currency)
-	let iconLocation  = UIImageView(SFSymbols.location)
-	let iconReturns   = UIImageView(SFSymbols.currency)
-	let iconTransport = UIImageView(image: #imageLiteral(resourceName: "motorcycle"))
-	let iconValise    = UIImageView(SFSymbols.valise)
-    
-	
-	//MARK: LifeCycle
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		createUI()
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 
 extension CardUserViewCell {
-    func setFonts(fontName : String) {
-        price.font = UIFont(name: fontName, size: 16)
-        returns.font = UIFont(name: fontName, size: 16)
-        name.font = UIFont(name: fontName, size: 16)
-        city.font = UIFont(name: fontName, size: 16)
-        transport.font = UIFont(name: fontName, size: 16)
+
+    fileprivate func createUI() {
+        
+        let hostingController = UIHostingController(rootView: CardUserView(viewModel: viewModel))
+        addSubview(hostingController.view)
+        hostingController.view.layer.cornerRadius = 15
+        hostingController.view.clipsToBounds = true
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius  = 10
+        layer.shadowOffset  = .init(width: 0, height: 10)
+        hostingController.view.fillSuperview()
+        
     }
-	fileprivate func createUI() {
-		backgroundColor = .systemBackground
-		layer.shadowOpacity = 0.5
-		layer.shadowRadius  = 10
-		layer.shadowOffset  = .init(width: 0, height: 10)
-		layer.cornerRadius  = 5
-        userIcon.image = #imageLiteral(resourceName: "icons8-administrator-male-100").withTintColor(.label).withRenderingMode(.alwaysOriginal)
-		userIcon.constrainWidth(constant: 85)
-		userIcon.constrainHeight(constant: 85)
-		iconTransport.constrainWidth(constant: 25)
-		iconTransport.constrainHeight(constant: 25)
-		
-		let hStackName = HStackView(arrangedSubviews: [iconName,name,UIView()], spacing: 5)
-		
-		let hStackPrice = HStackView(arrangedSubviews: [iconPrice,price,UIView()], spacing: 5)
-		
-		let hStackLocation = HStackView(arrangedSubviews: [iconLocation,city,UIView()], spacing: 5)
-		
-		let hStackReturns = HStackView(arrangedSubviews: [iconReturns,returns,UIView()], spacing: 5)
-		hStackReturns.alignment = .lastBaseline
-//		iconTransport.backgroundColor = .systemYellow
-		let hStackTransport = HStackView(arrangedSubviews: [iconValise,transport,iconTransport,UIView()], spacing: 5)
-		
-		let vStackLabels = VerticalStackView(arrangedSubviews: [hStackName,hStackReturns,hStackPrice], spacing: 20)
-		
-		let hStack = HStackView(arrangedSubviews: [userIcon,vStackLabels], spacing: 10)
-		
-		let mainStack = VerticalStackView(arrangedSubviews: [hStack,hStackLocation,hStackTransport], spacing: 15)
-		
-		addSubview(mainStack)
-		mainStack.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
-		
-		addSubview(active)
-		active.anchor(top: userIcon.topAnchor, leading: nil, bottom: nil, trailing: userIcon.trailingAnchor,padding: .init(top: -5, left: 0, bottom: 0, right: -5))
-	}
 }

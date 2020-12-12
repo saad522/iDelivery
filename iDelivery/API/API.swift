@@ -10,10 +10,12 @@ import FirebaseFirestore
 
 class API {
     static let shared = API()
+    let db = Firestore.firestore()
+    lazy var collection = db.collection(DB_Keys.collectionKey)
     
     func fetchUsersData(city : String,completion : @escaping([User]?,Error?)->Void) {
-        let db = Firestore.firestore()
-        db.collection(DB_Keys.collectionKey).whereField("city", isEqualTo: city).addSnapshotListener { (querySnapshot, error) in
+       
+        collection.whereField("city", isEqualTo: city).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error : ",error.localizedDescription)
                 completion(nil,error)
@@ -28,10 +30,26 @@ class API {
             completion(user,nil)
         }
    }
+    
+    func fetchMoreLikesHim(like name :String,on city :String, with price :String,completion :@escaping ([User]?, Error?) -> Void) {
+        collection.whereField("city", isEqualTo: city).whereField("price", isEqualTo: price).whereField("fullName", isNotEqualTo: name).addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error : ",error.localizedDescription)
+                completion(nil,error)
+                return
+            }
+            guard let documents = querySnapshot?.documents else { return }
+            let user = documents.map { (snpashot) -> User in
+                    let dectionary = snpashot.data()
+                    return User(dectionary: dectionary)
+                }
+            completion(user,nil)
+        }
+    }
     func fetchUserData(completion : @escaping(User?,Error?)->Void) {
         guard let uiserID = Auth.auth().currentUser?.uid else { return  }
-        let db = Firestore.firestore()
-        db.collection(DB_Keys.collectionKey).whereField("userId", isEqualTo: uiserID).getDocuments { (snpachot, error) in
+      
+        collection.whereField("userId", isEqualTo: uiserID).getDocuments { (snpachot, error) in
             if let error = error {
                 completion(nil,error)
             }
