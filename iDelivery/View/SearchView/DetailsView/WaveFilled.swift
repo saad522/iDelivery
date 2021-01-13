@@ -50,7 +50,7 @@ struct WaveFilled: View {
                 Wave()
                     .fill(color)
                     .onAppear {
-                        let baseAnimation = Animation.easeInOut(duration: 1).speed(0.4)
+                        let baseAnimation = Animation.easeInOut(duration: 0.3).speed(0.1)
                         let repeated = baseAnimation.repeatForever(autoreverses: true)
                         return withAnimation(repeated) {
                             self.color = randomColor

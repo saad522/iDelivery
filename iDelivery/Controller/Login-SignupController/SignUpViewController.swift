@@ -217,6 +217,7 @@ extension SignUpViewController {
             let metaData = StorageMetadata()
             metaData.contentType = "image/png"
             if let uploadData = self.profilePicture.image!.pngData() {
+            
                 storage.putData(uploadData, metadata: metaData) { (metadata, error) in
                     if let error = error {
                         print("Failed To Upload Image  👎🏾reason : ",error.localizedDescription)

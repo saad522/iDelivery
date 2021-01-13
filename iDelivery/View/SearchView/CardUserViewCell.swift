@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 struct CardUserView: View {
     @ObservedObject var viewModel: ContactViewModel
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color(.displayP3, white: 0.3, opacity: 0.5), Color(.random),
+        LinearGradient(gradient: Gradient(colors: [Color(.random), Color(.random),
         ]),startPoint: .bottomLeading, endPoint: .topTrailing).overlay(
             VStack(alignment : .trailing) {
                 HStack {
@@ -21,7 +21,7 @@ struct CardUserView: View {
                             .padding(.trailing,15)
                             .foregroundColor(.white)
                     })
-                }.padding(.bottom,5)
+                }.padding(.top, 10)
                 
                 .padding(.leading,10)
                 HStack(alignment : .center) {
@@ -84,13 +84,10 @@ struct CardUserView: View {
                                 .foregroundColor(.white)
                         
                     }
-                }
+                }.padding(.bottom, 15)
             }
-            .padding(.leading,5)
-            .padding(.trailing,5)
-
-        
-        )
+            .padding(.leading,15)
+            .padding(.trailing,15),alignment: .center)
         
     }
 }
@@ -136,7 +133,7 @@ extension CardUserViewCell {
         
         let hostingController = UIHostingController(rootView: CardUserView(viewModel: viewModel))
         addSubview(hostingController.view)
-        hostingController.view.layer.cornerRadius = 15
+        hostingController.view.layer.cornerRadius = 25
         hostingController.view.clipsToBounds = true
         layer.shadowOpacity = 0.5
         layer.shadowRadius  = 10

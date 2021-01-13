@@ -33,8 +33,8 @@ class MountainsController {
 		} else {
 			return filtered
 		}
-		
 	}
+    
 	private lazy var mountains: [Mountain] = {
 		return generateMountains()
 	}()

@@ -58,7 +58,7 @@ class SearchByCityController: UICollectionViewController {
 	init(city: String?) {
 		let item = NSCollectionLayoutItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
 		item.contentInsets = .init(top: 12, leading: 10, bottom: 12, trailing: 10)
-		let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(250)), subitems: [item])
+		let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(220)), subitems: [item])
 		
 		let section = NSCollectionLayoutSection(group: group)
 		let layout = UICollectionViewCompositionalLayout(section: section)
@@ -136,6 +136,7 @@ extension SearchByCityController {
     }
 	fileprivate func configuCollectionView() {
         navigationController?.navigationBar.prefersLargeTitles = true
+        collectionView.showsVerticalScrollIndicator = false
 		collectionView.backgroundColor = .systemBackground
 		collectionView.register(CardUserViewCell.self, forCellWithReuseIdentifier: secondeCellID)
         configureDataSource()

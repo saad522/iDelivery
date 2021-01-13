@@ -40,7 +40,6 @@ class SearchViewController: UICollectionViewController {
             profileViewController.infoUserTableViewController.user = user
         }
         let navigationController = UINavigationController(rootViewController: profileViewController)
-        
         present(navigationController, animated: true)
     }
 	let mountainsController = MountainsController()

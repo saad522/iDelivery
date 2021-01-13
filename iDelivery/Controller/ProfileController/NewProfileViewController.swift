@@ -87,6 +87,7 @@ class NewProfileViewController: UICollectionViewController & UICollectionViewDel
 
 //MARK: Networking
 extension NewProfileViewController {
+   
     fileprivate func fetchUsersData() {
         guard let city = user?.city , let price = user?.price, let name = user?.fullName else { return }
         API.shared.fetchMoreLikesHim(like: name, on: city, with: price) { (users, error) in
@@ -139,7 +140,16 @@ extension NewProfileViewController {
 
     }
 
-
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let user = users[indexPath.item]
+            let presentController = NewProfileViewController(user: user)
+            presentController.modalPresentationStyle = .fullScreen
+            present(presentController, animated: true)
+            
+        }
+    }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MesServicesViewCell
@@ -158,8 +168,6 @@ extension NewProfileViewController {
 private extension NewProfileViewController {
 
     func creatUI() {
-//        let barItem = UIBarButtonItem(title: "", image: UIImage(systemName: SFSymbols.menu)!.withTintColor(.white).withRenderingMode(.alwaysOriginal))
-//        navigationItem.rightBarButtonItem = barItem
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.backgroundColor = .systemBackground
         collectionView.showsVerticalScrollIndicator = false
