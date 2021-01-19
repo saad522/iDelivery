@@ -67,6 +67,7 @@
 		04BA30EC25837CA100AC1868 /* WaveFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30EB25837CA100AC1868 /* WaveFilled.swift */; };
 		04BA30F02583EF0E00AC1868 /* MesServicesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */; };
 		04BA30F32584060500AC1868 /* MoreLikesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */; };
+		04BAD33625B221E800118278 /* MessageSMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAD33525B221E800118278 /* MessageSMSViewController.swift */; };
 		04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC24CC254B90E200F45872 /* MoreDetailsController.swift */; };
 		04BFC5692549D6F600FCB620 /* SearchByCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC5682549D6F600FCB620 /* SearchByCityController.swift */; };
 		04BFC56C2549DCEE00FCB620 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */; };
@@ -142,6 +143,7 @@
 		04BA30EB25837CA100AC1868 /* WaveFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFilled.swift; sourceTree = "<group>"; };
 		04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesServicesViewCell.swift; sourceTree = "<group>"; };
 		04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreLikesViewCell.swift; sourceTree = "<group>"; };
+		04BAD33525B221E800118278 /* MessageSMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSMSViewController.swift; sourceTree = "<group>"; };
 		04BC24CC254B90E200F45872 /* MoreDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsController.swift; sourceTree = "<group>"; };
 		04BFC5682549D6F600FCB620 /* SearchByCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByCityController.swift; sourceTree = "<group>"; };
 		04BFC56B2549DCEE00FCB620 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				04BA30EB25837CA100AC1868 /* WaveFilled.swift */,
 				04BA30EF2583EF0E00AC1868 /* MesServicesViewCell.swift */,
 				04BA30F22584060500AC1868 /* MoreLikesViewCell.swift */,
+				04BAD33525B221E800118278 /* MessageSMSViewController.swift */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				049816DD25670A2000291FBB /* CustomFont.swift in Sources */,
 				04315FCA2580C6CB00A5BDFA /* AddMyServiceViewCell.swift in Sources */,
 				044B4B17255C3770008A0BAB /* User.swift in Sources */,
+				04BAD33625B221E800118278 /* MessageSMSViewController.swift in Sources */,
 				0499B9D125488D72005E9FEF /* SignUpViewController.swift in Sources */,
 				0421EF8325656702007971D8 /* ColorPickView.swift in Sources */,
 				04874071254E029B00F3AA54 /* SortsView.swift in Sources */,

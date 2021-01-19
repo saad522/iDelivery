@@ -14,6 +14,9 @@ class CompositionalHeaderForDetailProfile: UICollectionReusableView {
     var randomColor = UIColor()
     
     var  dismissDidTaped : () -> Void = {}
+    var messageControllerDidPresnted : () -> Void = {}
+    var didAddToListPresented : () -> Void = {}
+    
     var random : UIColor! {
         didSet {
             randomColor = random
@@ -43,6 +46,22 @@ class CompositionalHeaderForDetailProfile: UICollectionReusableView {
         addSubview(hostingHeader.view)
         hostingHeader.view.fillSuperview()
         hostingHeader.rootView.dismiss = dismiss
+        hostingHeader.rootView.didPhoneCallTapped = phoneCall
+        hostingHeader.rootView.didSendSMSTapped = sendSMS
+        hostingHeader.rootView.didAddToListTapped = addTolist
+    }
+    func addTolist() {
+        didAddToListPresented()
+    }
+    func phoneCall() {
+        print("DEBUG: Number is ",viewModel.phone)
+        let phoneNumber = viewModel.phone
+        let url = URL(string: "TEL://\(phoneNumber)")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    func sendSMS() {
+        print("DEBUG: Send Button ")
+        messageControllerDidPresnted()
     }
     func dismiss() {
         dismissDidTaped()
@@ -51,3 +70,4 @@ class CompositionalHeaderForDetailProfile: UICollectionReusableView {
         fatalError()
     }
 }
+

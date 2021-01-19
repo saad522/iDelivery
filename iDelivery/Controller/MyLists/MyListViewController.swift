@@ -20,13 +20,7 @@ class MyListViewController: UICollectionViewController {
     enum Section {
         case main
     }
-    lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, List> = .init(collectionView: collectionView) { (collection, indexPath, list) -> UICollectionViewCell? in
-        let cell = collection.dequeueReusableCell(withReuseIdentifier: self.cellID, for: indexPath) as! ListViewCell
-        cell.circle.backgroundColor = UIColor.color(data: list.color!)
-        cell.name.text = list.name
-        cell.numberOfItemInList.text = "\(list.items?.count ?? 0)"
-        return cell
-    }
+ 
     deinit {
         print("No Retain cycle For List")
     }
@@ -54,10 +48,11 @@ class MyListViewController: UICollectionViewController {
             let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
             self.list = fetchedList
             self.list.forEach({print("IDs :\($0.id ?? UUID()) \n")})
-            var snapshot = diffableDataSource.snapshot()
-            snapshot.appendItems(self.list)
-            diffableDataSource.apply(snapshot,animatingDifferences: false)
-            collectionView.dataSource = diffableDataSource
+            self.collectionView.reloadData()
+//            var snapshot = diffableDataSource.snapshot()
+//            snapshot.appendItems(self.list)
+//            diffableDataSource.apply(snapshot,animatingDifferences: false)
+//            collectionView.dataSource = diffableDataSource
         } catch let errorLoadLists {
             print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
         }
@@ -83,9 +78,10 @@ extension MyListViewController {
             newList.id = UUID()
             PersistenceServce.saveContext()
             self?.list.append(newList)
-            var snapshot = self?.diffableDataSource.snapshot()
-            snapshot?.appendItems([newList])
-            self?.diffableDataSource.apply(snapshot!)
+            self?.collectionView.reloadData()
+//            var snapshot = self?.diffableDataSource.snapshot()
+//            snapshot?.appendItems([newList])
+//            self?.diffableDataSource.apply(snapshot!)
             self?.dismiss(animated: true)
         }
         
@@ -94,7 +90,41 @@ extension MyListViewController {
 }
 //MARK: Configure CollectionView
 extension MyListViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        listImage.isHidden = list.count != 0
+        listTitle.isHidden = list.count != 0
+        return list.count
+    }
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+//        print("Captured Long Press")
+
+        let location = gesture.location(in: collectionView)
+
+        guard let selectedIndexPath = collectionView?.indexPathForItem(at: location) else { return }
+
+        print(selectedIndexPath.item)
+
+        let alertController = UIAlertController(title: "Remove Podcast?", message: nil, preferredStyle: .actionSheet)
+
+        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
+            let selectedList = self.list[selectedIndexPath.item]
+            // where we remove the podcast object from collection view
+            self.list.remove(at: selectedIndexPath.item)
+            self.collectionView?.deleteItems(at: [selectedIndexPath])
+            // also remove your favorited podcast from UserDefaults
+            // The simulator doesn't delete immediately, test with your physical iPhone devices
+            PersistenceServce.context.delete(selectedList)
+            PersistenceServce.saveContext()
+            print("DEBUG: Delete")
+        }))
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alertController, animated: true)
+    }
     fileprivate func setUpNvigation() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        collectionView?.addGestureRecognizer(gesture)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "My Lists"
         collectionView.backgroundColor = .secondarySystemBackground
@@ -102,7 +132,7 @@ extension MyListViewController {
         navigationItem.rightBarButtonItem = barItem
         cellRefistration()
         setupSource()
-//        creatUI()
+        creatUI()
     }
     fileprivate func creatUI() {
         let vStack = VerticalStackView(arrangedSubviews: [listImage,listTitle], spacing: 5)
@@ -112,7 +142,14 @@ extension MyListViewController {
         collectionView.addSubview(vStack)
         vStack.anchor(top: collectionView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,padding: .init(top: 0, left: 10, bottom: 0, right: 10))
     }
-
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellID, for: indexPath) as! ListViewCell
+        
+        cell.circle.backgroundColor = UIColor.color(data: list[indexPath.item].color!)
+        cell.name.text = list[indexPath.item].name
+        cell.numberOfItemInList.text = "\(list[indexPath.item].items?.count ?? 0)"
+        return cell
+    }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let parentList = list[indexPath.item]
         let listDeatail = ListDetailViewControlller(style: .insetGrouped)
@@ -130,11 +167,12 @@ extension MyListViewController {
             let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
             self.list = fetchedList
             self.list.forEach({print("IDs :\($0.id ?? UUID()) \n")})
-            var snapshot = diffableDataSource.snapshot()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(self.list, toSection: .main)
-            diffableDataSource.apply(snapshot,animatingDifferences: false)
-            collectionView.dataSource = diffableDataSource
+            collectionView.reloadData()
+//            var snapshot = diffableDataSource.snapshot()
+//            snapshot.appendSections([.main])
+//            snapshot.appendItems(self.list, toSection: .main)
+//            diffableDataSource.apply(snapshot,animatingDifferences: false)
+//            collectionView.dataSource = diffableDataSource
         } catch let errorLoadLists {
             print("Somthing Wroong reason : ",errorLoadLists.localizedDescription)
         }

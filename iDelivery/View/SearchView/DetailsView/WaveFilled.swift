@@ -29,6 +29,7 @@ struct NeumorphicButtonStyle: ButtonStyle {
             .animation(.spring())
     }
 }
+
 class ContactViewModel: ObservableObject {
     @Published var name      = ""
     @Published var city      = ""
@@ -39,10 +40,15 @@ class ContactViewModel: ObservableObject {
 }
 struct WaveFilled: View {
     var dismiss: (() -> Void)?
+    var didPhoneCallTapped : (() -> Void)?
+    var didSendSMSTapped   : (() -> Void)?
+    var didAddToListTapped    : (() -> Void)?
+    
     @ObservedObject var viewModel: ContactViewModel
     
-   @State private var randomColor = Color(.random)
+    @State private var randomColor = Color(.random)
     @State private var color : Color = Color(.random)
+    @State private var isActionSheetPresented = false
     var body: some View {
        
         ZStack {
@@ -69,10 +75,16 @@ struct WaveFilled: View {
                                         .padding(.trailing,15)
                                 })
                                 Spacer()
-                                Button(action: {}, label: {
-                                    Image(systemName: SFSymbols.menu)
-                                        .font(.system(size: 25.0))
-                                        .padding(.trailing,15)
+                                Button(action: didAddToListTapped!, label: {
+                                    VStack(alignment : .center) {
+                                        Image(systemName: SFSymbols.addMe)
+                                            .font(.system(size: 25.0))
+                                        Text("Add to list")
+                                            .foregroundColor(Color(.systemBackground))
+                                            .font(.system(size: 15.0))
+                                            .fontWeight(.semibold)
+                                    }.padding(.trailing,15)
+                                    
                                 })
                             }.padding(.bottom,5)
                             .padding(.leading,10)
@@ -93,11 +105,21 @@ struct WaveFilled: View {
                                         Image(systemName: SFSymbols.location)
                                         Text(viewModel.city)
                                         Spacer()
-                                        Button(action: {}, label: {
+                                        Button(action: {
+                                            isActionSheetPresented = true
+                                        }, label: {
                                             
                                             Text("Contact me")
                                                 .fontWeight(.semibold)
-                                        }).buttonStyle(NeumorphicButtonStyle(bgColor: .white))
+                                        })
+                                        .buttonStyle(NeumorphicButtonStyle(bgColor: .white))
+                                        .actionSheet(isPresented: $isActionSheetPresented) {
+                                            ActionSheet(title: Text("Contact me By..."), message: Text(""), buttons: [
+                                                .default(Text("Phone Call"), action: didPhoneCallTapped!),
+                                                .default(Text("Send SMS"), action: didSendSMSTapped!),
+                                                .cancel()
+                                            ])
+                                        }
                                         
                                         .padding(5)
                                     }

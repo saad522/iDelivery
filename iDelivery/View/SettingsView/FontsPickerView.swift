@@ -22,7 +22,6 @@ class FontsPickerView: UICollectionViewCell {
         UIFont(name: CustomFont.optima,       size: fontsSiez)!,
         UIFont(name: CustomFont.palatino,     size: fontsSiez)!,
         UIFont(name: CustomFont.thonburi,     size: fontsSiez)!,
-        
         UIFont(name: CustomFont.cochin,       size: fontsSiez)!,
         UIFont(name: CustomFont.chalkduster,  size: fontsSiez)!,
         UIFont(name: CustomFont.copperplate,  size: fontsSiez)!,
@@ -103,6 +102,7 @@ extension String {
     // A few sample ranges to get started
     // NOTE: Make sure each mapping pair has the same number of characters or bad things may happen
     static let circledLetters: [ClosedRange<UnicodeScalar> : ClosedRange<UnicodeScalar>] = ["A"..."Z" : "🅐"..."🅩", "a"..."z" : "🅐"..."🅩"]
+    static let sureLetters: [ClosedRange<UnicodeScalar> : ClosedRange<UnicodeScalar>] = ["A"..."Z" : "🅐"..."🅩", "a"..."z" : "🅐"..."🅩"]
     static let gobiLetters: [ClosedRange<UnicodeScalar> : ClosedRange<UnicodeScalar>] = ["A"..."Z" : "𝕬"..."𝖅", "a"..."z" : "𝖆"..."𝖟"]
     static let boxedLetters: [ClosedRange<UnicodeScalar> : ClosedRange<UnicodeScalar>] = ["A"..."Z" : "🅰"..."🆉", "a"..."z" : "🅰"..."🆉"]
     static let italicLetters: [ClosedRange<UnicodeScalar> : ClosedRange<UnicodeScalar>] = ["A"..."Z" : "𝐴"..."𝑍", "a"..."z" : "𝑎"..."𝑧"]

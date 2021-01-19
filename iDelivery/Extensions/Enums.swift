@@ -47,7 +47,7 @@ enum SFSymbols {
     static let saved        = "square.and.arrow.down"
     static let menu         = "text.justify"
     static let menu2        = "ellipsis"
-    
+    static let addMe        = "person.crop.circle.badge.plus"
 }
 
 enum Keys {

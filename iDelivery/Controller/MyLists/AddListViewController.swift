@@ -31,10 +31,10 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
                                         pointSize: 40,
                                         weight: .black,
                                         scale: .medium)))
-    let inputListName   : UITextField = {
+    lazy var inputListName   : UITextField = {
         let input = UITextField()
         input.font = .systemFont(ofSize: 25, weight: .bold)
-        input.textColor = .systemGreen
+        input.textColor = pickedColor
         return input
     }()
     let inputContainer     : UIView = {
@@ -72,7 +72,11 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
 }
 //MARK: set Actions with PickerColor Controller
 extension AddListViewController: UIColorPickerViewControllerDelegate {
-    
+    func dismissKeyBoard() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     @objc fileprivate func handleAddList() {
         guard let name : String = inputListName.text else {return}
         didAddList(name,pickedColor)
@@ -96,6 +100,7 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
     func setCircleClor(color : UIColor,button : UIButton) {
         circle.backgroundColor = color
         pickedColor = color
+        inputListName.textColor = color
         circle.layer.shadowColor = color.cgColor
         button.layer.borderColor = UIColor.label.cgColor
         button.layer.borderWidth = 2
@@ -113,6 +118,7 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
         // you may need to know which button to trigger some action
         // let buttonIndex = buttons.indexOf(sender)
         setCircleClor(color: color, button: sender)
+        
     }
     @objc fileprivate func handleGreen(button : UIButton) {
         print("Ima 7na")
@@ -169,6 +175,7 @@ extension AddListViewController: UIColorPickerViewControllerDelegate {
         pickedColor = viewController.selectedColor
         circle.backgroundColor = pickedColor
         circle.layer.shadowColor = pickedColor.cgColor
+        inputListName.textColor = pickedColor
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         print("Dismiss UIPickerColorController...")
@@ -193,6 +200,7 @@ extension AddListViewController {
 
     
     fileprivate func creatUI() {
+        dismissKeyBoard()
         view.backgroundColor = .systemBackground
         buttons.append(orange)
         buttons.append(yellow)

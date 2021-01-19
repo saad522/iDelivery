@@ -112,8 +112,30 @@ extension NewProfileViewController {
         header.label.textColor = .systemGray
         if indexPath.section == 0 {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! CompositionalHeaderForDetailProfile
-            header.dismissDidTaped = {
-                self.dismiss(animated: true)
+            header.dismissDidTaped = { [weak self] in
+                self?.dismiss(animated: true)
+            }
+            header.messageControllerDidPresnted = { [weak self] in
+                let messageController = MessageSMSViewController()
+                messageController.modalPresentationStyle = .custom
+                messageController.transitioningDelegate = self
+                self?.present(messageController, animated: true)
+            }
+            header.didAddToListPresented = { [weak self] in
+                let addToListViewController =  CreateListViewController()
+                let item = Item(context: PersistenceServce.context)
+                item.city    = self?.user?.city
+                item.email   = self?.user?.email
+                item.image   = self?.user?.profileImage
+                item.price   = self?.user?.price ?? "00"
+                item.returns = self?.user?.retruns ?? "00"
+                item.stock   = self?.user?.stock ?? "00"
+                item.machine = Int16(self?.user?.transport ?? 0)
+                item.name    = self?.user?.fullName
+                item.phone   = self?.user?.phone
+                item.id      = UUID()
+                addToListViewController.item = item
+                self?.present(addToListViewController, animated: true)
             }
             header.user = user
             return header
@@ -209,5 +231,10 @@ struct NewProfileViewController_Previews: PreviewProvider {
         NewProfileView()
             .previewDevice("iPhone SE (2nd generation)")
             .edgesIgnoringSafeArea(.all)
+    }
+}
+extension NewProfileViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

@@ -20,7 +20,6 @@ class CreateListViewController: UITableViewController {
     var list = [List]()
     var item : Item?
    
-    
     let button = UIButton(type : .system)
     private let cellID = "CellID"
     override func viewDidLoad() {
