@@ -11,19 +11,19 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
     
     let cancel : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("Cancel".localized, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
         return button
     }()
     let done : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Done", for: .normal)
+        button.setTitle("Done".localized, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         return button
     }()
-    let titleLable = UILabel(text: "New List 🎨", font: .systemFont(ofSize: 17, weight: .black))
+    let titleLable = UILabel(text: "New List".localized, font: .systemFont(ofSize: 17, weight: .black))
     let circle = UIView(.systemGreen,100)
     let icon   = UIImageView(image :
                             UIImage(systemName: SFSymbols.list,

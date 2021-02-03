@@ -22,7 +22,7 @@ class MoreDetailsController: UIViewController {
     let configuration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold, scale: .medium)
     lazy var  addToList : UIButton = {
         let button = UIButton(type : .system)
-        button.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.list,withConfiguration: configuration)!, string: "Add To List", color: .white, imageAlignment: 0, segFont: UIFont.systemFont(ofSize: 30, weight: .semibold)), for: .normal)
+        button.setImage(UIImage.textEmbededImage(image: UIImage(systemName: SFSymbols.list,withConfiguration: configuration)!, string: "Add To List".localized, color: .white, imageAlignment: 0, segFont: UIFont.systemFont(ofSize: 30, weight: .semibold)), for: .normal)
         button.layer.cornerRadius = 5
         button.shadow()
         button.backgroundColor = .niceBlue

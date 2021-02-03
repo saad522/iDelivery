@@ -14,11 +14,11 @@ class SignUpViewController: UIViewController{
     var prfileViewController : ProfileControllerView?
 	
 	//TextFields
-	let fullNameText = UITextField(placholder: "Full-Name")
+    let fullNameText = UITextField(placholder: "Full-Name".localized)
 	let phoneText    = UITextField(placholder: "Phone (Required)")
-	let emailText    = UITextField(placholder: "Email")
-	let passwordText = UITextField(placholder: "Password",isPassword: true)
-	let locationText = UITextField(placholder: "City")
+    let emailText    = UITextField(placholder: "Email".localized)
+    let passwordText = UITextField(placholder: "Password".localized,isPassword: true)
+    let locationText = UITextField(placholder: "City".localized)
 	
 	//Icons
 	let fullNameIcon   = UIImageView(SFSymbols.fullName)
@@ -41,8 +41,8 @@ class SignUpViewController: UIViewController{
 	}()
 	
 	//Buttons
-	let loginUpButton  = UIButton("Aleardy have an account?","Login")
-	let signUpButton   = UIButton(title: "SignUp")
+    let loginUpButton  = UIButton("Aleardy have an account?".localized,"Login".localized)
+    let signUpButton   = UIButton(title: "SignUp".localized)
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
 	
 	//Separators

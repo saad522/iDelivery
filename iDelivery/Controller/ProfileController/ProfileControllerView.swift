@@ -32,8 +32,8 @@ class ProfileControllerView: UIViewController {
     
 	//If User Not Login UI Components
 	let deisgn           = UIImageView(image : #imageLiteral(resourceName: "Group 109"))
-	let loginButton      = UIButton(action: "Login", background: .niceBlue)
-	let haveAccountLabel = UILabel(text: "Login to manage your account ")
+    let loginButton      = UIButton(action: "Login".localized, background: .niceBlue)
+    let haveAccountLabel = UILabel(text: "Login to manage your account".localized)
 
 	
 	//MARK: LifeCycle
@@ -58,7 +58,7 @@ class ProfileControllerView: UIViewController {
 //MARK: setupFirebase
 extension ProfileControllerView {
     fileprivate func setNavigation() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancle", style: .done, target: self, action: #selector(handleCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancle".localized, style: .done, target: self, action: #selector(handleCancel))
     }
     @objc func handleCancel(){
         dismiss(animated: true, completion: nil)

@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     
 	//Titles
 	let logo       = UILabel(text: "iDelevry", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
-	let loginlabel = UILabel.init(text: "Login", font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
+    let loginlabel = UILabel.init(text: "Login".localized, font: UIFont(name: "Avenir-Light", size: 36)!, textColor: .label)
 	
 	//Icons
 	let emailIcon     = UIImageView(SFSymbols.email)
@@ -24,8 +24,8 @@ class LoginViewController: UIViewController {
 	
 	
 	//TextFields
-	let emailText    = UITextField(placholder: "Email")
-	let passwordText = UITextField(placholder: "Password",isPassword: true)
+    let emailText    = UITextField(placholder: "Email".localized)
+    let passwordText = UITextField(placholder: "Password".localized,isPassword: true)
 
 	
 	//Containers
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
 	
 	
 	//Buttons
-	let loginButton    = UIButton(title: "Login")
+    let loginButton    = UIButton(title: "Login".localized)
     var skipButton     = UIButton()
 	var signUpButton   = UIButton()
 	let hiddenPassword = UIButton(SFSymbols.closeEye,size: 15,color: .label)
@@ -63,8 +63,8 @@ extension LoginViewController {
 		view.backgroundColor = .secondarySystemBackground
 	}
 	fileprivate func createUI() {
-        skipButton = UIButton("I'm just a Visitor!","Skip")
-        signUpButton = UIButton("Don't have an account?","SignUp")
+        skipButton = UIButton("I'm just a Visitor!".localized,"Skip".localized)
+        signUpButton = UIButton("Don't have an account?".localized,"Register".localized)
 		[skipButton,signUpButton].forEach({$0.tintColor = .label})
 
         let vStack = VerticalStackView(arrangedSubviews: [logo,loginlabel], spacing: 65)

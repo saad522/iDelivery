@@ -35,11 +35,11 @@ class ToolsTableViewController: UIViewController {
     let iconStock     = UIImageView(SFSymbols.package)
     let iconTransport = UIImageView(SFSymbols.valise)
     
-    let priceLabel     = UILabel.init(text: "Price/Order")
-    let retrunLabel    = UILabel.init(text: "Return/Order")
-    let stockLabel     = UILabel.init(text: "Stock")
-    let emailLabel     = UILabel.init(text: "Email")
-    let transportLabel = UILabel.init(text: "Transport")
+    let priceLabel     = UILabel.init(text: "Price/Order".localized)
+    let retrunLabel    = UILabel.init(text: "Return/Order".localized)
+    let stockLabel     = UILabel.init(text: "Stocking up".localized)
+    let emailLabel     = UILabel.init(text: "Email".localized)
+    let transportLabel = UILabel.init(text: "Transport".localized)
     
     let price     = UILabel.init(text: "45 DH")
     let retrun    = UILabel.init(text: "30 DH")

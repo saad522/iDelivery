@@ -15,7 +15,9 @@ class MyListViewController: UICollectionViewController {
     var list = [List]()
     private let cellID = "cellID"
     let listImage = UIImageView(image : #imageLiteral(resourceName: "undraw_No_data_re_kwbl"))
-    let listTitle = UILabel.init(text: "Create your own Lists 😎", font: .systemFont(ofSize: 35, weight: .semibold), numberOfLines: 2)
+    let message = "Create your own lists".localized
+    
+   lazy var listTitle = UILabel.init(text: self.message, font: .systemFont(ofSize: 35, weight: .semibold), numberOfLines: 2)
     
     enum Section {
         case main
@@ -43,6 +45,8 @@ class MyListViewController: UICollectionViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.title = "My Lists".localized
+        listTitle.text = message
         let fetchLists : NSFetchRequest<List> = List.fetchRequest()
         do {
             let fetchedList =  try PersistenceServce.context.fetch(fetchLists)
@@ -126,7 +130,7 @@ extension MyListViewController {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         collectionView?.addGestureRecognizer(gesture)
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "My Lists"
+       
         collectionView.backgroundColor = .secondarySystemBackground
         let barItem = UIBarButtonItem(image: UIImage(systemName: SFSymbols.addList)?.withTintColor(.label).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddNewList))
         navigationItem.rightBarButtonItem = barItem

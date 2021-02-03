@@ -13,6 +13,7 @@ class SearchViewController: UICollectionViewController {
 	private let cellID = "cellID"
     var user : User!
     
+    
 	let searchController = UISearchController(searchResultsController: nil)
 	var nameFilter: String?
 	var dataSource: UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>!
@@ -55,6 +56,7 @@ class SearchViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         setupSearchViewController()
         fetchUserData()
+        navigationItem.title = "Search by city".localized
         if let downcastStrings = self.tabBarController?.tabBar.items
         {
             downcastStrings[0].title = "Nearby".localized
@@ -156,7 +158,7 @@ extension SearchViewController {
 //MARK: setUp NavigationController
 extension SearchViewController : UISearchBarDelegate {
 	fileprivate func setUpNavigation() {
-		navigationItem.title = "Search by Cities"
+        
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.searchController = searchController
 		navigationItem.hidesSearchBarWhenScrolling = false

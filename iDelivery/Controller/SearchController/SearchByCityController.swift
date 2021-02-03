@@ -22,13 +22,13 @@ class SearchByCityController: UICollectionViewController {
     var forReload = [User]()
     
     let imageDesign = UIImageView(image : #imageLiteral(resourceName: "undraw_empty_xct9"))
-    let message     = UILabel.init(text: "We didn't find anyone here", font: .systemFont(ofSize: 16, weight: .light))
+    let message     = UILabel.init(text: "We didn't find anyone here".localized, font: .systemFont(ofSize: 16, weight: .light))
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, User>!
-
-    enum Section: CaseIterable {
-        case main
-    }
+//    var dataSource: UICollectionViewDiffableDataSource<Section, User>!
+//
+//    enum Section: CaseIterable {
+//        case main
+//    }
 	
 	//MARK: LifeCycle
 	override func viewDidLoad() {
@@ -76,18 +76,21 @@ class SearchByCityController: UICollectionViewController {
 //MARK: setup Firebase with DiffabledataSource
 extension SearchByCityController {
     func performQuery() {
-        API.shared.fetchUsersData(city: city) { [unowned self] (user, error)   in
+        API.shared.fetchUsersData(city: city) { [unowned self] (users, error)   in
             if let error = error {
                 print("We could not fetch users data reason ",error.localizedDescription)
                 return
             }
-            var snapshot = self.dataSource.snapshot()
-            snapshot.appendSections([.main])
-            self.users = user ?? []
-            self.forReload = user ?? []
-            [self.imageDesign,self.message].forEach({$0!.isHidden = self.users.count != 0 })
-            snapshot.appendItems(self.users)
-            self.dataSource.apply(snapshot)
+//            var snapshot = self.dataSource.snapshot()
+//            snapshot.appendSections([.main])
+            self.users = users ?? []
+            self.forReload = users ?? []
+//            [self.imageDesign,self.message].forEach({$0!.isHidden = self.users.count != 0 })
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+//            snapshot.appendItems(self.users)
+//            self.dataSource.apply(snapshot)
         }
     }
     
@@ -97,9 +100,9 @@ extension SearchByCityController {
 extension SearchByCityController {
     fileprivate func menus(with color : UIColor = .niceBlue) {
         let filters = UIMenu(title: "", children: [
-                                UIAction(title: "Filters", image: UIImage(systemName: SFSymbols.filter), handler: handleFilters),
-                                UIAction(title: "Sorts", image: UIImage(systemName: SFSymbols.sort), handler: handleSort),
-                                UIAction(title: "Reloads", image: UIImage(systemName: SFSymbols.reload), handler: handleReload)])
+                                UIAction(title: "Filters".localized, image: UIImage(systemName: SFSymbols.filter), handler: handleFilters),
+                                UIAction(title: "Sorts".localized, image: UIImage(systemName: SFSymbols.sort), handler: handleSort),
+                                UIAction(title: "Reloads".localized, image: UIImage(systemName: SFSymbols.reload), handler: handleReload)])
         let barItem = UIBarButtonItem(title: "", image: UIImage(systemName: SFSymbols.setFiltering)!.withTintColor(color).withRenderingMode(.alwaysOriginal), menu: filters)
         navigationItem.rightBarButtonItem = barItem
         
@@ -139,40 +142,52 @@ extension SearchByCityController {
         collectionView.showsVerticalScrollIndicator = false
 		collectionView.backgroundColor = .systemBackground
 		collectionView.register(CardUserViewCell.self, forCellWithReuseIdentifier: secondeCellID)
-        configureDataSource()
+//        configureDataSource()
         performQuery()
         menus()
         createDesign()
 	}
-	
-
-    
-    func configureDataSource() {
-        collectionView.dataSource = dataSource
-        let cellRegistration = UICollectionView.CellRegistration<CardUserViewCell, User> { (cell, indexPath, user) in
-            // Populate the cell with our item description.
-                cell.user = user
-//            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
-//            cell.setFonts(fontName: fontName)
-
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<Section, User>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: User) -> UICollectionViewCell? in
-            // Return the cell.
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
-        }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        imageDesign.isHidden = users.count != 0
+        message.isHidden = users.count != 0
+        return users.count
+    }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: secondeCellID, for: indexPath) as! CardUserViewCell
+        let user = users[indexPath.item]
+        cell.user = user
+//        let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+//        cell.setFonts(fontName: fontName)
+        return cell
         
     }
+//
+//    func configureDataSource() {
+//        collectionView.dataSource = dataSource
+//        let cellRegistration = UICollectionView.CellRegistration<CardUserViewCell, User> { (cell, indexPath, user) in
+//            // Populate the cell with our item description.
+//                cell.user = user
+////            let fontName = UserDefaults.standard.string(forKey: Keys.fontsKeys) ?? "Thonburi"
+////            cell.setFonts(fontName: fontName)
+//
+//        }
+//
+//        dataSource = UICollectionViewDiffableDataSource<Section, User>(collectionView: collectionView) {
+//            (collectionView: UICollectionView, indexPath: IndexPath, identifier: User) -> UICollectionViewCell? in
+//            // Return the cell.
+//            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+//        }
+//
+//    }
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let object = dataSource.itemIdentifier(for: indexPath)
-        if let user = object {
-            let profileController = NewProfileViewController(user: user)
+//        let object = dataSource.itemIdentifier(for: indexPath)
+//        if let user = users[indexPath.item] {
+            let profileController = NewProfileViewController(user: users[indexPath.item])
             profileController.modalPresentationStyle = .fullScreen
             present(profileController, animated: true)
-        }
+//        }
 	}
 
 
@@ -181,12 +196,15 @@ extension SearchByCityController {
 extension SearchByCityController {
     func handleFilters(action: UIAction) {
         let slideVC = FiltersView(users: users)
-        slideVC.didFilters = { user in
-            var snapshot = self.dataSource.snapshot()
-            snapshot.deleteItems(self.users)
-            snapshot.appendItems(user)
-            self.dataSource.apply(snapshot)
-            self.dismiss(animated: true)
+        slideVC.didFilters = { [weak self] user in
+            self?.users.removeAll(keepingCapacity: true)
+            self?.users = user
+            self?.collectionView.reloadData()
+//            var snapshot = self.dataSource.snapshot()
+//            snapshot.deleteItems(self.users)
+//            snapshot.appendItems(user)
+//            self.dataSource.apply(snapshot)
+            self?.dismiss(animated: true)
         }
         slideVC.modalPresentationStyle = .custom
         slideVC.transitioningDelegate = self
@@ -194,21 +212,31 @@ extension SearchByCityController {
     }
     func handleSort(action: UIAction) {
         let slideVC = SortsView(users: users)
-        slideVC.didSorts = {  user in
-            var snapshot = self.dataSource.snapshot()
-            snapshot.deleteItems(self.users)
-            snapshot.appendItems(user)
-            self.dataSource.apply(snapshot)
+        slideVC.didSorts = { [weak self] user in
+                self?.users.removeAll()
+                
+            DispatchQueue.main.async { [weak self] in
+                self?.users = user
+                self?.collectionView.reloadData()
+            }
+            
+//            var snapshot = self.dataSource.snapshot()
+//            snapshot.deleteItems(self.users)
+//            snapshot.appendItems(user)
+//            self.dataSource.apply(snapshot)
         }
         slideVC.modalPresentationStyle = .custom
         slideVC.transitioningDelegate = self
         self.present(slideVC, animated: true)
     }
     func handleReload(action: UIAction) {
-        var snapshot = self.dataSource.snapshot()
-        snapshot.deleteItems(self.users)
-        snapshot.appendItems(forReload)
-        self.dataSource.apply(snapshot)
+//        var snapshot = self.dataSource.snapshot()
+//        snapshot.deleteItems(self.users)
+//        snapshot.appendItems(forReload)
+//        self.dataSource.apply(snapshot)
+        self.users.removeAll(keepingCapacity: true)
+        self.users = forReload
+        self.collectionView.reloadData()
     }
 }
 struct SearchByCityView: UIViewControllerRepresentable {
