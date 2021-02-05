@@ -15,11 +15,7 @@ class SettingsViewController: UICollectionViewController {
     private let modeCellID     = "modeCellID"
     private let languageCellID = "languageCellID"
     
-    let colors = "Colors".localized
-    let fonts = "Fonts".localized
-    let darkAppearance = "Dark Appearance".localized
-    let language = "Language".localized
-    let settings = "Settings".localized
+  
     
     
     
@@ -82,7 +78,7 @@ class SettingsViewController: UICollectionViewController {
             downcastStrings[2].title = "Settings".localized
             
         }
-        navigationItem.title = settings
+        navigationItem.title = "Settings".localized
     }
 
     
@@ -182,13 +178,13 @@ extension SettingsViewController {
             if let object = self.dataSource.itemIdentifier(for: indexPath) {
                 if let section = snapshot.sectionIdentifier(containingItem: object) {
                     if section == .colors  {
-                        header.label.text = self.colors
+                        header.label.text = "Colors".localized
                     } else if section == .fonts {
-                        header.label.text = self.fonts
+                        header.label.text = "Fonts".localized
                     } else  if section == .mode {
-                        header.label.text = self.darkAppearance
+                        header.label.text = "Dark Appearance".localized
                     } else if section == .language {
-                        header.label.text = self.language
+                        header.label.text = "Language".localized
                     }
                 }
             }

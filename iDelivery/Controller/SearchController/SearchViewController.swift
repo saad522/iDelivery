@@ -35,13 +35,17 @@ class SearchViewController: UICollectionViewController {
 		case main
 	}
     @objc fileprivate func handelProfileButton() {
-        let profileViewController = ProfileControllerView()
-        if user != nil {
-            profileViewController.cardPersonnaleController.user = user
-            profileViewController.infoUserTableViewController.user = user
-        }
-        let navigationController = UINavigationController(rootViewController: profileViewController)
-        present(navigationController, animated: true)
+//        let profileViewController = ProfileControllerView()
+//        if user != nil {
+//            profileViewController.cardPersonnaleController.user = user
+//            profileViewController.infoUserTableViewController.user = user
+//        }
+//        let navigationController = UINavigationController(rootViewController: profileViewController)
+//        present(navigationController, animated: true)
+        let profileViewController = UIHostingController(rootView: ProfileUserViewController())
+        profileViewController.modalPresentationStyle = .fullScreen
+        present(profileViewController, animated: true)
+        
     }
 	let mountainsController = MountainsController()
 	

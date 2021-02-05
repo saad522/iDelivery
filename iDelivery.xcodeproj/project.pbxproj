@@ -35,6 +35,7 @@
 		0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */; };
 		0465BD932551CACA0093F8FA /* InformationOfUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */; };
 		04688B1C256C109100858322 /* CompositionalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04688B1B256C109100858322 /* CompositionalHeader.swift */; };
+		046A244925CDF04C0088D7FB /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A244825CDF04C0088D7FB /* ProfileUserViewController.swift */; };
 		0477824B25794C4D000883C2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0477824925794C4D000883C2 /* Model.xcdatamodeld */; };
 		0477825125794EB2000883C2 /* Item+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477824D25794EB1000883C2 /* Item+CoreDataProperties copy.swift */; };
 		0477825225794EB2000883C2 /* Item+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477824E25794EB1000883C2 /* Item+CoreDataClass copy.swift */; };
@@ -105,6 +106,7 @@
 		0465BD8F2551C1E10093F8FA /* CardPersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersonalView.swift; sourceTree = "<group>"; };
 		0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationOfUserTableViewController.swift; sourceTree = "<group>"; };
 		04688B1B256C109100858322 /* CompositionalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalHeader.swift; sourceTree = "<group>"; };
+		046A244825CDF04C0088D7FB /* ProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		0477824A25794C4D000883C2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		0477824D25794EB1000883C2 /* Item+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
 		0477824E25794EB1000883C2 /* Item+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass copy.swift"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				0465BD922551CACA0093F8FA /* InformationOfUserTableViewController.swift */,
 				0499A34D257C09E50050631C /* EditPersonaleInfoViewController.swift */,
 				0499A350257C1DEA0050631C /* EditProfilePictureViewController.swift */,
+				046A244825CDF04C0088D7FB /* ProfileUserViewController.swift */,
 			);
 			path = ProfileController;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				04315FC32580C00100A5BDFA /* AddMyServiceViewController.swift in Sources */,
 				04BC24CD254B90E200F45872 /* MoreDetailsController.swift in Sources */,
 				04BA30EC25837CA100AC1868 /* WaveFilled.swift in Sources */,
+				046A244925CDF04C0088D7FB /* ProfileUserViewController.swift in Sources */,
 				0487406D254DAB4000F3AA54 /* PresentationController.swift in Sources */,
 				0465BD902551C1E10093F8FA /* CardPersonalView.swift in Sources */,
 				042370C12559D50200E45215 /* EditProfileViewController.swift in Sources */,

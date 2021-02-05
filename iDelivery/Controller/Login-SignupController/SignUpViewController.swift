@@ -15,7 +15,7 @@ class SignUpViewController: UIViewController{
 	
 	//TextFields
     let fullNameText = UITextField(placholder: "Full-Name".localized)
-	let phoneText    = UITextField(placholder: "Phone (Required)")
+    let phoneText    = UITextField(placholder: "Phone (Required)".localized)
     let emailText    = UITextField(placholder: "Email".localized)
     let passwordText = UITextField(placholder: "Password".localized,isPassword: true)
     let locationText = UITextField(placholder: "City".localized)
